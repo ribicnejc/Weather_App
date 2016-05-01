@@ -208,6 +208,10 @@ public class MainActivity extends AppCompatActivity {
             ObjectInputStream in = new ObjectInputStream(fileInputStream);
             list = (ArrayList) in.readObject();
 
+
+
+
+
         }catch(Exception e){
             list = new ArrayList<>();
         }
