@@ -26,6 +26,7 @@ public class RefreshData {
                     waitForApi(api);
                 }
             }
+
         }, 100);
     }
     public void onFinish(GetWeatherInfoAPI api){
