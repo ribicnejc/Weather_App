@@ -25,6 +25,7 @@ public class RefreshData {
                 } else {
                     waitForApi(api);
                 }
+
             }
 
         }, 100);
