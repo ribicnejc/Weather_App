@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Nothing to refresh", Toast.LENGTH_SHORT).show();
         }
     }
+
     public void onItemsLoadComplete(final WaveSwipeRefreshLayout swipe){
         try{
             saveState(datas);
