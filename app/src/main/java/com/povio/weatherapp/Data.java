@@ -70,7 +70,7 @@ public class Data implements Serializable{
         return this.weatherIcon;
     }
     public void refreshData(int i){
-        RefreshData a = new RefreshData(this.cityName, this.desc, this.weatherIcon, i);
+        RefreshData a = new RefreshData(this.cityName, i);
         a.start();
     }
     public boolean isRefreshing(){
