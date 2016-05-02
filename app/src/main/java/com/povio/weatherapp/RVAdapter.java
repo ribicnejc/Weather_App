@@ -95,7 +95,6 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.InfoViewHolder> {
         weatherViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                WeatherInfo.grantName(MainActivity.getNameOfCity(i));
                 Intent intent = new Intent(mContext, MoreInfoActivity.class);
                 intent.putExtra("city", datas.get(i).getCityName());
                 mContext.startActivity(intent);

@@ -26,10 +26,6 @@
             android:label="@string/title_activity_city_query"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.povio.weatherapp.WeatherInfo"
-            android:label="@string/title_activity_weather_info"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name="com.povio.weatherapp.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
