@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 swipeView.setRefreshing(true);
-                refreshItems(swipeView);
+                refreshItems(swipeView, 0);
             }
         });
 
@@ -84,17 +84,35 @@ public class MainActivity extends AppCompatActivity {
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(rv);
       }
-    public void refreshItems(WaveSwipeRefreshLayout swipe){
+    public void refreshItems(final WaveSwipeRefreshLayout swipe, int pos){
+        if(pos < datas.size()) {
+            RefreshData refreshData = new RefreshData(datas.get(pos).getCityName(), pos);
+            refreshData.start();
+            refreshing(pos, refreshData, swipe);
+        }else if(pos == 0){
+            Toast.makeText(this, "Nothing to refresh", Toast.LENGTH_SHORT).show();
+            onItemsLoadComplete(swipe);
+        }else{
+//            Toast.makeText(this, "Items refreshed", Toast.LENGTH_SHORT).show();
+            onItemsLoadComplete(swipe);
+        }
+    }
+    public void refreshing(final int pos, final RefreshData refreshData, final WaveSwipeRefreshLayout swipe){
         try{
-            for (int i = 0; i < datas.size(); i++) {
-                datas.get(i).refreshData(i);
-            }
-            rv.getAdapter().notifyDataSetChanged();
-            rv.getAdapter().notifyItemRangeChanged(0, rv.getAdapter().getItemCount());
-            emptyRecyclerView(datas);
-            stillRefreshing(swipe, 0);
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if(refreshData.api.success){
+                        int tmp = pos;
+                        tmp += 1;
+                        refreshItems(swipe, tmp);
+                    }else{
+                        refreshing(pos, refreshData, swipe);
+                    }
+                }
+            }, 100);
         }catch (Exception e){
-            swipe.setRefreshing(false);
             Toast.makeText(this, "Nothing to refresh", Toast.LENGTH_SHORT).show();
         }
     }
@@ -106,20 +124,6 @@ public class MainActivity extends AppCompatActivity {
             datas.get(datas.size() - 1).setRefreshingState(true);
             rv.getAdapter().notifyDataSetChanged();
             Toast.makeText(this, "Items refreshed", Toast.LENGTH_SHORT).show();
-        }catch (Exception e){
-            Toast.makeText(this, "Nothing to refresh", Toast.LENGTH_SHORT).show();
-        }
-
-    }
-    public void stillRefreshing(final WaveSwipeRefreshLayout view, final int count){
-        try{
-            final Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    onItemsLoadComplete(view);
-                }
-            }, datas.size() * 300);
         }catch (Exception e){
             Toast.makeText(this, "Nothing to refresh", Toast.LENGTH_SHORT).show();
         }

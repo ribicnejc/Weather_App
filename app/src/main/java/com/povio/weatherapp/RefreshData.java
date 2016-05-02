@@ -6,13 +6,14 @@ import android.os.Handler;
 public class RefreshData {
     public String name;
     private int place;
+    public GetWeatherInfoAPI api;
     RefreshData(String name, int place){
         this.name = name;
         this.place = place;
     }
 
     public void start(){
-        GetWeatherInfoAPI api = new GetWeatherInfoAPI(this.name);
+        api = new GetWeatherInfoAPI(this.name);
         waitForApi(api);
     }
     public void waitForApi(final GetWeatherInfoAPI api){
