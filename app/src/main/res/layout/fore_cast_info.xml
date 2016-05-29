@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <HorizontalScrollView
+        android:id="@+id/hsv"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:fillViewport="true"
+        android:measureAllChildren="false"
+        android:scrollbars="none" >
+        <LinearLayout
+            android:id="@+id/innerLay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:id="@+id/firstMain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical" >
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent" >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="09:00"
+                        android:textColor="@color/colorForeCast"
+                        android:layout_centerHorizontal="true"
+                        android:orientation="horizontal"
+                        android:id="@+id/firstTime"
+                        android:textSize="@dimen/forecast_temp_font"/>
+                    <ImageView
+                        android:id="@+id/firstIcon"
+                        android:layout_width="@dimen/small_weather_icon"
+                        android:layout_height="@dimen/small_weather_icon"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/sun"
+                        android:layout_below="@+id/firstTime" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:id="@+id/firstTemp"
+                        android:layout_below="@+id/firstIcon"
+                        android:textSize="@dimen/forecast_temp_font"
+                        android:textColor="@color/colorForeCast"
+                        android:orientation="horizontal"
+                        android:text="20°"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true" />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </HorizontalScrollView>
+
+</LinearLayout>

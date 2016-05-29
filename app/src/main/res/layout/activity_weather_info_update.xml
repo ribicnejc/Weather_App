@@ -4,13 +4,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+<include layout="@layout/back_ground"/>
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 <RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -80,73 +82,15 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:id="@+id/relativeLayout3"
+        android:layout_marginRight="@dimen/activity_vertical_margin"
+        android:layout_marginEnd="@dimen/activity_vertical_margin"
         android:layout_marginTop="20dp"
         android:layout_below="@+id/iconMoreInfo"
         android:layout_alignLeft="@+id/relativeLayout4"
         android:layout_alignStart="@+id/relativeLayout4">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Sunrise"
-            android:textSize="20sp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:id="@+id/textView9" />
-
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:id="@+id/imageView4"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/sunrise"
-            android:layout_alignBottom="@+id/textView9"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="06:15:14"
-            android:layout_marginEnd="10dp"
-            android:textSize="20sp"
-            android:id="@+id/sunriseMoreInfo"
-            android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/imageView4"
-            android:layout_toStartOf="@+id/imageView4" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sunset"
-            android:textSize="20sp"
-            android:id="@+id/textView11"
-            android:layout_below="@+id/sunriseMoreInfo"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="20:01:55"
-            android:textSize="20sp"
-            android:id="@+id/sunsetMoreInfo"
-            android:layout_alignTop="@+id/textView11"
-            android:layout_alignLeft="@+id/sunriseMoreInfo"
-            android:layout_alignStart="@+id/sunriseMoreInfo" />
-
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:id="@+id/imageView6"
-            android:src="@drawable/sunset"
-            android:layout_marginRight="10dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-
+        <include layout="@layout/fore_cast_info"/>
 
     </RelativeLayout>
 <RelativeLayout
@@ -323,20 +267,6 @@
         android:layout_above="@+id/relativeLayout2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
-
-    <com.romainpiel.shimmer.ShimmerButton
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
-        android:text="BACK"
-        android:textSize="25sp"
-        android:textColor="#ffffff"
-        android:id="@+id/backMoreInfo"
-        app:reflectionColor="#0CA7D3"
-        android:layout_below="@+id/relativeLayout2"
-        android:layout_marginBottom="20dp"
-        android:layout_centerHorizontal="true" />
-
 
 </RelativeLayout>
 </ScrollView>

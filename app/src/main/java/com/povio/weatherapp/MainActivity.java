@@ -1,5 +1,6 @@
 package com.povio.weatherapp;
 
+import com.povio.weatherapp.APIs.*;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -139,10 +140,12 @@ public class MainActivity extends AppCompatActivity {
         if (someList.isEmpty()){
             TextView mTextView = (TextView) findViewById(R.id.emptyRV);
             mTextView.setText("City list is empty");
+            //mTextView.setVisibility(View.GONE);
         }
         else{
             TextView mTextView = (TextView) findViewById(R.id.emptyRV);
             mTextView.setText("");
+            //mTextView.setVisibility(View.INVISIBLE);
         }
     }
     public static void remove(int pos){

@@ -10,4 +10,5 @@
     <color name="PrimaryColor">#2196F3</color>
     <color name="colorGrayLight">#f6f6f6</color>
     <color name="PrimaryDarkColor">#1976D2</color>
+    <color name="colorForeCast">#ecf0f1</color>
 </resources>

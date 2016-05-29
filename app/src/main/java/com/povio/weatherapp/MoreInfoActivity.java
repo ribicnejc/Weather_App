@@ -2,16 +2,14 @@ package com.povio.weatherapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.romainpiel.shimmer.Shimmer;
 import com.romainpiel.shimmer.ShimmerButton;
 
 public class MoreInfoActivity extends AppCompatActivity {
@@ -21,29 +19,32 @@ public class MoreInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         GetWeatherInfoAPI api;
+        ForeCastAPI foreCastAPI;
         Bundle extras = getIntent().getExtras();
         if(extras != null){
             String city = extras.getString("city");
+            foreCastAPI = new ForeCastAPI(city);
             api = new GetWeatherInfoAPI(city);
-            waitForApi(api);
+
+            waitForApi(api, foreCastAPI);
         }
 
     }
 
-    public void waitForApi(final GetWeatherInfoAPI api){
+    public void waitForApi(final GetWeatherInfoAPI api, final ForeCastAPI foreCastAPI){
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (api.success) {
-                    onFinish(api);
+                if (api.success && foreCastAPI.success) {
+                    onFinish(api, foreCastAPI);
                 } else {
-                    waitForApi(api);
+                    waitForApi(api, foreCastAPI);
                 }
             }
         }, 100);
     }
-    public void onFinish(GetWeatherInfoAPI api) {
+    public void onFinish(GetWeatherInfoAPI api, ForeCastAPI foreCastAPI) {
         setContentView(R.layout.activity_weather_info_update);
         TextView cityName;
         TextView sunset;
@@ -58,6 +59,9 @@ public class MoreInfoActivity extends AppCompatActivity {
         TextView realFeel;
         ImageView weatherPhoto;
         ShimmerButton button;
+        ImageView firstIcon;
+        TextView firstTime;
+        TextView firstTemp;
         try{
         cityName = (TextView) findViewById(R.id.cityMoreInfo);
         cityName.setText(api.getCityName() + ", " + api.getCountry());
@@ -65,10 +69,6 @@ public class MoreInfoActivity extends AppCompatActivity {
         weatherInfo.setText(api.getMainDesc());
         weatherDesc = (TextView) findViewById(R.id.descMoreInfo);
         weatherDesc.setText(api.getIconDesc());
-        sunrise = (TextView) findViewById(R.id.sunriseMoreInfo);
-        sunrise.setText(api.getSunrise());
-        sunset = (TextView) findViewById(R.id.sunsetMoreInfo);
-        sunset.setText(api.getSunset());
         weatherPhoto = (ImageView) findViewById(R.id.iconMoreInfo);
         weatherPhoto.setImageResource(api.getIcon());
         temp = (TextView) findViewById(R.id.tempMoreInfo);
@@ -83,18 +83,15 @@ public class MoreInfoActivity extends AppCompatActivity {
         pressure.setText(api.getPressure() + " hPa");
         realFeel = (TextView) findViewById(R.id.realFeelMoreInfo);
         realFeel.setText("Real feel: " + api.getRealFeel() + "°C");
-        button = (ShimmerButton) findViewById(R.id.backMoreInfo);
-        Shimmer shimmer = new Shimmer();
-        shimmer.setDuration(2000);
-        shimmer.start(button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), MainActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
-            }
-        });
+
+        firstTime = (TextView) findViewById(R.id.firstTime);
+        firstTime.setText(foreCastAPI.getTimeL().get(0));
+        firstIcon = (ImageView) findViewById(R.id.firstIcon);
+        firstIcon.setImageResource(foreCastAPI.getIconL().get(0));
+        firstTemp = (TextView) findViewById(R.id.firstTemp);
+        firstTemp.setText(foreCastAPI.getMainTempL().get(0));
+
+
         }catch (Exception e){
             setContentView(R.layout.error);
             Toast.makeText(MoreInfoActivity.this, "No internet connection", Toast.LENGTH_SHORT).show();
