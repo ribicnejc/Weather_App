@@ -33,20 +33,20 @@
                         android:textColor="@color/colorForeCast"
                         android:layout_centerHorizontal="true"
                         android:orientation="horizontal"
-                        android:id="@+id/firstTime"
+                        android:id="@+id/firstTime1"
                         android:textSize="@dimen/forecast_temp_font"/>
                     <ImageView
-                        android:id="@+id/firstIcon"
+                        android:id="@+id/firstIcon1"
                         android:layout_width="@dimen/small_weather_icon"
                         android:layout_height="@dimen/small_weather_icon"
                         android:layout_centerHorizontal="true"
                         android:src="@drawable/sun"
-                        android:layout_below="@+id/firstTime" />
+                        android:layout_below="@+id/firstTime1" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="fill_parent"
-                        android:id="@+id/firstTemp"
-                        android:layout_below="@+id/firstIcon"
+                        android:id="@+id/firstTemp1"
+                        android:layout_below="@+id/firstIcon1"
                         android:textSize="@dimen/forecast_temp_font"
                         android:textColor="@color/colorForeCast"
                         android:orientation="horizontal"
@@ -54,6 +54,417 @@
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true" />
                 </RelativeLayout>
+
+            </LinearLayout>
+            <LinearLayout
+            android:id="@+id/firstMain1"
+            android:layout_marginLeft="@dimen/space_between_forecast"
+            android:layout_marginStart="@dimen/space_between_forecast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical" >
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent" >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="09:00"
+                    android:textColor="@color/colorForeCast"
+                    android:layout_centerHorizontal="true"
+                    android:orientation="horizontal"
+                    android:id="@+id/firstTime"
+                    android:textSize="@dimen/forecast_temp_font"/>
+                <ImageView
+                    android:id="@+id/firstIcon"
+                    android:layout_width="@dimen/small_weather_icon"
+                    android:layout_height="@dimen/small_weather_icon"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/sun"
+                    android:layout_below="@+id/firstTime" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/firstTemp"
+                    android:layout_below="@+id/firstIcon"
+                    android:textSize="@dimen/forecast_temp_font"
+                    android:textColor="@color/colorForeCast"
+                    android:orientation="horizontal"
+                    android:text="20°"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true" />
+            </RelativeLayout>
+
+        </LinearLayout>
+            <LinearLayout
+                android:id="@+id/firstMain2"
+                android:layout_marginLeft="@dimen/space_between_forecast"
+                android:layout_marginStart="@dimen/space_between_forecast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical" >
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent" >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="09:00"
+                        android:textColor="@color/colorForeCast"
+                        android:layout_centerHorizontal="true"
+                        android:orientation="horizontal"
+                        android:id="@+id/firstTime2"
+                        android:textSize="@dimen/forecast_temp_font"/>
+                    <ImageView
+                        android:id="@+id/firstIcon2"
+                        android:layout_width="@dimen/small_weather_icon"
+                        android:layout_height="@dimen/small_weather_icon"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/sun"
+                        android:layout_below="@+id/firstTime2" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:id="@+id/firstTemp2"
+                        android:layout_below="@+id/firstIcon2"
+                        android:textSize="@dimen/forecast_temp_font"
+                        android:textColor="@color/colorForeCast"
+                        android:orientation="horizontal"
+                        android:text="20°"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true" />
+                </RelativeLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/firstMain3"
+                android:layout_marginLeft="@dimen/space_between_forecast"
+                android:layout_marginStart="@dimen/space_between_forecast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical" >
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent" >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="09:00"
+                        android:textColor="@color/colorForeCast"
+                        android:layout_centerHorizontal="true"
+                        android:orientation="horizontal"
+                        android:id="@+id/firstTime3"
+                        android:textSize="@dimen/forecast_temp_font"/>
+                    <ImageView
+                        android:id="@+id/firstIcon3"
+                        android:layout_width="@dimen/small_weather_icon"
+                        android:layout_height="@dimen/small_weather_icon"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/sun"
+                        android:layout_below="@+id/firstTime3" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:id="@+id/firstTemp3"
+                        android:layout_below="@+id/firstIcon3"
+                        android:textSize="@dimen/forecast_temp_font"
+                        android:textColor="@color/colorForeCast"
+                        android:orientation="horizontal"
+                        android:text="20°"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true" />
+                </RelativeLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/firstMain4"
+                android:layout_marginLeft="@dimen/space_between_forecast"
+                android:layout_marginStart="@dimen/space_between_forecast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical" >
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent" >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="09:00"
+                        android:textColor="@color/colorForeCast"
+                        android:layout_centerHorizontal="true"
+                        android:orientation="horizontal"
+                        android:id="@+id/firstTime4"
+                        android:textSize="@dimen/forecast_temp_font"/>
+                    <ImageView
+                        android:id="@+id/firstIcon4"
+                        android:layout_width="@dimen/small_weather_icon"
+                        android:layout_height="@dimen/small_weather_icon"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/sun"
+                        android:layout_below="@+id/firstTime4" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:id="@+id/firstTemp4"
+                        android:layout_below="@+id/firstIcon4"
+                        android:textSize="@dimen/forecast_temp_font"
+                        android:textColor="@color/colorForeCast"
+                        android:orientation="horizontal"
+                        android:text="20°"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true" />
+                </RelativeLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/firstMain5"
+                android:layout_marginLeft="@dimen/space_between_forecast"
+                android:layout_marginStart="@dimen/space_between_forecast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical" >
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent" >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="09:00"
+                        android:textColor="@color/colorForeCast"
+                        android:layout_centerHorizontal="true"
+                        android:orientation="horizontal"
+                        android:id="@+id/firstTime5"
+                        android:textSize="@dimen/forecast_temp_font"/>
+                    <ImageView
+                        android:id="@+id/firstIcon5"
+                        android:layout_width="@dimen/small_weather_icon"
+                        android:layout_height="@dimen/small_weather_icon"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/sun"
+                        android:layout_below="@+id/firstTime5" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:id="@+id/firstTemp5"
+                        android:layout_below="@+id/firstIcon5"
+                        android:textSize="@dimen/forecast_temp_font"
+                        android:textColor="@color/colorForeCast"
+                        android:orientation="horizontal"
+                        android:text="20°"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true" />
+                </RelativeLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/firstMain6"
+                android:layout_marginLeft="@dimen/space_between_forecast"
+                android:layout_marginStart="@dimen/space_between_forecast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical" >
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent" >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="09:00"
+                        android:textColor="@color/colorForeCast"
+                        android:layout_centerHorizontal="true"
+                        android:orientation="horizontal"
+                        android:id="@+id/firstTime6"
+                        android:textSize="@dimen/forecast_temp_font"/>
+                    <ImageView
+                        android:id="@+id/firstIcon6"
+                        android:layout_width="@dimen/small_weather_icon"
+                        android:layout_height="@dimen/small_weather_icon"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/sun"
+                        android:layout_below="@+id/firstTime6" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:id="@+id/firstTemp6"
+                        android:layout_below="@+id/firstIcon6"
+                        android:textSize="@dimen/forecast_temp_font"
+                        android:textColor="@color/colorForeCast"
+                        android:orientation="horizontal"
+                        android:text="20°"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true" />
+                </RelativeLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/firstMain7"
+                android:layout_marginLeft="@dimen/space_between_forecast"
+                android:layout_marginStart="@dimen/space_between_forecast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical" >
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent" >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="09:00"
+                        android:textColor="@color/colorForeCast"
+                        android:layout_centerHorizontal="true"
+                        android:orientation="horizontal"
+                        android:id="@+id/firstTime7"
+                        android:textSize="@dimen/forecast_temp_font"/>
+                    <ImageView
+                        android:id="@+id/firstIcon7"
+                        android:layout_width="@dimen/small_weather_icon"
+                        android:layout_height="@dimen/small_weather_icon"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/sun"
+                        android:layout_below="@+id/firstTime7" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:id="@+id/firstTemp7"
+                        android:layout_below="@+id/firstIcon7"
+                        android:textSize="@dimen/forecast_temp_font"
+                        android:textColor="@color/colorForeCast"
+                        android:orientation="horizontal"
+                        android:text="20°"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true" />
+                </RelativeLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/firstMain8"
+                android:layout_marginLeft="@dimen/space_between_forecast"
+                android:layout_marginStart="@dimen/space_between_forecast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical" >
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent" >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="09:00"
+                        android:textColor="@color/colorForeCast"
+                        android:layout_centerHorizontal="true"
+                        android:orientation="horizontal"
+                        android:id="@+id/firstTime8"
+                        android:textSize="@dimen/forecast_temp_font"/>
+                    <ImageView
+                        android:id="@+id/firstIcon8"
+                        android:layout_width="@dimen/small_weather_icon"
+                        android:layout_height="@dimen/small_weather_icon"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/sun"
+                        android:layout_below="@+id/firstTime8" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:id="@+id/firstTemp8"
+                        android:layout_below="@+id/firstIcon8"
+                        android:textSize="@dimen/forecast_temp_font"
+                        android:textColor="@color/colorForeCast"
+                        android:orientation="horizontal"
+                        android:text="20°"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true" />
+                </RelativeLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/firstMain9"
+                android:layout_marginLeft="@dimen/space_between_forecast"
+                android:layout_marginStart="@dimen/space_between_forecast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical" >
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent" >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="09:00"
+                        android:textColor="@color/colorForeCast"
+                        android:layout_centerHorizontal="true"
+                        android:orientation="horizontal"
+                        android:id="@+id/firstTime9"
+                        android:textSize="@dimen/forecast_temp_font"/>
+                    <ImageView
+                        android:id="@+id/firstIcon9"
+                        android:layout_width="@dimen/small_weather_icon"
+                        android:layout_height="@dimen/small_weather_icon"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/sun"
+                        android:layout_below="@+id/firstTime9" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:id="@+id/firstTemp9"
+                        android:layout_below="@+id/firstIcon9"
+                        android:textSize="@dimen/forecast_temp_font"
+                        android:textColor="@color/colorForeCast"
+                        android:orientation="horizontal"
+                        android:text="20°"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true" />
+                </RelativeLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/firstMain10"
+                android:layout_marginLeft="@dimen/space_between_forecast"
+                android:layout_marginStart="@dimen/space_between_forecast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical" >
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent" >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="09:00"
+                        android:textColor="@color/colorForeCast"
+                        android:layout_centerHorizontal="true"
+                        android:orientation="horizontal"
+                        android:id="@+id/firstTime10"
+                        android:textSize="@dimen/forecast_temp_font"/>
+                    <ImageView
+                        android:id="@+id/firstIcon10"
+                        android:layout_width="@dimen/small_weather_icon"
+                        android:layout_height="@dimen/small_weather_icon"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/sun"
+                        android:layout_below="@+id/firstTime10" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:id="@+id/firstTemp10"
+                        android:layout_below="@+id/firstIcon10"
+                        android:textSize="@dimen/forecast_temp_font"
+                        android:textColor="@color/colorForeCast"
+                        android:orientation="horizontal"
+                        android:text="20°"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true" />
+                </RelativeLayout>
+
             </LinearLayout>
         </LinearLayout>
     </HorizontalScrollView>

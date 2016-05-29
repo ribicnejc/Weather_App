@@ -5,4 +5,8 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="small_weather_icon">30dp</dimen>
     <dimen name="forecast_temp_font">15sp</dimen>
+    <dimen name="space_between_forecast">15dp</dimen>
+    <dimen name="forcast_five_days_font">20sp</dimen>
+    <dimen name="forcast_five_days_icon">40dp</dimen>
+    <dimen name="forcast_fice_days_margin">15dp</dimen>
 </resources>

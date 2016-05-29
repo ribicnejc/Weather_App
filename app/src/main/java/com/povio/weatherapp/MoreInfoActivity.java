@@ -62,6 +62,7 @@ public class MoreInfoActivity extends AppCompatActivity {
         ImageView firstIcon;
         TextView firstTime;
         TextView firstTemp;
+
         try{
         cityName = (TextView) findViewById(R.id.cityMoreInfo);
         cityName.setText(api.getCityName() + ", " + api.getCountry());
@@ -71,18 +72,18 @@ public class MoreInfoActivity extends AppCompatActivity {
         weatherDesc.setText(api.getIconDesc());
         weatherPhoto = (ImageView) findViewById(R.id.iconMoreInfo);
         weatherPhoto.setImageResource(api.getIcon());
-        temp = (TextView) findViewById(R.id.tempMoreInfo);
-        temp.setText(api.getMainTemp());
-        minTemp = (TextView) findViewById(R.id.minTempMoreInfo);
-        minTemp.setText(api.getMinTemp() + "°C");
-        maxTemp = (TextView) findViewById(R.id.maxTempMoreInfo);
-        maxTemp.setText(api.getMaxTemp() + "°C");
-        humidity = (TextView) findViewById(R.id.humidityMoreInfo);
-        humidity.setText(api.getHumidity() + "%");
-        pressure = (TextView) findViewById(R.id.pressureMoreInfo);
-        pressure.setText(api.getPressure() + " hPa");
-        realFeel = (TextView) findViewById(R.id.realFeelMoreInfo);
-        realFeel.setText("Real feel: " + api.getRealFeel() + "°C");
+//        temp = (TextView) findViewById(R.id.tempMoreInfo);
+//        temp.setText(api.getMainTemp());
+//        minTemp = (TextView) findViewById(R.id.minTempMoreInfo);
+//        minTemp.setText(api.getMinTemp() + "°C");
+//        maxTemp = (TextView) findViewById(R.id.maxTempMoreInfo);
+//        maxTemp.setText(api.getMaxTemp() + "°C");
+//        humidity = (TextView) findViewById(R.id.humidityMoreInfo);
+//        humidity.setText(api.getHumidity() + "%");
+//        pressure = (TextView) findViewById(R.id.pressureMoreInfo);
+//        pressure.setText(api.getPressure() + " hPa");
+//        realFeel = (TextView) findViewById(R.id.realFeelMoreInfo);
+//        realFeel.setText("Real feel: " + api.getRealFeel() + "°C");
 
         firstTime = (TextView) findViewById(R.id.firstTime);
         firstTime.setText(foreCastAPI.getTimeL().get(0));

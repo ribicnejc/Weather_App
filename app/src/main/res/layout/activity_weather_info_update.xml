@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:text="Ljubljana, SI"
         android:id="@+id/cityMoreInfo"
-        android:textColor="@color/colorBlack"
+        android:textColor="@color/colorGrayLight"
         android:textSize="35sp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -39,6 +39,7 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:text="Weather info:"
+            android:textColor="@color/colorGrayLight"
             android:textSize="25sp"
             android:id="@+id/textView13"
             android:layout_alignParentTop="true"
@@ -51,6 +52,7 @@
             android:text="Clouds"
             android:textSize="22sp"
             android:id="@+id/infoMoreInfo"
+            android:textColor="@color/colorGray"
             android:layout_below="@+id/textView13"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
@@ -61,6 +63,7 @@
             android:textStyle="italic"
             android:text="broken clouds"
             android:textSize="18sp"
+            android:textColor="@color/colorGray"
             android:id="@+id/descMoreInfo"
             android:layout_below="@+id/infoMoreInfo"
             android:layout_alignParentLeft="true"
@@ -93,150 +96,150 @@
         <include layout="@layout/fore_cast_info"/>
 
     </RelativeLayout>
-<RelativeLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="40dp"
-    android:id="@+id/relativeLayout2"
-    android:layout_below="@+id/relativeLayout3"
-    android:layout_alignLeft="@+id/relativeLayout3"
-    android:layout_alignStart="@+id/relativeLayout3">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Real Feel: 12°C"
-        android:textSize="25sp"
-        android:id="@+id/realFeelMoreInfo"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+<!--<RelativeLayout-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="40dp"-->
+    <!--android:id="@+id/relativeLayout2"-->
+    <!--android:layout_below="@+id/relativeLayout3"-->
+    <!--android:layout_alignLeft="@+id/relativeLayout3"-->
+    <!--android:layout_alignStart="@+id/relativeLayout3">-->
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Real Feel: 12°C"-->
+        <!--android:textSize="25sp"-->
+        <!--android:id="@+id/realFeelMoreInfo"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true" />-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pressure: "
-        android:id="@+id/textView3"
-        android:textSize="18sp"
-        android:layout_below="@+id/realFeelMoreInfo"
-        android:layout_alignLeft="@+id/realFeelMoreInfo"
-        android:layout_alignStart="@+id/realFeelMoreInfo"
-        android:layout_marginTop="24dp" />
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Pressure: "-->
+        <!--android:id="@+id/textView3"-->
+        <!--android:textSize="18sp"-->
+        <!--android:layout_below="@+id/realFeelMoreInfo"-->
+        <!--android:layout_alignLeft="@+id/realFeelMoreInfo"-->
+        <!--android:layout_alignStart="@+id/realFeelMoreInfo"-->
+        <!--android:layout_marginTop="24dp" />-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Humidity: "
-        android:id="@+id/textView5"
-        android:textSize="18sp"
-        android:layout_below="@+id/textView3"
-        android:layout_alignLeft="@+id/textView3"
-        android:layout_alignStart="@+id/textView3" />
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Humidity: "-->
+        <!--android:id="@+id/textView5"-->
+        <!--android:textSize="18sp"-->
+        <!--android:layout_below="@+id/textView3"-->
+        <!--android:layout_alignLeft="@+id/textView3"-->
+        <!--android:layout_alignStart="@+id/textView3" />-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textSize="18sp"-->
 
-        android:text="Min temperature: "
-        android:id="@+id/textView6"
-        android:layout_below="@+id/textView5"
-        android:layout_alignLeft="@+id/textView5"
-        android:layout_alignStart="@+id/textView5" />
+        <!--android:text="Min temperature: "-->
+        <!--android:id="@+id/textView6"-->
+        <!--android:layout_below="@+id/textView5"-->
+        <!--android:layout_alignLeft="@+id/textView5"-->
+        <!--android:layout_alignStart="@+id/textView5" />-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Max temperature: "
-        android:textSize="18sp"
-        android:id="@+id/textView7"
-        android:layout_below="@+id/textView6"
-        android:layout_alignLeft="@+id/textView6"
-        android:layout_alignStart="@+id/textView6" />
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Max temperature: "-->
+        <!--android:textSize="18sp"-->
+        <!--android:id="@+id/textView7"-->
+        <!--android:layout_below="@+id/textView6"-->
+        <!--android:layout_alignLeft="@+id/textView6"-->
+        <!--android:layout_alignStart="@+id/textView6" />-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:id="@+id/dateMoreInfo"
-        android:textSize="18sp"
-        android:layout_below="@+id/textView7"
-        android:layout_alignLeft="@+id/textView7"
-        android:layout_alignStart="@+id/textView7" />
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text=""-->
+        <!--android:id="@+id/dateMoreInfo"-->
+        <!--android:textSize="18sp"-->
+        <!--android:layout_below="@+id/textView7"-->
+        <!--android:layout_alignLeft="@+id/textView7"-->
+        <!--android:layout_alignStart="@+id/textView7" />-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="1040hpa"
-        android:textSize="18sp"
-        android:id="@+id/pressureMoreInfo"
-        android:layout_alignBottom="@+id/textView3"
-        android:layout_toRightOf="@+id/textView3"
-        android:layout_toEndOf="@+id/textView3" />
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="1040hpa"-->
+        <!--android:textSize="18sp"-->
+        <!--android:id="@+id/pressureMoreInfo"-->
+        <!--android:layout_alignBottom="@+id/textView3"-->
+        <!--android:layout_toRightOf="@+id/textView3"-->
+        <!--android:layout_toEndOf="@+id/textView3" />-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="89%"
-        android:id="@+id/humidityMoreInfo"
-        android:textSize="18sp"
-        android:layout_alignBottom="@+id/textView5"
-        android:layout_toRightOf="@+id/textView3"
-        android:layout_toEndOf="@+id/textView3" />
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="89%"-->
+        <!--android:id="@+id/humidityMoreInfo"-->
+        <!--android:textSize="18sp"-->
+        <!--android:layout_alignBottom="@+id/textView5"-->
+        <!--android:layout_toRightOf="@+id/textView3"-->
+        <!--android:layout_toEndOf="@+id/textView3" />-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="15°C"
-        android:textSize="18sp"
-        android:id="@+id/minTempMoreInfo"
-        android:layout_alignBottom="@+id/textView6"
-        android:layout_toRightOf="@+id/textView6"
-        android:layout_toEndOf="@+id/textView6" />
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="15°C"-->
+        <!--android:textSize="18sp"-->
+        <!--android:id="@+id/minTempMoreInfo"-->
+        <!--android:layout_alignBottom="@+id/textView6"-->
+        <!--android:layout_toRightOf="@+id/textView6"-->
+        <!--android:layout_toEndOf="@+id/textView6" />-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="20°C"
-        android:textSize="18sp"
-        android:id="@+id/maxTempMoreInfo"
-        android:layout_above="@+id/dateMoreInfo"
-        android:layout_toRightOf="@+id/textView7"
-        android:layout_toEndOf="@+id/textView7" />
-</RelativeLayout>
-<RelativeLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignTop="@+id/relativeLayout2"
-    android:background="@color/colorPrimaryDarkTrans"
-    android:layout_alignParentRight="true"
-    android:layout_alignParentEnd="true">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="15,7"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:id="@+id/tempMoreInfo"
-        android:textColor="#ffffff"
-        android:textSize="40sp"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="20°C"-->
+        <!--android:textSize="18sp"-->
+        <!--android:id="@+id/maxTempMoreInfo"-->
+        <!--android:layout_above="@+id/dateMoreInfo"-->
+        <!--android:layout_toRightOf="@+id/textView7"-->
+        <!--android:layout_toEndOf="@+id/textView7" />-->
+<!--</RelativeLayout>-->
+<!--<RelativeLayout-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignTop="@+id/relativeLayout2"-->
+    <!--android:background="@color/colorPrimaryDarkTrans"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_alignParentEnd="true">-->
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="15,7"-->
+        <!--android:layout_marginStart="20dp"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:id="@+id/tempMoreInfo"-->
+        <!--android:textColor="#ffffff"-->
+        <!--android:textSize="40sp"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true" />-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="°C"
-        android:id="@+id/textView10"
-        android:textSize="20sp"
-        android:layout_marginRight="10dp"
-        android:layout_marginEnd="10dp"
-        android:textColor="#ffffff"
-        android:layout_marginTop="5dp"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/tempMoreInfo"
-        android:layout_toEndOf="@+id/tempMoreInfo" />
-</RelativeLayout>
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="°C"-->
+        <!--android:id="@+id/textView10"-->
+        <!--android:textSize="20sp"-->
+        <!--android:layout_marginRight="10dp"-->
+        <!--android:layout_marginEnd="10dp"-->
+        <!--android:textColor="#ffffff"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_toRightOf="@+id/tempMoreInfo"-->
+        <!--android:layout_toEndOf="@+id/tempMoreInfo" />-->
+<!--</RelativeLayout>-->
 
     <TextView
         android:layout_width="match_parent"
@@ -262,11 +265,18 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:layout_marginBottom="-20dp"
+        android:id="@+id/line5"
         android:background="@color/colorGray"
-        android:layout_above="@+id/relativeLayout2"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/relativeLayout3"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <include layout="@layout/fore_cast_five_days"
+        android:layout_below="@+id/line5"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
 
 </RelativeLayout>
 </ScrollView>
