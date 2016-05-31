@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.povio.weatherapp.Splash"
+            android:name=".Splash"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -22,17 +22,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.povio.weatherapp.CityQuery"
+            android:name=".CityQuery"
             android:label="@string/title_activity_city_query"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.povio.weatherapp.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.povio.weatherapp.MoreInfoActivity"
+            android:name=".MoreInfoActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppThemeTransparent"/>
+            android:theme="@style/AppTheme" />
 
     </application>
 
