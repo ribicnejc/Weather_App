@@ -94,8 +94,8 @@
         android:layout_below="@+id/iconMoreInfo"
         android:layout_alignLeft="@+id/relativeLayout4"
         android:layout_alignStart="@+id/relativeLayout4">
-        <include layout="@layout/fore_cast_info"/>
-
+        <!--<include layout="@layout/fore_cast_info"/>-->
+        <include layout="@layout/horizontal_rec_view_forecast"/>
     </RelativeLayout>
 
     <TextView

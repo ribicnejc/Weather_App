@@ -6,6 +6,8 @@ import android.os.Handler;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,12 +15,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.povio.weatherapp.Adapters.HorizontalRVAdapter;
+
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
 public class MoreInfoActivity extends AppCompatActivity {
-
+    private RecyclerView horizontalRecyclerView;
+    private HorizontalRVAdapter horizontalAdapter;
+    private ArrayList<String> horizontalList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +57,15 @@ public class MoreInfoActivity extends AppCompatActivity {
     }
     public void onFinish(GetWeatherInfoAPI api, ForeCastAPI foreCastAPI) {
         setContentView(R.layout.activity_weather_info_update);
+        horizontalRecyclerView = (RecyclerView) findViewById(R.id.horizontal_recycler_view);
+        horizontalList.add("nejc");
+        horizontalList.add("ema");
+        horizontalAdapter = new HorizontalRVAdapter(horizontalList);
+        LinearLayoutManager horizontalLayoutManager
+                = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true);
+        horizontalRecyclerView.setLayoutManager(horizontalLayoutManager);
+        horizontalRecyclerView.setAdapter(horizontalAdapter);
+
         TextView cityName;
         TextView weatherDesc;
         TextView weatherInfo;
@@ -72,12 +88,12 @@ public class MoreInfoActivity extends AppCompatActivity {
             weatherDesc.setText(api.getIconDesc());
             weatherPhoto = (ImageView) findViewById(R.id.iconMoreInfo);
             weatherPhoto.setImageResource(api.getIcon());
-            firstTime = (TextView) findViewById(R.id.firstTime1);
-            firstTime.setText(foreCastAPI.getTimeL().get(0));
-            firstIcon = (ImageView) findViewById(R.id.firstIcon1);
-            firstIcon.setImageResource(foreCastAPI.getIconL().get(0));
-            firstTemp = (TextView) findViewById(R.id.firstTemp1);
-            firstTemp.setText(foreCastAPI.getMainTempL().get(0));
+//            firstTime = (TextView) findViewById(R.id.firstTime1);
+//            firstTime.setText(foreCastAPI.getTimeL().get(0));
+//            firstIcon = (ImageView) findViewById(R.id.firstIcon1);
+//            firstIcon.setImageResource(foreCastAPI.getIconL().get(0));
+//            firstTemp = (TextView) findViewById(R.id.firstTemp1);
+//            firstTemp.setText(foreCastAPI.getMainTempL().get(0));
             int i = 0;
             int j = 0;
             for (String elt : foreCastAPI.getTimeL()){
