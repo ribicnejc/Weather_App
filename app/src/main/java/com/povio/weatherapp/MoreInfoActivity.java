@@ -58,11 +58,11 @@ public class MoreInfoActivity extends AppCompatActivity {
     public void onFinish(GetWeatherInfoAPI api, ForeCastAPI foreCastAPI) {
         setContentView(R.layout.activity_weather_info_update);
         horizontalRecyclerView = (RecyclerView) findViewById(R.id.horizontal_recycler_view);
-        horizontalList.add("nejc");
-        horizontalList.add("ema");
-        horizontalAdapter = new HorizontalRVAdapter(horizontalList);
+//        horizontalList.add("nejc");
+//        horizontalList.add("ema");
+        horizontalAdapter = new HorizontalRVAdapter(foreCastAPI.getTimeL(), foreCastAPI.getIconL(), foreCastAPI.getMainTempL());
         LinearLayoutManager horizontalLayoutManager
-                = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true);
+                = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         horizontalRecyclerView.setLayoutManager(horizontalLayoutManager);
         horizontalRecyclerView.setAdapter(horizontalAdapter);
 

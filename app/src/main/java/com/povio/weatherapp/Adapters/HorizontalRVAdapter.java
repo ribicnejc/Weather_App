@@ -1,33 +1,42 @@
 package com.povio.weatherapp.Adapters;
 import android.content.Context;
+import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.povio.weatherapp.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HorizontalRVAdapter extends RecyclerView.Adapter<HorizontalRVAdapter.MyViewHolder> {
     Context mContext;
-    private List<String> horizontalList;
-
+    private List<String> time;
+    private List<Integer> picture;
+    private List<String> temperature;
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView txtView;
+        public TextView timeTxtView;
+        public ImageView imgView;
+        public TextView tempTxtView;
 
         public MyViewHolder(View view) {
             super(view);
-            txtView = (TextView) view.findViewById(R.id.temp);
-
+            timeTxtView = (TextView) view.findViewById(R.id.horTime);
+            imgView = (ImageView) view.findViewById(R.id.horIcon);
+            tempTxtView = (TextView) view.findViewById(R.id.horTemp);
         }
     }
 
 
-    public HorizontalRVAdapter(List<String> horizontalList) {
-        this.horizontalList = horizontalList;
+    public HorizontalRVAdapter(ArrayList<String> time, ArrayList<Integer> picture, ArrayList<String> temperature) {
+        this.time = time;
+        this.picture = picture;
+        this.temperature = temperature;
     }
 
     @Override
@@ -40,19 +49,21 @@ public class HorizontalRVAdapter extends RecyclerView.Adapter<HorizontalRVAdapte
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
-        holder.txtView.setText(horizontalList.get(position));
+        holder.timeTxtView.setText(this.time.get(position));
+        holder.imgView.setImageResource(this.picture.get(position));
+        holder.tempTxtView.setText(this.temperature.get(position));
 
-        holder.txtView.setOnClickListener(new View.OnClickListener() {
+        /*holder.txtView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(mContext, holder.txtView.getText().toString(),Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
     }
 
     @Override
     public int getItemCount() {
-        return horizontalList.size();
+        return time.size();
     }
 }
 

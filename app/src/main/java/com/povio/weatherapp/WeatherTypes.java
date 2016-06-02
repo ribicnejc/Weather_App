@@ -25,6 +25,8 @@ public class WeatherTypes {
         typeIcons.put("heavy intensity shower rain", R.drawable.downpour);
         typeIcons.put("ragged shower rain", R.drawable.rain);
         typeIcons.put("light intensity shower rain", R.drawable.heavy_rain);
+        //storms
+        typeIcons.put("thunderstorm", R.drawable.storm);
         // clouds
         typeIcons.put("few clouds", R.drawable.partly_cloudy_day);
         typeIcons.put("scattered clouds", R.drawable.cloud);

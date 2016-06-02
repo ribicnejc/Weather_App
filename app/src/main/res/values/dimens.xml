@@ -9,4 +9,5 @@
     <dimen name="forcast_five_days_font">20sp</dimen>
     <dimen name="forcast_five_days_icon">40dp</dimen>
     <dimen name="forcast_fice_days_margin">15dp</dimen>
+    <dimen name="margin_between_horizontal_elements">60dp</dimen>
 </resources>
