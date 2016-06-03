@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -81,6 +82,8 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.InfoViewHolder> {
         weatherViewHolder.minTemp.setText("min:  " + datas.get(i).getMinTemp() + "°");
         weatherViewHolder.maxTemp.setText("max: " + datas.get(i).getMaxTemp() + "°");
         weatherViewHolder.weatherPhoto.setImageResource(datas.get(i).weatherIcon);
+        //weatherViewHolder.cv.setBackgroundColor(Color.TRANSPARENT);
+        weatherViewHolder.cv.setCardElevation(0);
         weatherViewHolder.buttonTest.setOnClickListener(new View.OnClickListener(){
 
             @Override
