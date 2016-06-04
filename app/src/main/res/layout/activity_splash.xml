@@ -14,7 +14,7 @@
 
     <com.romainpiel.shimmer.ShimmerTextView
         android:id="@+id/shimmer_tv"
-        android:text="Good Afternoon nejc how"
+        android:text="Weather App"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#dbdbdb"
@@ -29,7 +29,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="version 1.5.8"
+        android:text="@string/version_splash"
         android:textSize="18sp"
         android:textColor="@color/colorLightGray"
         android:id="@+id/version"
