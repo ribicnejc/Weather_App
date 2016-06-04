@@ -61,6 +61,7 @@ public class MoreInfoActivity extends AppCompatActivity {
     }
     public void onFinish(GetWeatherInfoAPI api, ForeCastAPI foreCastAPI) {
         setContentView(R.layout.activity_weather_info_update);
+        setTitle("Weather in " + api.getCityName());
         horizontalRecyclerView = (RecyclerView) findViewById(R.id.horizontal_recycler_view);
         horizontalAdapter = new HorizontalRVAdapter(foreCastAPI.getTimeL(), foreCastAPI.getIconL(), foreCastAPI.getMainTempL());
         LinearLayoutManager horizontalLayoutManager

@@ -14,4 +14,5 @@
     <color name="colorForeCastCold">#8EA7C6</color>
     <color name="colorDarkTransparentBackground">#8c4a4a4a</color>
     <color name="colorDarkTransparentBackgroundCard">#1c4a4a4a</color>
+    <color name="colorWhiteTransparent">#54ffffff</color>
 </resources>

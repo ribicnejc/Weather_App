@@ -3,6 +3,7 @@ package com.povio.weatherapp;
 import com.povio.weatherapp.APIs.*;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,12 +34,14 @@ public class MainActivity extends AppCompatActivity {
     //public static List<Data> a;
     private RecyclerView rv;
     public static TextView mTxtView;
+    public ImageView background;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        background = (ImageView) findViewById(R.id.background);
+        background.setImageResource(R.drawable.bg_main2);
         mTxtView = (TextView) findViewById(R.id.emptyRV);
         final WaveSwipeRefreshLayout swipeView = (WaveSwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
         swipeView.setColorSchemeColors(Color.WHITE, Color.WHITE);

@@ -89,14 +89,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/relativeLayout3"
-        android:layout_marginRight="@dimen/activity_vertical_margin"
-        android:layout_marginEnd="@dimen/activity_vertical_margin"
         android:layout_marginTop="20dp"
         android:layout_below="@+id/iconMoreInfo"
-        android:layout_alignLeft="@+id/relativeLayout4"
-        android:layout_alignStart="@+id/relativeLayout4">
+        android:padding="@dimen/forcast_card_view_padding">
         <!--<include layout="@layout/fore_cast_info"/>-->
-        <include layout="@layout/horizontal_rec_view_forecast"/>
+            <include layout="@layout/horizontal_rec_view_forecast"/>
     </RelativeLayout>
 
     <TextView

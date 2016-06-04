@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Sankofa Weather</string>
+    <string name="app_name">Weather App</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_city_query">CityQuery</string>
     <string name="title_activity_weather_info">WeatherInfo</string>
