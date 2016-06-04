@@ -51,7 +51,7 @@ public class HorizontalRVAdapter extends RecyclerView.Adapter<HorizontalRVAdapte
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         holder.timeTxtView.setText(this.time.get(position));
         holder.imgView.setImageResource(this.picture.get(position));
-        holder.tempTxtView.setText(this.temperature.get(position));
+        holder.tempTxtView.setText(Math.round(Double.parseDouble(this.temperature.get(position).replace(',','.')))+"°");
 
         /*holder.txtView.setOnClickListener(new View.OnClickListener() {
             @Override

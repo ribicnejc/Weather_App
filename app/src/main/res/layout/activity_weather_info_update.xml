@@ -53,7 +53,8 @@
             android:text="Clouds"
             android:textSize="22sp"
             android:id="@+id/infoMoreInfo"
-            android:textColor="@color/colorGray"
+            android:textStyle="italic"
+            android:textColor="@color/colorGrayLight"
             android:layout_below="@+id/textView13"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
@@ -64,7 +65,7 @@
             android:textStyle="italic"
             android:text="broken clouds"
             android:textSize="18sp"
-            android:textColor="@color/colorGray"
+            android:textColor="@color/colorGrayLight"
             android:id="@+id/descMoreInfo"
             android:layout_below="@+id/infoMoreInfo"
             android:layout_alignParentLeft="true"

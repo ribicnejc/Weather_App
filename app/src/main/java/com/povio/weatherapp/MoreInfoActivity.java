@@ -105,10 +105,20 @@ public class MoreInfoActivity extends AppCompatActivity {
                     SimpleDateFormat newDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.ENGLISH);
                     Date MyDate = newDateFormat.parse(foreCastAPI.getDateAndTimeL().get(j));
                     newDateFormat.applyPattern("EEEE");
+
                     String nameOfDay = newDateFormat.format(MyDate);
                     int dayResId = getResources().getIdentifier("day" + (i+1), "id", getPackageName());
                     days[i] = (TextView) findViewById(dayResId);
                     days[i].setText(nameOfDay);
+
+
+                    int minTempResId = getResources().getIdentifier("day"+(i+1)+"_temp_min", "id", getPackageName());
+                    daysTempMin[i] = (TextView) findViewById(minTempResId);
+                    daysTempMin[i].setText(foreCastAPI.getMinTempByDay(foreCastAPI.getDateAndTimeL().get(j).split(" ")[0]));
+
+                    int maxTempResId = getResources().getIdentifier("day" + (i+1) + "_temp_max", "id", getPackageName());
+                    daysTempMax[i] = (TextView) findViewById(maxTempResId);
+                    daysTempMax[i].setText(foreCastAPI.getMaxTempByDay(foreCastAPI.getDateAndTimeL().get(j).split(" ")[0]));
                     i++;
                 }
                 j++;

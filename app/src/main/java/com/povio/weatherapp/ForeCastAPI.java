@@ -76,6 +76,34 @@ public class ForeCastAPI {
         }
         return timeA;
     }
+    public String getMinTempByDay(String date){
+        double min = 200d;
+        int i = 0;
+        for (String dateIter : dateL){
+            dateIter = dateIter.split(" ")[0];
+            if (dateIter.equals(date)){
+                if (Double.parseDouble(getMainTempL().get(i).replace(",", ".")) < min){
+                    min = Double.parseDouble(getMainTempL().get(i).replace(",", "."));
+                }
+            }
+            i++;
+        }
+        return Math.round(min) + "°";
+    }
+    public String getMaxTempByDay(String date){
+        double max = 0;
+        int i = 0;
+        for (String dateIter : dateL){
+            dateIter = dateIter.split(" ")[0];
+            if (dateIter.equals(date)){
+                if (Double.parseDouble(getMainTempL().get(i).replace(",", ".")) > max){
+                    max = Double.parseDouble(getMainTempL().get(i).replace(",", "."));
+                }
+            }
+            i++;
+        }
+        return Math.round(max) + "°";
+    }
     public void start(){
         new OpenWeatherMapTask(this.cityName).execute();
     }
@@ -146,7 +174,7 @@ public class ForeCastAPI {
 
                                 dateL.add(jsonHelperGetString(thisList, "dt_txt"));
                                 JSONObject main = jsonHelperGetJSONObject(thisList, "main");
-                                mainTempL.add(toCelsius(main, "temp") + "°");
+                                mainTempL.add(toCelsius(main, "temp"));
                                 minTempL.add(toCelsius(main, "temp_min"));
                                 maxTempL.add(toCelsius(main, "temp_max"));
                                 pressureL.add(jsonHelperGetString(main, "pressure"));
