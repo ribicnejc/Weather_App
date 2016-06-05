@@ -99,6 +99,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.InfoViewHolder> {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, MoreInfoActivity.class);
+                intent.setFlags(intent .getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
                 intent.putExtra("city", datas.get(i).getCityName());
                 mContext.startActivity(intent);
                 ((Activity) mContext).overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);

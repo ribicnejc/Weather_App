@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +40,7 @@ public class CityQuery extends AppCompatActivity {
     TextView add;
     ShimmerButton btnByCityName;
     TextView textViewResult, textViewInfo;
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +48,8 @@ public class CityQuery extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setTitle("Search city");
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.GONE);
         editTextCityName = (EditText)findViewById(R.id.cityname);
         btnByCityName = (ShimmerButton)findViewById(R.id.bycityname);
         shimmer.setDuration(2000);
@@ -58,6 +62,7 @@ public class CityQuery extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 add.setText("Searching...");
+                progressBar.setVisibility(View.VISIBLE);
                 GetWeatherInfoAPI api = new GetWeatherInfoAPI(editTextCityName.getText().toString());
                 waitForApi(api);
             }
@@ -79,6 +84,7 @@ public class CityQuery extends AppCompatActivity {
     }
     public void onFinish(final GetWeatherInfoAPI api) {
         add.setText("Search city");
+        progressBar.setVisibility(View.GONE);
         if (api.getMainDesc().equals(":(")) {
             Toast.makeText(CityQuery.this, "That place does not exist", Toast.LENGTH_SHORT).show();
         } else {
