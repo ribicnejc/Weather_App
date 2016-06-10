@@ -10,6 +10,8 @@ public class Data implements Serializable{
     String temp;
 
     String minTemp;
+
+
     String maxTemp;
     int weatherIcon;
     boolean refreshingState = true;
