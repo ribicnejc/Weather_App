@@ -55,8 +55,8 @@ public class CityQuery extends AppCompatActivity {
         shimmer.setDuration(2000);
         shimmer.start(btnByCityName);
         add = (TextView)findViewById(R.id.add);
-        textViewResult = (TextView)findViewById(R.id.result);
-        textViewResult.setText("");
+        //textViewResult = (TextView)findViewById(R.id.result);
+        //textViewResult.setText("");
         textViewInfo = (TextView)findViewById(R.id.info);
         btnByCityName.setOnClickListener(new View.OnClickListener() {
             @Override

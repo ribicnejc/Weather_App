@@ -15,12 +15,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
-        android:textStyle="italic"
+        android:textColor="@color/colorLightGray"
+        android:text="@string/empty_list"
         android:id="@+id/emptyRV"
         android:textSize="30sp"
-        android:layout_marginTop="200dp"
-        android:fontFamily="fonts/d"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
     <jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout

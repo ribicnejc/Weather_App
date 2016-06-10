@@ -9,6 +9,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
@@ -104,6 +105,8 @@ public class MainActivity extends AppCompatActivity {
         );
         background.setImageResource(R.drawable.bg_main2);
         mTxtView = (TextView) findViewById(R.id.emptyRV);
+        Typeface type = Typeface.createFromAsset(getAssets(), "openSansLight.ttf");
+        mTxtView.setTypeface(type);
         final WaveSwipeRefreshLayout swipeView = (WaveSwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
         swipeView.setColorSchemeColors(Color.WHITE, Color.WHITE);
         swipeView.setWaveColor(Color.argb(100, 7, 133, 171));
@@ -204,13 +207,11 @@ public class MainActivity extends AppCompatActivity {
 
     public final void emptyRecyclerView(List someList){
         if (someList.isEmpty()){
-            TextView mTextView = (TextView) findViewById(R.id.emptyRV);
-            mTextView.setText("City list is empty");
+            mTxtView.setVisibility(View.VISIBLE);
             //mTextView.setVisibility(View.GONE);
         }
         else{
-            TextView mTextView = (TextView) findViewById(R.id.emptyRV);
-            mTextView.setText("");
+            mTxtView.setVisibility(View.GONE);
             //mTextView.setVisibility(View.INVISIBLE);
         }
     }
@@ -219,20 +220,16 @@ public class MainActivity extends AppCompatActivity {
             datas.remove(pos);
             saveState(datas);
             if (datas.isEmpty()) {
-                mTxtView.setText("City list is empty");
+                mTxtView.setVisibility(View.VISIBLE);
             } else {
-                mTxtView.setText("");
+                mTxtView.setVisibility(View.GONE);
             }
         }catch (Exception e){
             Log.d("Crash swipe", "removing");
         }
     }
 
-    public static String getNameOfCity(int pos){
-        String name;
-        name = datas.get(pos).getCityName();
-        return name;
-    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
