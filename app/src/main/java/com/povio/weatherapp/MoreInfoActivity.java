@@ -14,7 +14,9 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +36,10 @@ public class MoreInfoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.loading_before_moreinfo);
+        ProgressBar pr;
+        pr = (ProgressBar) findViewById(R.id.progressBarMoreInfo);
+        pr.setVisibility(View.VISIBLE);
         GetWeatherInfoAPI api;
         ForeCastAPI foreCastAPI;
 
