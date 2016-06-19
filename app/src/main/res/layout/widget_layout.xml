@@ -1,58 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg_clear"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-        <!--<RelativeLayout-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content">-->
-            <!--<EditText-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:id="@+id/widget_edit_text"/>-->
-            <!--<Button-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-<!---->
-                <!--android:layout_alignParentEnd="true"/>-->
-<!---->
-        <!--</RelativeLayout>-->
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@color/colorWidgetToolbarBG"
             android:visibility="visible"
             android:id="@+id/widget">
-
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/widget_padding">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="14:56"
-                android:id="@+id/widget_clock"
-                android:textSize="40sp"
+                android:text="H: 15° / L: 7°"
+                android:textColor="@color/colorLightGray"
+                android:id="@+id/widget_max_min"
+                android:textSize="12sp"
                 />
-            <ImageView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/widget_city_name"
+                android:layout_below="@+id/widget_max_min"
+                android:textColor="@color/colorLightGray"
+                android:text="Medvode"
+                android:textSize="25sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FRI, 11. Jun | Sl"
+                android:textColor="@color/colorLightGray"
+                android:layout_below="@+id/widget_city_name"
+                android:id="@+id/widget_time_date"
+                android:layout_alignParentStart="true" />
+            </RelativeLayout>
+            <ImageView
+                android:contentDescription="@string/widget_daily"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/widget_image"
-                android:src="@drawable/moon"
+                android:src="@drawable/partly_cloudy_day"
                 android:layout_centerVertical="true"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="23°"
-                android:layout_centerVertical="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:textSize="50sp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="FRI, 11. Jun | Smlednik"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
-        </RelativeLayout>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/widget_padding"
+                android:text="23°"
+                android:textColor="@color/colorLightGray"
+                android:layout_alignParentEnd="true"
+                android:textSize="50sp"/>
+
+
+            <include layout="@layout/widget_toolbar"
+                android:layout_below="@+id/widget_image"
+                android:layout_width="match_parent"
+                android:layout_height="25dp" />
+
+        </RelativeLayout>
 </RelativeLayout>

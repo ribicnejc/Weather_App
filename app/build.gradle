@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.povio.com.povio.weatherapp"
-        minSdkVersion 15
+        minSdkVersion 17
         targetSdkVersion 23
         versionCode 5
         versionName "2.0.4"

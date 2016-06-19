@@ -15,4 +15,6 @@
     <color name="colorDarkTransparentBackground">#8c4a4a4a</color>
     <color name="colorDarkTransparentBackgroundCard">#1c4a4a4a</color>
     <color name="colorWhiteTransparent">#54ffffff</color>
+    <color name="colorWidgetBg">#AA2196F3</color>
+    <color name="colorWidgetToolbarBG">#AA000000</color>
 </resources>
