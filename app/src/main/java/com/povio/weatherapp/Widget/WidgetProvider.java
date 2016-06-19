@@ -26,12 +26,12 @@ public class WidgetProvider extends AppWidgetProvider{
 
             //GetWeatherInfoAPI api = new GetWeatherInfoAPI();
             //set elements values
-            remoteViews.setTextViewText(R.id.widget_clock, new Random().nextInt(50)+"");
+            remoteViews.setTextViewText(R.id.widget_city_name, new Random().nextInt(50)+"");
 
             Intent configIntent = new Intent (context, CityQuery.class);
             configIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetIds);
             PendingIntent pIntent = PendingIntent.getActivity(context, 0, configIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-            remoteViews.setOnClickPendingIntent(R.id.widget_clock, pIntent);
+            remoteViews.setOnClickPendingIntent(R.id.widget_city_name, pIntent);
 
             Intent intent = new Intent(context, WidgetProvider.class);
             intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
