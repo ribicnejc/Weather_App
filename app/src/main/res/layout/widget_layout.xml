@@ -14,8 +14,6 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/widget_padding">
             <TextView
-
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="H: 15° / L: 7°"
@@ -60,15 +58,22 @@
                 android:layout_alignParentEnd="true"
                 android:textSize="50sp"/>
 
+            <include layout="@layout/widget_hourly_forecast"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/widget_hourly_forecast2"
+                android:layout_below="@+id/widget_image"/>
+
             <include layout="@layout/widget_daily_forecast"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_width="match_parent"
-                android:id="@+id/widget_daily_forecast"
-                android:layout_below="@+id/widget_image"/>
+                android:id="@+id/widget_daily_forecast2"
+                android:layout_below="@+id/widget_hourly_forecast2"/>
 
             <include layout="@layout/widget_toolbar"
-                android:layout_below="@+id/widget_daily_forecast"
+                android:layout_below="@+id/widget_daily_forecast2"
                 android:layout_width="match_parent"
                 android:layout_height="25dp" />
 

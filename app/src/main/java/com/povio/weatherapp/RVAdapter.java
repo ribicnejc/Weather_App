@@ -146,7 +146,8 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.InfoViewHolder> {
         final Data deleted = datas.get(position);
         final Snackbar snackbar = Snackbar.make(view, datas.get(position).getCityName()+" has been removed", Snackbar.LENGTH_LONG);
         MainActivity.remove(position);
-        MainActivity.mTxtView.setVisibility(View.VISIBLE);
+        if(datas.size() == 0)
+            MainActivity.mTxtView.setVisibility(View.VISIBLE);
         notifyItemRemoved(position);
         MainActivity.saveState(datas);
         notifyItemRangeChanged(position, getItemCount());

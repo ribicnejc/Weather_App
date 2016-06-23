@@ -12,17 +12,17 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <receiver
-            android:icon="@drawable/ic"
-            android:label="Weather App"
-            android:name=".Widget.WidgetProvider">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
-            </intent-filter>
-            <meta-data android:name="android.appwidget.provider"
-                android:resource="@xml/widget"/>
-
-        </receiver>
+        <!--<receiver-->
+            <!--android:icon="@drawable/ic"-->
+            <!--android:label="Weather App"-->
+            <!--android:name=".Widget.WidgetProvider">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>-->
+            <!--</intent-filter>-->
+            <!--<meta-data android:name="android.appwidget.provider"-->
+                <!--android:resource="@xml/widget"/>-->
+<!---->
+        <!--</receiver>-->
         <activity
             android:noHistory="true"
             android:name=".Splash"

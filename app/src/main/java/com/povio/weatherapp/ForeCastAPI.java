@@ -180,7 +180,8 @@ public class ForeCastAPI {
                                 pressureL.add(jsonHelperGetString(main, "pressure"));
                                 humidityL.add(jsonHelperGetString(main, "humidity"));
                                 JSONObject wind = jsonHelperGetJSONObject(thisList, "wind");
-                                windSpeedL.add(jsonHelperGetString(wind, "speed"));
+                                if(wind != null)
+                                    windSpeedL.add(jsonHelperGetString(wind, "speed"));
                                 JSONArray weather = jsonHelperGetJSONArray(thisList, "weather");
                                 if (weather != null) {
                                     for (int j = 0; j < weather.length(); j++) {

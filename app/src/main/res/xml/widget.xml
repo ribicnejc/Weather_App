@@ -7,8 +7,6 @@
     android:resizeMode="horizontal|vertical"
     android:widgetCategory="home_screen|keyguard"
     android:previewImage="@drawable/ic"
-
-
     >
 
 </appwidget-provider>

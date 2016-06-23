@@ -111,7 +111,7 @@ public class MoreInfoActivity extends AppCompatActivity {
             int i = 0;
             int j = 0;
             for (String elt : foreCastAPI.getTimeL()){
-                if (elt.equals("12:00")){
+                if ( elt.equals("15:00")){
                     int resId = getResources().getIdentifier("day" + (i+1) + "_icon", "id", getPackageName());
                     daysIcons[i] = (ImageView) findViewById(resId);
                     daysIcons[i].setImageResource(foreCastAPI.getIconL().get(j));
