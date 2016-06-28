@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,14 +33,19 @@ import com.povio.weatherapp.Images.Backgrounds;
 public class MoreInfoActivity extends AppCompatActivity {
     private RecyclerView horizontalRecyclerView;
     private HorizontalRVAdapter horizontalAdapter;
+    private Toolbar toolbar;
     private ArrayList<String> horizontalList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.loading_before_moreinfo);
-        ProgressBar pr;
-        pr = (ProgressBar) findViewById(R.id.progressBarMoreInfo);
-        pr.setVisibility(View.VISIBLE);
+        setContentView(R.layout.activity_weather_info_update);
+        toolbar = (Toolbar) findViewById(R.id.app_bar);
+        setSupportActionBar(toolbar);
+       // ProgressBar pr;
+
+
+       // pr = (ProgressBar) findViewById(R.id.progressBarMoreInfo);
+//        pr.setVisibility(View.VISIBLE);
         GetWeatherInfoAPI api;
         ForeCastAPI foreCastAPI;
 
@@ -69,7 +75,7 @@ public class MoreInfoActivity extends AppCompatActivity {
         }, 100);
     }
     public void onFinish(GetWeatherInfoAPI api, ForeCastAPI foreCastAPI) {
-        setContentView(R.layout.activity_weather_info_update);
+        //setContentView(R.layout.activity_weather_info_update);
         setTitle("Weather in " + api.getCityName());
         horizontalRecyclerView = (RecyclerView) findViewById(R.id.horizontal_recycler_view);
         horizontalAdapter = new HorizontalRVAdapter(foreCastAPI.getTimeL(), foreCastAPI.getIconL(), foreCastAPI.getMainTempL());

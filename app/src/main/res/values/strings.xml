@@ -12,4 +12,5 @@
     <string name="widget_hourly">HOURLY</string>
     <string name="widget_daily">DAILY</string>
     <string name="widget_without">WITHOUT</string>
+    <string name="search">Search</string>
 </resources>
