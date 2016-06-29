@@ -1,5 +1,6 @@
 package com.povio.weatherapp.Adapters;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,12 +24,16 @@ public class HorizontalRVAdapter extends RecyclerView.Adapter<HorizontalRVAdapte
         public TextView timeTxtView;
         public ImageView imgView;
         public TextView tempTxtView;
+        public Typeface type;
+        public TextView rail;
 
         public MyViewHolder(View view) {
             super(view);
             timeTxtView = (TextView) view.findViewById(R.id.horTime);
             imgView = (ImageView) view.findViewById(R.id.horIcon);
             tempTxtView = (TextView) view.findViewById(R.id.horTemp);
+            type = Typeface.createFromAsset(view.getContext().getAssets(), "openSansLight.ttf");
+            rail = (TextView) view.findViewById(R.id.rail);
         }
     }
 
@@ -52,7 +57,13 @@ public class HorizontalRVAdapter extends RecyclerView.Adapter<HorizontalRVAdapte
         holder.timeTxtView.setText(this.time.get(position));
         holder.imgView.setImageResource(this.picture.get(position));
         holder.tempTxtView.setText(Math.round(Double.parseDouble(this.temperature.get(position).replace(',','.')))+"°");
-
+        holder.timeTxtView.setTypeface(holder.type);
+        holder.tempTxtView.setTypeface(holder.type);
+        if(this.time.get(position).equals("21:00")){
+            holder.rail.setVisibility(View.VISIBLE);
+        }else{
+            holder.rail.setVisibility(View.GONE);
+        }
         /*holder.txtView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

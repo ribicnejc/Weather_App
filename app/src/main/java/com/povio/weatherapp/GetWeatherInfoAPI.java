@@ -185,11 +185,9 @@ public class GetWeatherInfoAPI {
                         jsonResult += "\n";
                         JSONArray weather = jsonHelperGetJSONArray(JsonObject, "weather");
                         if(weather != null){
-                            for(int i=0; i<weather.length(); i++){
-                                JSONObject thisWeather = weather.getJSONObject(i);
+                                JSONObject thisWeather = weather.getJSONObject(0);
                                 iconDesc = jsonHelperGetString(thisWeather, "description");
                                 mainDesc = jsonHelperGetString(thisWeather, "main");
-                            }
                         }
 
                         JSONObject main = jsonHelperGetJSONObject(JsonObject, "main");

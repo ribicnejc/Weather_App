@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.support.v4.app.NavUtils;
@@ -79,6 +80,7 @@ public class MoreInfoActivity extends AppCompatActivity {
 
     public void onFinish(GetWeatherInfoAPI api, ForeCastAPI foreCastAPI) {
         setContentView(R.layout.activity_weather_info_update);
+        Typeface type = Typeface.createFromAsset(getAssets(), "openSansLight.ttf");
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -108,10 +110,16 @@ public class MoreInfoActivity extends AppCompatActivity {
         try {
             cityName = (TextView) findViewById(R.id.cityMoreInfo);
             cityName.setText(api.getCityName() + ", " + api.getCountry());
+            cityName.setTypeface(type);
+
             weatherInfo = (TextView) findViewById(R.id.infoMoreInfo);
             weatherInfo.setText(api.getMainDesc());
+            weatherInfo.setTypeface(type);
+
             weatherDesc = (TextView) findViewById(R.id.descMoreInfo);
             weatherDesc.setText(api.getIconDesc());
+            weatherDesc.setTypeface(type);
+
             weatherPhoto = (ImageView) findViewById(R.id.iconMoreInfo);
             weatherPhoto.setImageResource(api.getIcon());
             background = (ImageView) findViewById(R.id.background);
@@ -136,15 +144,18 @@ public class MoreInfoActivity extends AppCompatActivity {
                     int dayResId = getResources().getIdentifier("day" + (i + 1), "id", getPackageName());
                     days[i] = (TextView) findViewById(dayResId);
                     days[i].setText(nameOfDay);
+                    days[i].setTypeface(type);
 
 
                     int minTempResId = getResources().getIdentifier("day" + (i + 1) + "_temp_min", "id", getPackageName());
                     daysTempMin[i] = (TextView) findViewById(minTempResId);
                     daysTempMin[i].setText(foreCastAPI.getMinTempByDay(foreCastAPI.getDateAndTimeL().get(j).split(" ")[0]));
+                    daysTempMin[i].setTypeface(type);
 
                     int maxTempResId = getResources().getIdentifier("day" + (i + 1) + "_temp_max", "id", getPackageName());
                     daysTempMax[i] = (TextView) findViewById(maxTempResId);
                     daysTempMax[i].setText(foreCastAPI.getMaxTempByDay(foreCastAPI.getDateAndTimeL().get(j).split(" ")[0]));
+                    daysTempMax[i].setTypeface(type);
                     i++;
                 }
                 j++;
