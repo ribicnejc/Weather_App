@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
+
 import com.povio.weatherapp.Images.Backgrounds;
 
 public class MoreInfoActivity extends AppCompatActivity {
@@ -35,23 +37,23 @@ public class MoreInfoActivity extends AppCompatActivity {
     private HorizontalRVAdapter horizontalAdapter;
     private Toolbar toolbar;
     private ArrayList<String> horizontalList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_weather_info_update);
-        toolbar = (Toolbar) findViewById(R.id.app_bar);
-        setSupportActionBar(toolbar);
-       // ProgressBar pr;
+        setContentView(R.layout.loading_before_moreinfo);
+
+        ProgressBar pr;
 
 
-       // pr = (ProgressBar) findViewById(R.id.progressBarMoreInfo);
-//        pr.setVisibility(View.VISIBLE);
+        pr = (ProgressBar) findViewById(R.id.progressBarMoreInfo);
+        pr.setVisibility(View.VISIBLE);
         GetWeatherInfoAPI api;
         ForeCastAPI foreCastAPI;
 
 
         Bundle extras = getIntent().getExtras();
-        if(extras != null){
+        if (extras != null) {
             String city = extras.getString("city");
             foreCastAPI = new ForeCastAPI(city);
             api = new GetWeatherInfoAPI(city);
@@ -61,7 +63,7 @@ public class MoreInfoActivity extends AppCompatActivity {
 
     }
 
-    public void waitForApi(final GetWeatherInfoAPI api, final ForeCastAPI foreCastAPI){
+    public void waitForApi(final GetWeatherInfoAPI api, final ForeCastAPI foreCastAPI) {
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -74,8 +76,13 @@ public class MoreInfoActivity extends AppCompatActivity {
             }
         }, 100);
     }
+
     public void onFinish(GetWeatherInfoAPI api, ForeCastAPI foreCastAPI) {
-        //setContentView(R.layout.activity_weather_info_update);
+        setContentView(R.layout.activity_weather_info_update);
+        toolbar = (Toolbar) findViewById(R.id.app_bar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Weather in " + api.getCityName());
         horizontalRecyclerView = (RecyclerView) findViewById(R.id.horizontal_recycler_view);
         horizontalAdapter = new HorizontalRVAdapter(foreCastAPI.getTimeL(), foreCastAPI.getIconL(), foreCastAPI.getMainTempL());
@@ -98,7 +105,7 @@ public class MoreInfoActivity extends AppCompatActivity {
         TextView[] daysTempMax = new TextView[5];
         ImageView[] daysIcons = new ImageView[5];
 
-        try{
+        try {
             cityName = (TextView) findViewById(R.id.cityMoreInfo);
             cityName.setText(api.getCityName() + ", " + api.getCountry());
             weatherInfo = (TextView) findViewById(R.id.infoMoreInfo);
@@ -116,9 +123,9 @@ public class MoreInfoActivity extends AppCompatActivity {
             background.setImageResource(backgrounds.get(api.getIconDesc()));
             int i = 0;
             int j = 0;
-            for (String elt : foreCastAPI.getTimeL()){
-                if ( elt.equals("15:00")){
-                    int resId = getResources().getIdentifier("day" + (i+1) + "_icon", "id", getPackageName());
+            for (String elt : foreCastAPI.getTimeL()) {
+                if (elt.equals("15:00")) {
+                    int resId = getResources().getIdentifier("day" + (i + 1) + "_icon", "id", getPackageName());
                     daysIcons[i] = (ImageView) findViewById(resId);
                     daysIcons[i].setImageResource(foreCastAPI.getIconL().get(j));
                     SimpleDateFormat newDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.ENGLISH);
@@ -126,28 +133,29 @@ public class MoreInfoActivity extends AppCompatActivity {
                     newDateFormat.applyPattern("EEEE");
 
                     String nameOfDay = newDateFormat.format(MyDate);
-                    int dayResId = getResources().getIdentifier("day" + (i+1), "id", getPackageName());
+                    int dayResId = getResources().getIdentifier("day" + (i + 1), "id", getPackageName());
                     days[i] = (TextView) findViewById(dayResId);
                     days[i].setText(nameOfDay);
 
 
-                    int minTempResId = getResources().getIdentifier("day"+(i+1)+"_temp_min", "id", getPackageName());
+                    int minTempResId = getResources().getIdentifier("day" + (i + 1) + "_temp_min", "id", getPackageName());
                     daysTempMin[i] = (TextView) findViewById(minTempResId);
                     daysTempMin[i].setText(foreCastAPI.getMinTempByDay(foreCastAPI.getDateAndTimeL().get(j).split(" ")[0]));
 
-                    int maxTempResId = getResources().getIdentifier("day" + (i+1) + "_temp_max", "id", getPackageName());
+                    int maxTempResId = getResources().getIdentifier("day" + (i + 1) + "_temp_max", "id", getPackageName());
                     daysTempMax[i] = (TextView) findViewById(maxTempResId);
                     daysTempMax[i].setText(foreCastAPI.getMaxTempByDay(foreCastAPI.getDateAndTimeL().get(j).split(" ")[0]));
                     i++;
                 }
                 j++;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             setContentView(R.layout.error);
             Toast.makeText(MoreInfoActivity.this, "No internet connection", Toast.LENGTH_SHORT).show();
-            Log.e("MoreInfoActivity","no internet connection");
+            Log.e("MoreInfoActivity", "no internet connection");
         }
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -158,17 +166,24 @@ public class MoreInfoActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.add_city){
+        if (id == R.id.add_city) {
             Intent intent = new Intent(getBaseContext(), CityQuery.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
         }
-        if (id == R.id.home){
+        if (id == R.id.homeSet) {
             Intent intent = new Intent(getBaseContext(), MainActivity.class);
             startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+        }
+        if (id == android.R.id.home){
+            startActivity(new Intent(getBaseContext(), MainActivity.class));
+           // NavUtils.navigateUpFromSameTask(this);
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
         }
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     public void onBackPressed() {
         Log.d("CDA", "onBackPressed Called");
@@ -176,6 +191,7 @@ public class MoreInfoActivity extends AppCompatActivity {
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
     }
+
     public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId,
                                                          int reqWidth, int reqHeight) {
 

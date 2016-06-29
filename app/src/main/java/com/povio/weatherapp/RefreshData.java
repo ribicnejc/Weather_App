@@ -33,7 +33,7 @@ public class RefreshData {
     }
     public void onFinish(GetWeatherInfoAPI api){
         if(!api.getMainDesc().equals(":(")){
-            MainActivity.datas.get(this.place).setDesc(api.getMainDesc());
+            MainActivity.datas.get(this.place).setType(api.getMainDesc());
             MainActivity.datas.get(this.place).setTemp(api.getMainTemp());
             MainActivity.datas.get(this.place).setWeatherIcon(api.getIcon());
             MainActivity.datas.get(this.place).setMinTemp(api.getMinTemp());

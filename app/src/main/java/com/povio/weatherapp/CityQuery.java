@@ -47,6 +47,8 @@ public class CityQuery extends AppCompatActivity {
         setContentView(R.layout.activity_city_query);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Search city");
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar.setVisibility(View.GONE);
@@ -127,6 +129,11 @@ public class CityQuery extends AppCompatActivity {
             startActivity(intent);
         }
         if (id == R.id.home){
+            Intent intent = new Intent(getBaseContext(), MainActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
+        }
+        if (id == android.R.id.home){
             Intent intent = new Intent(getBaseContext(), MainActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);

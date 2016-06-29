@@ -18,4 +18,5 @@
     <color name="colorWhiteTransparent">#54ffffff</color>
     <color name="colorWidgetBg">#AA2196F3</color>
     <color name="colorWidgetToolbarBG">#AA000000</color>
+    <color name="colorPrimaryTransparent">#11ffffff</color>
 </resources>

@@ -16,14 +16,20 @@
 
     <include layout="@layout/back_ground" />
 
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/appbar"
+        android:theme="@style/AppTheme.AppBarOverlay">
     <include
         android:id="@+id/app_bar"
         layout="@layout/app_bar" />
+    </android.support.design.widget.AppBarLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/app_bar">
+        android:layout_below="@id/appbar">
 
         <RelativeLayout
             android:layout_width="match_parent"

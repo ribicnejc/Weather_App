@@ -48,7 +48,8 @@
             android:noHistory="true"
             android:name=".MoreInfoActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppThemeTransparent" />
+            android:theme="@style/AppThemeTransparent" >
+        </activity>
 
     </application>
 
