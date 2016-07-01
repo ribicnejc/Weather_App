@@ -33,6 +33,8 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import android.os.Handler;
 import jp.co.recruit_lifestyle.android.widget.*;
@@ -189,6 +191,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void onItemsLoadComplete(final WaveSwipeRefreshLayout swipe){
         try{
+            Collections.sort(datas, new Comparator<Data>(){
+                public int compare(Data d1, Data d2) {
+                    return d1.getCityName().compareToIgnoreCase(d2.getCityName());
+                }
+            });
             saveState(datas);
             swipe.setRefreshing(false);
             datas.get(datas.size() - 1).setRefreshingState(true);

@@ -1,9 +1,9 @@
 package com.povio.weatherapp;
-
 import java.io.Serializable;
+import java.util.Comparator;
 
 
-public class Data implements Serializable{
+public class Data implements Serializable {
     String cityName;
     String desc;
     String type;
@@ -15,12 +15,13 @@ public class Data implements Serializable{
     String maxTemp;
     int weatherIcon;
     boolean refreshingState = true;
-    Data(String cityName, String desc, int weatherIcon){
+    Data(String cityName, String desc, int weatherIcon) {
         this.cityName = cityName;
         this.desc = desc;
         this.weatherIcon = weatherIcon;
     }
-    Data(String cityName, String desc, String type, int weatherIcon, String temp, String maxTemp, String minTemp){
+
+    Data(String cityName, String desc, String type, int weatherIcon, String temp, String maxTemp, String minTemp) {
         this.cityName = cityName;
         this.desc = desc;
         this.type = type;
@@ -29,57 +30,73 @@ public class Data implements Serializable{
         this.maxTemp = maxTemp;
         this.minTemp = minTemp;
     }
-    public String getCityName(){
+
+    public String getCityName() {
         return this.cityName;
     }
-    public void setCityName(String cityName){
+
+    public void setCityName(String cityName) {
         this.cityName = cityName;
     }
-    public String getDesc(){
+
+    public String getDesc() {
         return this.desc;
     }
-    public void setDesc(String desc){
+
+    public void setDesc(String desc) {
         this.desc = desc;
     }
-    public String getType(){
+
+    public String getType() {
         return this.type;
     }
-    public void setType(String type){
+
+    public void setType(String type) {
         this.type = type;
     }
-    public String getTemp(){
+
+    public String getTemp() {
         return this.temp;
     }
-    public void setTemp(String temp){
+
+    public void setTemp(String temp) {
         this.temp = temp;
     }
-    public String getMinTemp(){
+
+    public String getMinTemp() {
         return this.minTemp;
     }
-    public String getMaxTemp(){
+
+    public String getMaxTemp() {
         return this.maxTemp;
     }
-    public void setMinTemp(String minTemp){
+
+    public void setMinTemp(String minTemp) {
         this.minTemp = minTemp;
     }
-    public void setMaxTemp(String maxTemp){
+
+    public void setMaxTemp(String maxTemp) {
         this.maxTemp = maxTemp;
     }
-    public void setWeatherIcon(int weatherIcon){
+
+    public void setWeatherIcon(int weatherIcon) {
         this.weatherIcon = weatherIcon;
     }
-    public int getWeatherIcon(){
+
+    public int getWeatherIcon() {
         return this.weatherIcon;
     }
-    public void refreshData(int i){
+
+    public void refreshData(int i) {
         RefreshData a = new RefreshData(this.cityName, i);
         a.start();
     }
-    public boolean isRefreshing(){
+
+    public boolean isRefreshing() {
         return refreshingState;
     }
-    public void setRefreshingState(boolean a){
+
+    public void setRefreshingState(boolean a) {
         refreshingState = a;
     }
-
 }

@@ -185,12 +185,12 @@ public class MoreInfoActivity extends AppCompatActivity {
         if (id == R.id.homeSet) {
             Intent intent = new Intent(getBaseContext(), MainActivity.class);
             startActivity(intent);
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+            overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
         }
         if (id == android.R.id.home){
             startActivity(new Intent(getBaseContext(), MainActivity.class));
            // NavUtils.navigateUpFromSameTask(this);
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+            overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
         }
         return super.onOptionsItemSelected(item);
     }
