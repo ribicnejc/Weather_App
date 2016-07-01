@@ -82,6 +82,7 @@ public class MoreInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_weather_info_update);
         Typeface type = Typeface.createFromAsset(getAssets(), "openSansLight.ttf");
         toolbar = (Toolbar) findViewById(R.id.app_bar);
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -170,6 +171,10 @@ public class MoreInfoActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuItem sortIcon = menu.findItem(R.id.sort_icon);
+        MenuItem searchIcon = menu.findItem(R.id.search);
+        sortIcon.setVisible(false);
+        searchIcon.setVisible(false);
         return true;
     }
 
