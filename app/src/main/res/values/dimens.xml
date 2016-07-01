@@ -15,4 +15,5 @@
     <dimen name="widget_padding">10dp</dimen>
     <dimen name="widget_forecast_icon">35dp</dimen>
     <dimen name="widget_daily_icon">35dp</dimen>
+    <dimen name="nav_drawer">280dp</dimen>
 </resources>

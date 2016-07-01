@@ -13,4 +13,9 @@
     <string name="widget_daily">DAILY</string>
     <string name="widget_without">WITHOUT</string>
     <string name="search">Search</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

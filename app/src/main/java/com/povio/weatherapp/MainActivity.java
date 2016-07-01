@@ -14,6 +14,7 @@ import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -36,7 +37,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
 import android.os.Handler;
+
 import jp.co.recruit_lifestyle.android.widget.*;
 
 public class MainActivity extends AppCompatActivity {
@@ -45,8 +48,9 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView rv;
     public static TextView mTxtView;
     public ImageView background;
+
     @Override
-    protected  void onStart(){
+    protected void onStart() {
         super.onStart();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
@@ -75,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode) {
@@ -96,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,13 +129,18 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        NavigationDrawerFragment drawerFragment = (NavigationDrawerFragment)
+                getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
+        drawerFragment.setUp(R.id.fragment_navigation_drawer ,(DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getBaseContext(), CityQuery.class);
-                intent .setFlags(intent .getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
             }
@@ -142,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
         emptyRecyclerView(datas);
 
         // setup recyclerview
-        rv = (RecyclerView)findViewById(R.id.recyclerView);
+        rv = (RecyclerView) findViewById(R.id.recyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         rv.setLayoutManager(linearLayoutManager);
         rv.setHasFixedSize(true);
@@ -155,43 +166,45 @@ public class MainActivity extends AppCompatActivity {
         ItemTouchHelper.Callback callback = new CardTouchHelper(adapter);
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(rv);
-      }
-    public void refreshItems(final WaveSwipeRefreshLayout swipe, int pos){
-        if(pos < datas.size()) {
+    }
+
+    public void refreshItems(final WaveSwipeRefreshLayout swipe, int pos) {
+        if (pos < datas.size()) {
             RefreshData refreshData = new RefreshData(datas.get(pos).getCityName(), pos);
             refreshData.start();
             refreshing(pos, refreshData, swipe);
-        }else if(pos == 0){
+        } else if (pos == 0) {
             Toast.makeText(this, "Nothing to refresh", Toast.LENGTH_SHORT).show();
             onItemsLoadComplete(swipe);
-        }else{
+        } else {
 //            Toast.makeText(this, "Items refreshed", Toast.LENGTH_SHORT).show();
             onItemsLoadComplete(swipe);
         }
     }
-    public void refreshing(final int pos, final RefreshData refreshData, final WaveSwipeRefreshLayout swipe){
-        try{
+
+    public void refreshing(final int pos, final RefreshData refreshData, final WaveSwipeRefreshLayout swipe) {
+        try {
             final Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    if(refreshData.api.success){
+                    if (refreshData.api.success) {
                         int tmp = pos;
                         tmp += 1;
                         refreshItems(swipe, tmp);
-                    }else{
+                    } else {
                         refreshing(pos, refreshData, swipe);
                     }
                 }
             }, 100);
-        }catch (Exception e){
+        } catch (Exception e) {
             Toast.makeText(this, "Nothing to refresh", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void onItemsLoadComplete(final WaveSwipeRefreshLayout swipe){
-        try{
-            Collections.sort(datas, new Comparator<Data>(){
+    public void onItemsLoadComplete(final WaveSwipeRefreshLayout swipe) {
+        try {
+            Collections.sort(datas, new Comparator<Data>() {
                 public int compare(Data d1, Data d2) {
                     return d1.getCityName().compareToIgnoreCase(d2.getCityName());
                 }
@@ -201,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
             datas.get(datas.size() - 1).setRefreshingState(true);
             rv.getAdapter().notifyDataSetChanged();
             Toast.makeText(this, "Items refreshed", Toast.LENGTH_SHORT).show();
-        }catch (Exception e){
+        } catch (Exception e) {
             Toast.makeText(this, "Nothing to refresh", Toast.LENGTH_SHORT).show();
         }
 
@@ -212,17 +225,17 @@ public class MainActivity extends AppCompatActivity {
         saveState(datas);
     }
 
-    public final void emptyRecyclerView(List someList){
-        if (someList.isEmpty()){
+    public final void emptyRecyclerView(List someList) {
+        if (someList.isEmpty()) {
             mTxtView.setVisibility(View.VISIBLE);
             //mTextView.setVisibility(View.GONE);
-        }
-        else{
+        } else {
             mTxtView.setVisibility(View.GONE);
             //mTextView.setVisibility(View.INVISIBLE);
         }
     }
-    public static void remove(int pos){
+
+    public static void remove(int pos) {
         try {
             datas.remove(pos);
             saveState(datas);
@@ -231,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 mTxtView.setVisibility(View.GONE);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             Log.d("Crash swipe", "removing");
         }
     }
@@ -247,50 +260,50 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.add_city){
+        if (id == R.id.add_city) {
             Intent intent = new Intent(getBaseContext(), CityQuery.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
         }
-        if (id == R.id.home){
+        if (id == R.id.home) {
             Intent intent = new Intent(getBaseContext(), MainActivity.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
-    public static void saveState(List<Data> objects){
+
+    public static void saveState(List<Data> objects) {
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(new File("/storage/emulated/0/savedData.ser"));
             ObjectOutputStream outputStream = new ObjectOutputStream(fileOutputStream);
             outputStream.writeObject(objects);
             outputStream.close();
             fileOutputStream.close();
-        }catch (Exception e){
+        } catch (Exception e) {
             // save log
         }
 
 
     }
-    public List<Data> readState(){
+
+    public List<Data> readState() {
         boolean check = new File("/storage/emulated/0/savedData.ser").exists();
         List<Data> list = new ArrayList<>();
-        if (check){
+        if (check) {
             list = readData();
         }
         return list;
     }
-    public List<Data> readData(){
+
+    public List<Data> readData() {
         List<Data> list;
-        try{
+        try {
             FileInputStream fileInputStream = new FileInputStream(new File("/storage/emulated/0/savedData.ser"));
             ObjectInputStream in = new ObjectInputStream(fileInputStream);
             list = (ArrayList) in.readObject();
 
 
-
-
-
-        }catch(Exception e){
+        } catch (Exception e) {
             list = new ArrayList<>();
         }
         return list;
@@ -316,10 +329,11 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void run() {
-                doubleBackToExitPressedOnce=false;
+                doubleBackToExitPressedOnce = false;
             }
         }, 2000);
     }
+
     public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId,
                                                          int reqWidth, int reqHeight) {
 

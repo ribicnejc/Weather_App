@@ -1,40 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_layout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context="com.povio.weatherapp.MainActivity">
-    <include layout="@layout/back_ground"/>
-    <android.support.design.widget.AppBarLayout
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:context="com.povio.weatherapp.MainActivity">
 
-        <!--<android.support.v7.widget.Toolbar-->
-            <!--android:id="@+id/toolbar"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="?attr/actionBarSize"-->
-<!---->
-            <!--app:popupTheme="@style/AppTheme.PopupOverlay" />-->
-    <include
-        android:id="@+id/app_bar"
-        layout="@layout/app_bar"/>
-    </android.support.design.widget.AppBarLayout>
+        <include layout="@layout/back_ground" />
 
-    <include layout="@layout/content_main" />
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <include
+                android:id="@+id/app_bar"
+                layout="@layout/app_bar" />
+        </android.support.design.widget.AppBarLayout>
+
+        <include layout="@layout/content_main" />
 
 
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
+            android:src="@drawable/plus48" />
+        <!--app:rippleColor="@android:color/white"-->
 
-        android:src="@drawable/plus48" />
-    <!--app:rippleColor="@android:color/white"-->
-
-</android.support.design.widget.CoordinatorLayout>
+    </android.support.design.widget.CoordinatorLayout>
+    <fragment
+        android:id="@+id/fragment_navigation_drawer"
+        android:layout_width="@dimen/nav_drawer"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:layout="@layout/fragment_navigation_drawer"
+        android:name="com.povio.weatherapp.NavigationDrawerFragment"
+        tools:layout="@layout/fragment_navigation_drawer" />
+</android.support.v4.widget.DrawerLayout>
