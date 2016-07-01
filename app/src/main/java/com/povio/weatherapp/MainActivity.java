@@ -204,11 +204,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onItemsLoadComplete(final WaveSwipeRefreshLayout swipe) {
         try {
-            Collections.sort(datas, new Comparator<Data>() {
-                public int compare(Data d1, Data d2) {
-                    return d1.getCityName().compareToIgnoreCase(d2.getCityName());
-                }
-            });
+
             saveState(datas);
             swipe.setRefreshing(false);
             datas.get(datas.size() - 1).setRefreshingState(true);
@@ -268,6 +264,15 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.home) {
             Intent intent = new Intent(getBaseContext(), MainActivity.class);
             startActivity(intent);
+        }
+        if (id == R.id.sort_icon){
+            Collections.sort(datas, new Comparator<Data>() {
+                public int compare(Data d1, Data d2) {
+                    return d1.getCityName().compareToIgnoreCase(d2.getCityName());
+                }
+            });
+            rv.getAdapter().notifyDataSetChanged();
+
         }
         return super.onOptionsItemSelected(item);
     }
