@@ -21,4 +21,9 @@
     <string name="nejc_ribic">Nejc Ribič</string>
     <string name="email">nejc.ribic95@gmail.com</string>
     <string name="drawable_icon">Drawable icon</string>
+    <string name="github_com_ribicnejc">github.com/ribicnejc</string>
+    <string name="type">Type</string>
+    <string name="sort_name">Name</string>
+    <string name="sort_temperature">Temperature</string>
+    <string name="sort_by">Sort By:</string>
 </resources>

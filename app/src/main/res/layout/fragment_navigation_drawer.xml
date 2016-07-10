@@ -2,158 +2,193 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_weight="1"
     android:background="#EEE"
     android:orientation="vertical"
     tools:context="com.povio.weatherapp.NavigationDrawerFragment">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.4">
-
-        <include layout="@layout/back_ground" />
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/navigation_drawer_user_photo"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:contentDescription="@string/user_profile_photo"
-                android:src="@drawable/ic" />
-
-            <TextView
-                android:id="@+id/navigation_drawer_user_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/app_name"
-                android:textColor="@color/colorLightGray"
-                android:textSize="25sp" />
-
-            <TextView
-                android:id="@+id/navigation_drawer_email"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="github.com/ribicnejc"
-                android:textColor="@color/colorLightGray" />
-
-        </LinearLayout>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.6">
-
-        <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingEnd="20dp"
-                android:paddingStart="20dp">
+                android:layout_height="200dp">
 
-                <ImageView
-                    android:layout_width="@dimen/drawable_icon_size"
-                    android:layout_height="@dimen/drawable_icon_size"
-                    android:layout_gravity="center"
-                    android:contentDescription="@string/drawable_icon"
-                    android:src="@drawable/drawable_home" />
+                <include layout="@layout/back_ground" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="   Home"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="16sp" />
-            </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-            <LinearLayout
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/navigation_drawer_user_photo"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:contentDescription="@string/user_profile_photo"
+                        android:src="@drawable/ic" />
+
+                    <TextView
+                        android:id="@+id/navigation_drawer_user_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/app_name"
+                        android:textColor="@color/colorLightGray"
+                        android:textSize="25sp" />
+
+                    <TextView
+                        android:id="@+id/navigation_drawer_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/github_com_ribicnejc"
+                        android:autoLink="web"
+                        android:textColorLink="@color/colorLightGray" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingEnd="20dp"
-                android:paddingStart="20dp">
-
-                <ImageView
-                    android:layout_width="@dimen/drawable_icon_size"
-                    android:layout_height="@dimen/drawable_icon_size"
-                    android:layout_gravity="center"
-                    android:contentDescription="@string/drawable_icon"
-                    android:src="@drawable/drawable_add_city" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="   Add city"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.2dp"
-                android:background="@color/colorBlack" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="300dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="20dp">
+                    android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_width="@dimen/drawable_icon_size"
-                        android:layout_height="@dimen/drawable_icon_size"
-                        android:src="@drawable/drawable_sort_options" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingEnd="20dp"
+                        android:paddingStart="20dp">
 
-                    <TextView
+                        <ImageView
+                            android:layout_width="@dimen/drawable_icon_size"
+                            android:layout_height="@dimen/drawable_icon_size"
+                            android:layout_gravity="center"
+                            android:contentDescription="@string/drawable_icon"
+                            android:src="@drawable/drawable_home" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="   Home"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/colorGray"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingEnd="20dp"
+                        android:paddingStart="20dp">
+
+                        <ImageView
+                            android:layout_width="@dimen/drawable_icon_size"
+                            android:layout_height="@dimen/drawable_icon_size"
+                            android:layout_gravity="center"
+                            android:contentDescription="@string/drawable_icon"
+                            android:src="@drawable/drawable_add_city" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="   Add city"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.2dp"
+                        android:background="@color/colorBlack" />
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:gravity="center_vertical"
-                        android:text="Sort By:"
-                        android:textSize="16sp" />
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:paddingStart="20dp"
+                            android:paddingEnd="20dp">
+
+                            <ImageView
+                                android:contentDescription="@string/app_name"
+                                android:layout_width="@dimen/drawable_icon_size"
+                                android:layout_height="@dimen/drawable_icon_size"
+                                android:src="@drawable/drawable_sort_options" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:gravity="center_vertical"
+                                android:text="@string/sort_by"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/colorGray"/>
+                        <RadioGroup
+                            android:layout_width="match_parent"
+                            android:paddingStart="30dp"
+                            android:paddingEnd="0dp"
+                            android:layout_height="wrap_content">
+                            <RadioButton
+                                android:layout_width="match_parent"
+                                android:text="@string/sort_temperature"
+                                android:textColor="@color/colorBlack"
+                                android:layout_height="wrap_content" />
+                            <RadioButton
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/sort_name"
+                                android:checked="true"
+                                android:textColor="@color/colorBlack"/>
+                            <RadioButton
+                                android:layout_width="match_parent"
+                                android:text="@string/type"
+                                android:textColor="@color/colorBlack"
+                                android:layout_height="wrap_content" />
+                        </RadioGroup>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/colorBlack"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="10dp"
+                            android:text="\n--Code available on Github"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="10dp"
+                            android:text="--All rights reserved by Nejc Ribic"/>
+
+                    </LinearLayout>
                 </LinearLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="50dp"
-                    android:text="- Temperature"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="50dp"
-                    android:text="- Name"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="50dp"
-                    android:text="- Type"
-                    android:textSize="16sp" />
-            </LinearLayout>
+            </RelativeLayout>
         </LinearLayout>
-    </RelativeLayout>
+    </ScrollView>
 </LinearLayout>
