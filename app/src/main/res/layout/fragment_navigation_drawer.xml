@@ -10,7 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.3">
+        android:layout_weight="0.4">
 
         <include layout="@layout/back_ground" />
 
@@ -18,28 +18,29 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="10dp"
+            android:gravity="center"
             android:orientation="vertical">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/navigation_drawer_user_photo"
-                android:layout_width="70dp"
+                android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:contentDescription="@string/user_profile_photo"
-                android:src="@drawable/user_test" />
+                android:src="@drawable/ic" />
 
             <TextView
                 android:id="@+id/navigation_drawer_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/nejc_ribic"
+                android:text="@string/app_name"
                 android:textColor="@color/colorLightGray"
-                android:textSize="20sp" />
+                android:textSize="25sp" />
 
             <TextView
                 android:id="@+id/navigation_drawer_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/email"
+                android:text="github.com/ribicnejc"
                 android:textColor="@color/colorLightGray" />
 
         </LinearLayout>
@@ -49,15 +50,15 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.7">
+        android:layout_weight="0.6">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
@@ -65,16 +66,93 @@
                 android:paddingStart="20dp">
 
                 <ImageView
+                    android:layout_width="@dimen/drawable_icon_size"
+                    android:layout_height="@dimen/drawable_icon_size"
+                    android:layout_gravity="center"
                     android:contentDescription="@string/drawable_icon"
-                    android:src="@drawable/drawable_home"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/drawable_icon_size" />
+                    android:src="@drawable/drawable_home" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Home"
-                    android:textSize="20sp" />
+                    android:text="   Home"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingEnd="20dp"
+                android:paddingStart="20dp">
+
+                <ImageView
+                    android:layout_width="@dimen/drawable_icon_size"
+                    android:layout_height="@dimen/drawable_icon_size"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/drawable_icon"
+                    android:src="@drawable/drawable_add_city" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="   Add city"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:background="@color/colorBlack" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="20dp">
+
+                    <ImageView
+                        android:layout_width="@dimen/drawable_icon_size"
+                        android:layout_height="@dimen/drawable_icon_size"
+                        android:src="@drawable/drawable_sort_options" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:gravity="center_vertical"
+                        android:text="Sort By:"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="50dp"
+                    android:text="- Temperature"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="50dp"
+                    android:text="- Name"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="50dp"
+                    android:text="- Type"
+                    android:textSize="16sp" />
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
