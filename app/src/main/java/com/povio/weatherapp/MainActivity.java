@@ -5,6 +5,7 @@ import com.povio.weatherapp.APIs.*;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -268,11 +269,40 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
         if (id == R.id.sort_icon){
-            Collections.sort(datas, new Comparator<Data>() {
-                public int compare(Data d1, Data d2) {
-                    return d1.getCityName().compareToIgnoreCase(d2.getCityName());
+            SharedPreferences sharedPreferences = NavigationDrawerFragment.getSharedPreferences();
+            if(sharedPreferences.contains("radioButtonTemp")){
+                if(sharedPreferences.getBoolean("radioButtonName", false)){
+                    Collections.sort(datas, new Comparator<Data>() {
+                        public int compare(Data d1, Data d2) {
+                            return d1.getCityName().compareToIgnoreCase(d2.getCityName());
+                        }
+                    });
+                    Toast.makeText(MainActivity.this, "Sorted by city name", Toast.LENGTH_SHORT).show();
+                }else if(sharedPreferences.getBoolean("radioButtonType", false)){
+                    Collections.sort(datas, new Comparator<Data>() {
+                        public int compare(Data d1, Data d2) {
+                            return d1.getDesc().compareToIgnoreCase(d2.getDesc());
+                        }
+                    });
+                    Toast.makeText(MainActivity.this, "Sorted by weather type", Toast.LENGTH_SHORT).show();
+                }else if(sharedPreferences.getBoolean("radioButtonTemp", false)){
+                    Collections.sort(datas, new Comparator<Data>() {
+                        public int compare(Data d1, Data d2) {
+                            double t1 = Double.parseDouble(d1.getTemp().replace(",","."));
+                            double t2 = Double.parseDouble(d2.getTemp().replace(",","."));
+                            if(t1 - t2 < 0)
+                                return -1;
+                            if(t1 - t2 > 0)
+                                return 1;
+                            return 0;
+                        }
+                    });
+                    Toast.makeText(MainActivity.this, "Sorted by temperature", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(MainActivity.this, "Oops! Something went wrong :(", Toast.LENGTH_SHORT).show();
                 }
-            });
+            }
+
             rv.getAdapter().notifyDataSetChanged();
 
         }

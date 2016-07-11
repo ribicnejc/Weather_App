@@ -24,7 +24,7 @@ public class NavigationDrawerFragment extends Fragment {
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
 
-    private SharedPreferences sharedPreferences;
+    public static SharedPreferences sharedPreferences;
     private RadioButton radioButtonTemp, radioButtonType, radioButtonName;
 
     private View containerView;
@@ -111,7 +111,6 @@ public class NavigationDrawerFragment extends Fragment {
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
                 getActivity().invalidateOptionsMenu();
-                Toast.makeText(getActivity(), "Shranim podatke ?", Toast.LENGTH_SHORT).show();
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putBoolean("radioButtonTemp", radioButtonTemp.isChecked());
                 editor.putBoolean("radioButtonType", radioButtonType.isChecked());
@@ -146,5 +145,9 @@ public class NavigationDrawerFragment extends Fragment {
     public static String readFromPreferences(Context context, String preferenceName, String defaultValue) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getString(preferenceName, defaultValue);
+    }
+
+    public static SharedPreferences getSharedPreferences(){
+        return sharedPreferences;
     }
 }
