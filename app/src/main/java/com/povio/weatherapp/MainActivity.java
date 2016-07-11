@@ -3,6 +3,7 @@ package com.povio.weatherapp;
 import com.povio.weatherapp.APIs.*;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView rv;
     public static TextView mTxtView;
     public ImageView background;
+    public static Context mContext;
 
     @Override
     protected void onStart() {

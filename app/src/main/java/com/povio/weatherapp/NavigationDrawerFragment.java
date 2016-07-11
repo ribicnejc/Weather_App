@@ -2,10 +2,9 @@ package com.povio.weatherapp;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.BoolRes;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 public class NavigationDrawerFragment extends Fragment {
 
@@ -24,6 +24,7 @@ public class NavigationDrawerFragment extends Fragment {
     private View containerView;
     private boolean mUserLearnedDrawer;
     private boolean mFromSavedInstanceState;
+    private LinearLayout linearLayoutHomeButton;
     public NavigationDrawerFragment() {
         // Required empty public constructor
     }
@@ -35,13 +36,34 @@ public class NavigationDrawerFragment extends Fragment {
         if( savedInstanceState != null){
             mFromSavedInstanceState = true;
         }
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        final View view = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
+        linearLayoutHomeButton = (LinearLayout) view.findViewById(R.id.navigation_drawer_home_button);
+        linearLayoutHomeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDrawerLayout.closeDrawers();
+            }
+        });
+        LinearLayout linearLayoutAddCityButton = (LinearLayout) view.findViewById(R.id.navigation_drawer_add_city_button);
+        linearLayoutAddCityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDrawerLayout.closeDrawers();
+                Intent intent = new Intent(getActivity(), CityQuery.class);
+                intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                startActivity(intent);
+                (getActivity()).overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+            }
+        });
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
+        return view;
     }
 
     public void setUp(int fragmentId , DrawerLayout drawerLayout, final Toolbar toolbar) {
