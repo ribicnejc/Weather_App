@@ -14,6 +14,18 @@ public class CardTouchHelper extends ItemTouchHelper.SimpleCallback {
         this.mRVAdapter = mRVAdapter;
     }
 
+    /*
+    @Override
+    public boolean isLongedPressDragEnabled(){
+        return true;
+    } */
+
+    @Override
+    public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder){
+        int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
+        int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;
+        return makeMovementFlags(dragFlags, swipeFlags);
+    }
 
     @Override
     public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {

@@ -19,4 +19,19 @@
     <color name="colorWidgetBg">#AA2196F3</color>
     <color name="colorWidgetToolbarBG">#AA000000</color>
     <color name="colorPrimaryTransparent">#11ffffff</color>
+
+    <color name="colorChart0">#884A4A4A</color>
+    <color name="colorChart1">#88591249</color>
+    <color name="colorChart2">#88662E91</color>
+    <color name="colorChart3">#882E3192</color>
+    <color name="colorChart4">#880054A5</color>
+    <color name="colorChart5">#8801A89E</color>
+    <color name="colorChart6">#8800A652</color>
+    <color name="colorChart7">#888DC701</color>
+    <color name="colorChart8">#88FEF200</color>
+    <color name="colorChart9">#88FFC501</color>
+    <color name="colorChart10">#88FE9400</color>
+    <color name="colorChart11">#88F36523</color>
+    <color name="colorChart12">#88EE1C25</color>
+    <color name="colorChart13">#88B71C1C</color>
 </resources>

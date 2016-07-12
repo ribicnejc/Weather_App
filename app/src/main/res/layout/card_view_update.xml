@@ -58,8 +58,8 @@
                 android:layout_width="140dp"
                 android:layout_height="45dp"
                 android:layout_marginBottom="-5dp"
-                android:background="@color/colorPrimaryDarkTrans"
-                android:id="@+id/textView4"
+                android:background="@color/colorBlack"
+                android:id="@+id/card_view_background_temp"
                 android:layout_alignBottom="@+id/mainDegrees"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
@@ -83,7 +83,7 @@
                 android:id="@+id/relativeLayout"
                 android:layout_marginLeft="11dp"
                 android:layout_marginStart="11dp"
-                android:layout_alignBottom="@+id/textView4"
+                android:layout_alignBottom="@+id/card_view_background_temp"
                 android:layout_alignLeft="@+id/weatherIcon"
                 android:layout_alignStart="@+id/weatherIcon">
                 <TextView

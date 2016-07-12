@@ -7,7 +7,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.GradientDrawable;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -21,7 +23,8 @@ import java.util.List;
 
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.InfoViewHolder> {
     private Context mContext;
-    public static class InfoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+
+    public static class InfoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private View.OnClickListener clickListener;
         CardView cv;
@@ -31,26 +34,29 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.InfoViewHolder> {
         TextView temp;
         TextView weatherDesc;
         TextView buttonTest;
+        TextView backGroundTemp;
         ImageView weatherPhoto;
         public Typeface typeface;
 
         InfoViewHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
-            cv = (CardView)itemView.findViewById(R.id.cv2);
-            cityName = (TextView)itemView.findViewById(R.id.cityName);
-            weatherDesc = (TextView)itemView.findViewById(R.id.weatherDesc);
-            temp = (TextView)itemView.findViewById(R.id.mainDegrees);
-            minTemp = (TextView)itemView.findViewById(R.id.minDegrees);
-            maxTemp = (TextView)itemView.findViewById(R.id.maxDegrees);
-            buttonTest = (TextView)itemView.findViewById(R.id.buttonMore);
-            weatherPhoto = (ImageView)itemView.findViewById(R.id.weatherIcon);
+            cv = (CardView) itemView.findViewById(R.id.cv2);
+            cityName = (TextView) itemView.findViewById(R.id.cityName);
+            weatherDesc = (TextView) itemView.findViewById(R.id.weatherDesc);
+            temp = (TextView) itemView.findViewById(R.id.mainDegrees);
+            minTemp = (TextView) itemView.findViewById(R.id.minDegrees);
+            maxTemp = (TextView) itemView.findViewById(R.id.maxDegrees);
+            buttonTest = (TextView) itemView.findViewById(R.id.buttonMore);
+            weatherPhoto = (ImageView) itemView.findViewById(R.id.weatherIcon);
+            backGroundTemp = (TextView) itemView.findViewById(R.id.card_view_background_temp);
             typeface = Typeface.createFromAsset(itemView.getContext().getAssets(), "openSansLight.ttf");
         }
 
         public void setClickListener(View.OnClickListener itemClickListener) {
             this.clickListener = itemClickListener;
         }
+
         @Override
         public void onClick(View v) {
             clickListener.onClick(v);
@@ -59,7 +65,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.InfoViewHolder> {
 
     List<Data> datas;
 
-    public RVAdapter(List<Data> datas, Context ctx){
+    public RVAdapter(List<Data> datas, Context ctx) {
         this.datas = datas;
         this.mContext = ctx;
     }
@@ -92,9 +98,15 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.InfoViewHolder> {
         weatherViewHolder.minTemp.setTypeface(weatherViewHolder.typeface);
         weatherViewHolder.maxTemp.setTypeface(weatherViewHolder.typeface);
 
+        GradientDrawable gdDefault = new GradientDrawable();
+        gdDefault.setColor(getRightColor(datas.get(i).getTemp()));
+        gdDefault.setCornerRadius(10);
+        weatherViewHolder.backGroundTemp.setBackground(gdDefault);
+        //weatherViewHolder.backGroundTemp.setBackgroundColor(getRightColor(datas.get(i).getTemp()));
+
         //weatherViewHolder.cv.setBackgroundColor(Color.TRANSPARENT);
         weatherViewHolder.cv.setCardElevation(0);
-        weatherViewHolder.buttonTest.setOnClickListener(new View.OnClickListener(){
+        weatherViewHolder.buttonTest.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -109,20 +121,20 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.InfoViewHolder> {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, MoreInfoActivity.class);
-                intent.setFlags(intent .getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
                 intent.putExtra("city", datas.get(i).getCityName());
                 mContext.startActivity(intent);
                 ((Activity) mContext).overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
             }
         });
-        weatherViewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener(){
+        weatherViewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
 
             @Override
             public boolean onLongClick(View v) {
                 DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        switch (which){
+                        switch (which) {
                             case DialogInterface.BUTTON_POSITIVE:
                                 MainActivity.remove(i);
                                 notifyDataSetChanged();
@@ -152,11 +164,11 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.InfoViewHolder> {
     }
 
 
-    public void remove(final int position, View view){
+    public void remove(final int position, View view) {
         final Data deleted = datas.get(position);
-        final Snackbar snackbar = Snackbar.make(view, datas.get(position).getCityName()+" has been removed", Snackbar.LENGTH_LONG);
+        final Snackbar snackbar = Snackbar.make(view, datas.get(position).getCityName() + " has been removed", Snackbar.LENGTH_LONG);
         MainActivity.remove(position);
-        if(datas.size() == 0)
+        if (datas.size() == 0)
             MainActivity.mTxtView.setVisibility(View.VISIBLE);
         notifyItemRemoved(position);
         MainActivity.saveState(datas);
@@ -174,10 +186,40 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.InfoViewHolder> {
 
 
         snackbar.show();
-        }
-
-
-
     }
+
+    public int getRightColor(String temp){
+        float t = Float.parseFloat(temp.replace(",","."));
+        if(t < -20){
+            return ContextCompat.getColor(mContext, R.color.colorChart0);
+        }else if (t >= -20 && t < -16){
+            return ContextCompat.getColor(mContext, R.color.colorChart1);
+        }else if (t >= -16 && t < -12){
+            return ContextCompat.getColor(mContext, R.color.colorChart2);
+        }else if (t >= -12 && t < -8){
+            return ContextCompat.getColor(mContext, R.color.colorChart3);
+        }else if (t >= -8 && t < -4){
+            return ContextCompat.getColor(mContext, R.color.colorChart4);
+        }else if (t >= -4 && t < 0){
+            return ContextCompat.getColor(mContext, R.color.colorChart5);
+        }else if (t >= 0 && t < 4){
+            return ContextCompat.getColor(mContext, R.color.colorChart6);
+        }else if (t >= 4 && t < 8){
+            return ContextCompat.getColor(mContext, R.color.colorChart7);
+        }else if (t >= 8 && t < 12){
+            return ContextCompat.getColor(mContext, R.color.colorChart8);
+        }else if (t >= 12 && t < 16){
+            return ContextCompat.getColor(mContext, R.color.colorChart9);
+        }else if (t >= 16 && t < 20){
+            return ContextCompat.getColor(mContext, R.color.colorChart10);
+        }else if (t >= 20 && t < 24){
+            return ContextCompat.getColor(mContext, R.color.colorChart11);
+        }else if (t >= 24 && t < 28){
+            return ContextCompat.getColor(mContext, R.color.colorChart12);
+        }else{
+            return ContextCompat.getColor(mContext, R.color.colorChart13);
+        }
+    }
+}
 
 
