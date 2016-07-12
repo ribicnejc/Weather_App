@@ -14,13 +14,13 @@
         android:title="@string/home"
         app:showAsAction="never"
         />
-    <item
-        android:orderInCategory="200"
-        android:title="@string/search"
-        android:id="@+id/search"
-        android:icon="@android:drawable/ic_menu_search"
-        app:showAsAction="always"
-        />
+    <!--<item-->
+        <!--android:orderInCategory="200"-->
+        <!--android:title="@string/search"-->
+        <!--android:id="@+id/search"-->
+        <!--android:icon="@android:drawable/ic_menu_search"-->
+        <!--app:showAsAction="always"-->
+        <!--/>-->
     <item
         android:orderInCategory="200"
         android:title="@string/sort"

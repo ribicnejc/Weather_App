@@ -306,6 +306,7 @@ public class MainActivity extends AppCompatActivity {
             rv.getAdapter().notifyDataSetChanged();
 
         }
+        saveState(datas);
         return super.onOptionsItemSelected(item);
     }
 

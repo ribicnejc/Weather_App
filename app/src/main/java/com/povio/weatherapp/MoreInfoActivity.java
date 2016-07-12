@@ -172,9 +172,9 @@ public class MoreInfoActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         MenuItem sortIcon = menu.findItem(R.id.sort_icon);
-        MenuItem searchIcon = menu.findItem(R.id.search);
+        //MenuItem searchIcon = menu.findItem(R.id.search);
         sortIcon.setVisible(false);
-        searchIcon.setVisible(false);
+        //searchIcon.setVisible(false);
         return true;
     }
 
