@@ -20,6 +20,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:layout_gravity="center"
         android:id="@+id/day1_main"
         android:orientation="horizontal">
@@ -76,6 +77,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:visibility="gone"
         android:id="@+id/day2_main"
         android:orientation="horizontal">
         <TextView
@@ -131,6 +133,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:visibility="gone"
         android:id="@+id/day3_main"
         android:orientation="horizontal">
         <TextView
@@ -186,6 +189,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:visibility="gone"
         android:id="@+id/day4_main"
         android:orientation="horizontal">
         <TextView
@@ -242,6 +246,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:id="@+id/day5_main"
+        android:visibility="gone"
         android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"

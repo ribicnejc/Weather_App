@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -134,12 +135,18 @@ public class MoreInfoActivity extends AppCompatActivity {
             int j = 0;
             for (String elt : foreCastAPI.getTimeL()) {
                 if (elt.equals("15:00")) {
+                   // RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.day1_main);
                     int resId = getResources().getIdentifier("day" + (i + 1) + "_icon", "id", getPackageName());
                     daysIcons[i] = (ImageView) findViewById(resId);
                     daysIcons[i].setImageResource(foreCastAPI.getIconL().get(j));
                     SimpleDateFormat newDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.ENGLISH);
                     Date MyDate = newDateFormat.parse(foreCastAPI.getDateAndTimeL().get(j));
                     newDateFormat.applyPattern("EEEE");
+
+
+                    int dayMainId = getResources().getIdentifier("day" + (i + 1) + "_main", "id", getPackageName());
+                    RelativeLayout relativeLayout1 = (RelativeLayout) findViewById(dayMainId);
+                    relativeLayout1.setVisibility(View.VISIBLE);
 
                     String nameOfDay = newDateFormat.format(MyDate);
                     int dayResId = getResources().getIdentifier("day" + (i + 1), "id", getPackageName());
@@ -158,13 +165,14 @@ public class MoreInfoActivity extends AppCompatActivity {
                     daysTempMax[i].setText(foreCastAPI.getMaxTempByDay(foreCastAPI.getDateAndTimeL().get(j).split(" ")[0]));
                     daysTempMax[i].setTypeface(type);
                     i++;
+
                 }
                 j++;
             }
         } catch (Exception e) {
             setContentView(R.layout.error);
             Toast.makeText(MoreInfoActivity.this, "No internet connection", Toast.LENGTH_SHORT).show();
-            Log.e("MoreInfoActivity", "no internet connection");
+            Log.e("MoreInfoActivity", "Oops something went wrong");
         }
     }
 
