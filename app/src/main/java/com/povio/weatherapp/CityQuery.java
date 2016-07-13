@@ -41,6 +41,7 @@ public class CityQuery extends AppCompatActivity {
     ShimmerButton btnByCityName;
     TextView textViewResult, textViewInfo;
     ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,14 +53,14 @@ public class CityQuery extends AppCompatActivity {
         setTitle("Search city");
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar.setVisibility(View.GONE);
-        editTextCityName = (EditText)findViewById(R.id.cityname);
-        btnByCityName = (ShimmerButton)findViewById(R.id.bycityname);
+        editTextCityName = (EditText) findViewById(R.id.cityname);
+        btnByCityName = (ShimmerButton) findViewById(R.id.bycityname);
         shimmer.setDuration(2000);
         shimmer.start(btnByCityName);
-        add = (TextView)findViewById(R.id.add);
+        add = (TextView) findViewById(R.id.add);
         //textViewResult = (TextView)findViewById(R.id.result);
         //textViewResult.setText("");
-        textViewInfo = (TextView)findViewById(R.id.info);
+        textViewInfo = (TextView) findViewById(R.id.info);
         btnByCityName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,7 +72,7 @@ public class CityQuery extends AppCompatActivity {
         });
     }
 
-    public void waitForApi(final GetWeatherInfoAPI api){
+    public void waitForApi(final GetWeatherInfoAPI api) {
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -84,6 +85,7 @@ public class CityQuery extends AppCompatActivity {
             }
         }, 100);
     }
+
     public void onFinish(final GetWeatherInfoAPI api) {
         add.setText("Search city");
         progressBar.setVisibility(View.GONE);
@@ -100,7 +102,7 @@ public class CityQuery extends AppCompatActivity {
                             Intent intent = new Intent(getBaseContext(), MainActivity.class);
                             startActivity(intent);
                             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
-                            Toast.makeText(CityQuery.this, api.getCityName() +" added", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CityQuery.this, api.getCityName() + " added", Toast.LENGTH_SHORT).show();
                             break;
 
                         case DialogInterface.BUTTON_NEGATIVE:
@@ -117,10 +119,12 @@ public class CityQuery extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-       getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         MenuItem sortIcon = menu.findItem(R.id.sort_icon);
+        MenuItem resfreshIcon = menu.findItem(R.id.refresh_toolbar_icon);
         //MenuItem searchIcon = menu.findItem(R.id.search);
         sortIcon.setVisible(false);
+        resfreshIcon.setVisible(false);
         //searchIcon.setVisible(false);
         return true;
     }
@@ -128,16 +132,16 @@ public class CityQuery extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.add_city){
+        if (id == R.id.add_city) {
             Intent intent = new Intent(getBaseContext(), CityQuery.class);
             startActivity(intent);
         }
-        if (id == R.id.home){
+        if (id == R.id.home) {
             Intent intent = new Intent(getBaseContext(), MainActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
         }
-        if (id == android.R.id.home){
+        if (id == android.R.id.home) {
             Intent intent = new Intent(getBaseContext(), MainActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
@@ -145,6 +149,7 @@ public class CityQuery extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     public void onBackPressed() {
         Log.d("CDA", "onBackPressed Called");

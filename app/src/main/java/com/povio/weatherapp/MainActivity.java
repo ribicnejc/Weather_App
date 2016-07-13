@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
 
         NavigationDrawerFragment drawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
-        drawerFragment.setUp(R.id.fragment_navigation_drawer ,(DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
+        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -268,42 +268,50 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(getBaseContext(), MainActivity.class);
             startActivity(intent);
         }
-        if (id == R.id.sort_icon){
+        if (id == R.id.sort_icon) {
             SharedPreferences sharedPreferences = NavigationDrawerFragment.getSharedPreferences();
-            if(sharedPreferences.contains("radioButtonTemp")){
-                if(sharedPreferences.getBoolean("radioButtonName", false)){
+            if (sharedPreferences.contains("radioButtonTemp")) {
+                if (sharedPreferences.getBoolean("radioButtonName", false)) {
                     Collections.sort(datas, new Comparator<Data>() {
                         public int compare(Data d1, Data d2) {
                             return d1.getCityName().compareToIgnoreCase(d2.getCityName());
                         }
                     });
                     Toast.makeText(MainActivity.this, "Sorted by city name", Toast.LENGTH_SHORT).show();
-                }else if(sharedPreferences.getBoolean("radioButtonType", false)){
+                } else if (sharedPreferences.getBoolean("radioButtonType", false)) {
                     Collections.sort(datas, new Comparator<Data>() {
                         public int compare(Data d1, Data d2) {
                             return d1.getDesc().compareToIgnoreCase(d2.getDesc());
                         }
                     });
                     Toast.makeText(MainActivity.this, "Sorted by weather type", Toast.LENGTH_SHORT).show();
-                }else if(sharedPreferences.getBoolean("radioButtonTemp", false)){
+                } else if (sharedPreferences.getBoolean("radioButtonTemp", false)) {
                     Collections.sort(datas, new Comparator<Data>() {
                         public int compare(Data d1, Data d2) {
-                            double t1 = Double.parseDouble(d1.getTemp().replace(",","."));
-                            double t2 = Double.parseDouble(d2.getTemp().replace(",","."));
-                            if(t1 - t2 < 0)
+                            double t1 = Double.parseDouble(d1.getTemp().replace(",", "."));
+                            double t2 = Double.parseDouble(d2.getTemp().replace(",", "."));
+                            if (t1 - t2 < 0)
                                 return -1;
-                            if(t1 - t2 > 0)
+                            if (t1 - t2 > 0)
                                 return 1;
                             return 0;
                         }
                     });
                     Toast.makeText(MainActivity.this, "Sorted by temperature", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
                     Toast.makeText(MainActivity.this, "Oops! Something went wrong :(", Toast.LENGTH_SHORT).show();
                 }
             }
 
             rv.getAdapter().notifyDataSetChanged();
+
+        }
+        if(id == R.id.refresh_toolbar_icon){
+            final WaveSwipeRefreshLayout swipeView = (WaveSwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+            swipeView.setColorSchemeColors(Color.WHITE, Color.WHITE);
+            swipeView.setWaveColor(Color.argb(100, 7, 133, 171));
+            swipeView.setRefreshing(true);
+            refreshItems(swipeView, 0);
 
         }
         saveState(datas);

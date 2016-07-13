@@ -22,6 +22,12 @@
         <!--app:showAsAction="always"-->
         <!--/>-->
     <item
+        android:orderInCategory="150"
+        android:title="Refresh"
+        android:id="@+id/refresh_toolbar_icon"
+        android:icon="@drawable/refresh_button"
+        app:showAsAction="always"/>
+    <item
         android:orderInCategory="200"
         android:title="@string/sort"
         android:id="@+id/sort_icon"
