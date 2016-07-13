@@ -34,10 +34,13 @@ import java.util.Locale;
 
 import com.povio.weatherapp.Images.Backgrounds;
 
+import jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout;
+
 public class MoreInfoActivity extends AppCompatActivity {
     private RecyclerView horizontalRecyclerView;
     private HorizontalRVAdapter horizontalAdapter;
     private Toolbar toolbar;
+    private String cityName;
     private ArrayList<String> horizontalList = new ArrayList<>();
 
     @Override
@@ -56,9 +59,10 @@ public class MoreInfoActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            String city = extras.getString("city");
-            foreCastAPI = new ForeCastAPI(city);
-            api = new GetWeatherInfoAPI(city);
+            cityName = extras.getString("city");
+
+            foreCastAPI = new ForeCastAPI(cityName);
+            api = new GetWeatherInfoAPI(cityName);
 
             waitForApi(api, foreCastAPI);
         }
@@ -204,6 +208,11 @@ public class MoreInfoActivity extends AppCompatActivity {
             startActivity(new Intent(getBaseContext(), MainActivity.class));
            // NavUtils.navigateUpFromSameTask(this);
             overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
+        }
+        if (id == R.id.refresh_toolbar_icon){
+            Intent intent = new Intent(getBaseContext(), MoreInfoActivity.class);
+            intent.putExtra("city", cityName);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
