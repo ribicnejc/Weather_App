@@ -7,7 +7,9 @@
     <string name="home">Home</string>
     <string name="no_connection">No internet connection</string>
     <string name="title_activity_info">InfoActivity</string>
-    <string name="version_splash">version 2.4.5</string>
+
+    <string name="version_splash">version 2.4.6</string>
+
     <string name="empty_list">City list is empty</string>
     <string name="widget_hourly">HOURLY</string>
     <string name="widget_daily">DAILY</string>
