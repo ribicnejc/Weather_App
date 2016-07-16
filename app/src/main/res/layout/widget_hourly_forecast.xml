@@ -2,46 +2,196 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="wrap_content"
+
     android:layout_weight="1"
     android:id="@+id/widget_daily_forecast_main">
 
     <LinearLayout
+        android:id="@+id/widget_hourly_forecast_main1"
         android:layout_width="0dp"
         android:layout_gravity="center_horizontal"
         android:layout_height="wrap_content"
         android:layout_weight="0.5"
         android:orientation="vertical">
-
         <TextView
             android:layout_width="wrap_content"
             android:textAlignment="center"
             android:textColor="@color/colorLightGray"
             android:text="15:00"
             android:layout_gravity="center_horizontal"
-            android:id="@+id/widget_daily_forecast_time1"
+            android:id="@+id/widget_hourly_forecast_time1"
             android:layout_height="wrap_content" />
         <ImageView
+            android:id="@+id/widget_hourly_forecast_icon1"
             android:layout_width="@dimen/widget_daily_icon"
             android:contentDescription="@string/add_city"
             android:src="@drawable/sun"
             android:layout_gravity="center_horizontal"
             android:layout_height="@dimen/widget_daily_icon" />
         <TextView
+            android:id="@+id/widget_hourly_forecast_temp1"
             android:textColor="@color/colorLightGray"
             android:textAlignment="center"
             android:text="20°"
             android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/widget_hourly_forecast_main2"
+        android:layout_width="0dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:orientation="vertical">
         <TextView
+            android:layout_width="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/colorLightGray"
+            android:text="15:00"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/widget_hourly_forecast_time2"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/widget_hourly_forecast_icon2"
+            android:layout_width="@dimen/widget_daily_icon"
+            android:contentDescription="@string/add_city"
+            android:src="@drawable/sun"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="@dimen/widget_daily_icon" />
+        <TextView
+            android:id="@+id/widget_hourly_forecast_temp2"
             android:textColor="@color/colorLightGray"
             android:textAlignment="center"
             android:text="20°"
-            android:textSize="10sp"
             android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
+            android:layout_height="wrap_content" />
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/widget_hourly_forecast_main3"
+        android:layout_width="0dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/colorLightGray"
+            android:text="15:00"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/widget_hourly_forecast_time3"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/widget_hourly_forecast_icon3"
+            android:layout_width="@dimen/widget_daily_icon"
+            android:contentDescription="@string/add_city"
+            android:src="@drawable/sun"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="@dimen/widget_daily_icon" />
+        <TextView
+            android:id="@+id/widget_hourly_forecast_temp3"
+            android:textColor="@color/colorLightGray"
+            android:textAlignment="center"
+            android:text="20°"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/widget_hourly_forecast_main4"
+        android:layout_width="0dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/colorLightGray"
+            android:text="15:00"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/widget_hourly_forecast_time4"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/widget_hourly_forecast_icon4"
+            android:layout_width="@dimen/widget_daily_icon"
+            android:contentDescription="@string/add_city"
+            android:src="@drawable/sun"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="@dimen/widget_daily_icon" />
+        <TextView
+            android:id="@+id/widget_hourly_forecast_temp4"
+            android:textColor="@color/colorLightGray"
+            android:textAlignment="center"
+            android:text="20°"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/widget_hourly_forecast_main5"
+        android:layout_width="0dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/colorLightGray"
+            android:text="15:00"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/widget_hourly_forecast_time5"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/widget_hourly_forecast_icon5"
+            android:layout_width="@dimen/widget_daily_icon"
+            android:contentDescription="@string/add_city"
+            android:src="@drawable/sun"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="@dimen/widget_daily_icon" />
+        <TextView
+            android:id="@+id/widget_hourly_forecast_temp5"
+            android:textColor="@color/colorLightGray"
+            android:textAlignment="center"
+            android:text="20°"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/widget_hourly_forecast_main6"
+        android:layout_width="0dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/colorLightGray"
+            android:text="15:00"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/widget_hourly_forecast_time6"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/widget_hourly_forecast_icon6"
+            android:layout_width="@dimen/widget_daily_icon"
+            android:contentDescription="@string/add_city"
+            android:src="@drawable/sun"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="@dimen/widget_daily_icon" />
+        <TextView
+            android:id="@+id/widget_hourly_forecast_temp6"
+            android:textColor="@color/colorLightGray"
+            android:textAlignment="center"
+            android:text="20°"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
 
 </LinearLayout>

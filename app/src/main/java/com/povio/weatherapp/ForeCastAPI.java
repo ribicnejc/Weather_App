@@ -32,7 +32,7 @@ public class ForeCastAPI {
     private ArrayList<String> sunsetL = new ArrayList<>();
     private ArrayList<String> dateL = new ArrayList<>();
     public boolean success = false;
-    ForeCastAPI(String cityName){
+    public ForeCastAPI(String cityName){
         this.cityName = cityName;
         start();
     }

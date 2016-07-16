@@ -53,14 +53,14 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/widget_padding"
                 android:text="23°"
-
+                android:id="@+id/widget_temp_main"
                 android:textColor="@color/colorLightGray"
                 android:layout_alignParentEnd="true"
                 android:textSize="50sp"/>
 
             <include layout="@layout/widget_hourly_forecast"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_centerHorizontal="true"
                 android:id="@+id/widget_hourly_forecast2"
                 android:layout_below="@+id/widget_image"/>

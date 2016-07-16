@@ -34,7 +34,7 @@ public class GetWeatherInfoAPI {
     public String sunset = ":(";
     public boolean success = false;
     public int icon;
-    GetWeatherInfoAPI(String cityName){
+    public GetWeatherInfoAPI(String cityName){
         this.cityName = cityName;
         start();
     }

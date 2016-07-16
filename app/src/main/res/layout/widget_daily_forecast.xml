@@ -10,6 +10,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:orientation="vertical"
+            android:id="@+id/widget_daily_forecast_main1"
             android:layout_weight="0.3"
             android:layout_height="wrap_content">
             <TextView
@@ -17,14 +18,50 @@
                 android:layout_height="wrap_content"
                 android:text="FRI"
                 android:textColor="@color/colorLightGray"
-                android:id="@+id/widget_day1"
+                android:id="@+id/widget_daily_forecast_day1"
+                android:textAlignment="center" />
+            <ImageView
+                android:contentDescription="@string/app_name"
+                android:layout_width="@dimen/forcast_five_days_icon"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/widget_daily_forecast_icon1"
+                android:src="@drawable/sun"
+                android:layout_height="@dimen/widget_forecast_icon" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/widget_daily_forecast_temp1"
+                android:textColor="@color/colorLightGray"
+                android:text="20°"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:orientation="vertical"
+            android:layout_weight="0.3"
+            android:id="@+id/widget_daily_forecast_main2"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="FRI"
+                android:textColor="@color/colorLightGray"
+                android:id="@+id/widget_daily_forecast_day2"
                 android:textAlignment="center" />
             <ImageView
                 android:contentDescription="@string/app_name"
                 android:layout_width="@dimen/forcast_five_days_icon"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/sun"
+                android:id="@+id/widget_daily_forecast_icon2"
                 android:layout_height="@dimen/widget_forecast_icon" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/widget_daily_forecast_temp2"
+                android:textColor="@color/colorLightGray"
+                android:text="20°"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
@@ -35,17 +72,54 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="FRI"
+                android:id="@+id/widget_daily_forecast_day3"
                 android:textColor="@color/colorLightGray"
-                android:id="@+id/widget_day2"
                 android:textAlignment="center" />
             <ImageView
                 android:contentDescription="@string/app_name"
                 android:layout_width="@dimen/forcast_five_days_icon"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/sun"
+                android:id="@+id/widget_daily_forecast_icon3"
                 android:layout_height="@dimen/widget_forecast_icon" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/widget_daily_forecast_temp3"
+                android:textColor="@color/colorLightGray"
+                android:text="20°"/>
         </LinearLayout>
         <LinearLayout
+            android:layout_width="0dp"
+            android:orientation="vertical"
+            android:layout_weight="0.3"
+            android:id="@+id/widget_daily_forecast_main4"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="FRI"
+                android:textColor="@color/colorLightGray"
+                android:id="@+id/widget_daily_forecast_day4"
+                android:textAlignment="center" />
+            <ImageView
+                android:contentDescription="@string/app_name"
+                android:layout_width="@dimen/forcast_five_days_icon"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/sun"
+                android:id="@+id/widget_daily_forecast_icon4"
+                android:layout_height="@dimen/widget_forecast_icon" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/widget_daily_forecast_temp4"
+                android:textColor="@color/colorLightGray"
+                android:text="20°"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/widget_daily_forecast_main5"
             android:layout_width="0dp"
             android:orientation="vertical"
             android:layout_weight="0.3"
@@ -55,52 +129,22 @@
                 android:layout_height="wrap_content"
                 android:text="FRI"
                 android:textColor="@color/colorLightGray"
-                android:id="@+id/widget_day3"
+                android:id="@+id/widget_daily_forecast_day5"
                 android:textAlignment="center" />
             <ImageView
                 android:contentDescription="@string/app_name"
                 android:layout_width="@dimen/forcast_five_days_icon"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/sun"
+                android:id="@+id/widget_daily_forecast_icon5"
                 android:layout_height="@dimen/widget_forecast_icon" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:orientation="vertical"
-            android:layout_weight="0.3"
-            android:layout_height="wrap_content">
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="FRI"
+                android:layout_gravity="center"
+                android:id="@+id/widget_daily_forecast_temp5"
                 android:textColor="@color/colorLightGray"
-                android:id="@+id/widget_day4"
-                android:textAlignment="center" />
-            <ImageView
-                android:contentDescription="@string/app_name"
-                android:layout_width="@dimen/forcast_five_days_icon"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/sun"
-                android:layout_height="@dimen/widget_forecast_icon" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:orientation="vertical"
-            android:layout_weight="0.3"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="FRI"
-                android:textColor="@color/colorLightGray"
-                android:id="@+id/widget_day5"
-                android:textAlignment="center" />
-            <ImageView
-                android:contentDescription="@string/app_name"
-                android:layout_width="@dimen/forcast_five_days_icon"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/sun"
-                android:layout_height="@dimen/widget_forecast_icon" />
+                android:text="20°"/>
         </LinearLayout>
 
 
