@@ -134,21 +134,21 @@ public class WidgetProvider extends AppWidgetProvider {
         return PendingIntent.getBroadcast(context, 0, intent, 0);
     }
 
-    private void waitForApi(final GetWeatherInfoAPI api, final ForeCastAPI forecastApi ,final RemoteViews remoteViews, final ComponentName watchWidget, final AppWidgetManager appWidgetManager, final Context context){
+    private void waitForApi(final GetWeatherInfoAPI api, final ForeCastAPI forecastApi, final RemoteViews remoteViews, final ComponentName watchWidget, final AppWidgetManager appWidgetManager, final Context context) {
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (api.success ) {
+                if (api.success && forecastApi.success) { //nul pointer exception
                     onFinish(api, forecastApi, remoteViews, watchWidget, appWidgetManager, context);
                 } else {
-                    waitForApi(api, forecastApi,remoteViews, watchWidget, appWidgetManager,context);
+                    waitForApi(api, forecastApi, remoteViews, watchWidget, appWidgetManager, context);
                 }
             }
         }, 100);
     }
 
-    public void onFinish(GetWeatherInfoAPI api, ForeCastAPI forecastApi, RemoteViews remoteViews, ComponentName watchWidget, AppWidgetManager appWidgetManager, Context context){
+    public void onFinish(GetWeatherInfoAPI api, ForeCastAPI forecastApi, RemoteViews remoteViews, ComponentName watchWidget, AppWidgetManager appWidgetManager, Context context) {
 
         String minMaxWidget = String.format("H: %s° / L: %s°", api.getMaxTemp(), api.getMinTemp());
         SimpleDateFormat sdfDate = new SimpleDateFormat("EEE, dd. MMM", Locale.ENGLISH);//dd/MM/yyyy
@@ -161,9 +161,52 @@ public class WidgetProvider extends AppWidgetProvider {
         remoteViews.setTextViewText(R.id.widget_max_min, minMaxWidget);
         remoteViews.setTextViewText(R.id.widget_time_date, date);
 
+        try {
+            for (int i = 0; i < 6; i++) {
+                int widgetHourlyTimeId = context.getResources().getIdentifier("widget_hourly_forecast_time" + (i + 1), "id", context.getPackageName());
+                int widgetHourlyIconId = context.getResources().getIdentifier("widget_hourly_forecast_icon" + (i + 1), "id", context.getPackageName());
+                int widgetHourlyTempId = context.getResources().getIdentifier("widget_hourly_forecast_temp" + (i + 1), "id", context.getPackageName());
+
+                remoteViews.setTextViewText(widgetHourlyTimeId, forecastApi.getTimeL().get(i));
+                remoteViews.setImageViewResource(widgetHourlyIconId, forecastApi.getIconL().get(i));
+                remoteViews.setTextViewText(widgetHourlyTempId, forecastApi.getMainTempL().get(i));
+
+            }
+        } catch (Exception e) {
+            Log.v("FORECASTAPIHOURLY", e.getMessage() + "");
+        }
 
 
-        Log.i("NEJC REMOTEVIEW",api.getCityName());
+        try {
+            int i = 0, j = 0;
+            for (String elt : forecastApi.getTimeL()) {
+                if (elt.equals("15:00")) {
+
+                    int widgetForecastDayId = context.getResources().getIdentifier("widget_daily_forecast_day" + (i + 1), "id", context.getPackageName());
+                    int widgetForecastIconId = context.getResources().getIdentifier("widget_daily_forecast_icon" + (i + 1), "id", context.getPackageName());
+                    int widgetForecastTempId = context.getResources().getIdentifier("widget_daily_forecast_temp" + (i + 1), "id", context.getPackageName());
+
+                    SimpleDateFormat newDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.ENGLISH);
+                    Date MyDate = newDateFormat.parse(forecastApi.getDateAndTimeL().get(j));
+                    newDateFormat.applyPattern("EEEE");
+                    String nameOfDay = newDateFormat.format(MyDate);
+                    remoteViews.setTextViewText(widgetForecastDayId, nameOfDay);
+
+                    String tempString = String.format("%s°", forecastApi.getMainTempL().get(i));
+                    remoteViews.setTextViewText(widgetForecastTempId, tempString);
+
+                    remoteViews.setImageViewResource(widgetForecastIconId, forecastApi.getIconL().get(i));
+                    i++;
+
+                }
+                j++;
+            }
+        } catch (Exception e) {
+            Log.v("FORECASTAPI", e.toString() + "");
+        }
+
+
+        Log.i("NEJC REMOTEVIEW", api.getCityName());
 
         remoteViews.setOnClickPendingIntent(R.id.widget_image, getPendingSelfIntent(context, SYNC_CLICKED));
         remoteViews.setOnClickPendingIntent(R.id.widget_hourly_button, getPendingSelfIntent(context, HOURLY_CLICKED));
