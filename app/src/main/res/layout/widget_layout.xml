@@ -48,6 +48,13 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true" />
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_input_add"
+                android:id="@+id/widget_change_city"
+                android:layout_alignRight="@+id/widget_temp_main"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

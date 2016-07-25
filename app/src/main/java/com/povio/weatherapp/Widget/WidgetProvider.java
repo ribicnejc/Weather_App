@@ -6,12 +6,16 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.RemoteViews;
+import android.widget.Toast;
 
 import com.povio.weatherapp.ForeCastAPI;
 import com.povio.weatherapp.GetWeatherInfoAPI;
@@ -27,6 +31,7 @@ public class WidgetProvider extends AppWidgetProvider {
     private static final String HOURLY_CLICKED = "hourlyWidgetButtonClicked";
     private static final String DAILY_CLICKED = "dailyWidgetButtonClicked";
     private static final String WITHOUT_CLICKED = "withoutWidgetButtonClicked";
+    private static final String CHANGE_CITY = "changeCityName";
     private static String cityNameWidget = "London";
     private static boolean DAILY_BOOL = false;
     private static boolean HOURLY_BOOL = false;
@@ -55,6 +60,20 @@ public class WidgetProvider extends AppWidgetProvider {
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
+
+        if (CHANGE_CITY.equals(intent.getAction())){
+            //alertEditText(context);
+            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+            Intent intent2 = new Intent(context, WidgetChangeCity.class);
+            ComponentName watchWidget;
+            watchWidget = new ComponentName(context, WidgetProvider.class);
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent2, 0);
+
+            RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_main_layout);
+            remoteViews.setOnClickPendingIntent(R.id.widget_change_city, pendingIntent);
+
+            appWidgetManager.updateAppWidget(watchWidget, remoteViews);
+        }
 
         if (SYNC_CLICKED.equals(intent.getAction())) {
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
@@ -212,9 +231,29 @@ public class WidgetProvider extends AppWidgetProvider {
         remoteViews.setOnClickPendingIntent(R.id.widget_hourly_button, getPendingSelfIntent(context, HOURLY_CLICKED));
         remoteViews.setOnClickPendingIntent(R.id.widget_daily_button, getPendingSelfIntent(context, DAILY_CLICKED));
         remoteViews.setOnClickPendingIntent(R.id.widget_without_button, getPendingSelfIntent(context, WITHOUT_CLICKED));
+        remoteViews.setOnClickPendingIntent(R.id.widget_change_city, getPendingSelfIntent(context, CHANGE_CITY));
         appWidgetManager.updateAppWidget(watchWidget, remoteViews);
 
     }
+    public void alertEditText(final Context context){
+        final AlertDialog.Builder alert = new AlertDialog.Builder(context);
+        final EditText input = new EditText(context);
+        alert.setView(input);
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                String value = input.getText().toString().trim();
+                Toast.makeText(context.getApplicationContext(), value,
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
 
+        alert.setNegativeButton("Cancel",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        dialog.cancel();
+                    }
+                });
+        alert.show();
+    }
 }
 
