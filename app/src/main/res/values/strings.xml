@@ -30,4 +30,5 @@
     <string name="sort_by">Sort By:</string>
     <string name="title_activity_widget_change_city">WidgetChangeCity</string>
     <string name="search_city">Search city</string>
+    <string name="check_if_city_exists">Check if city exists</string>
 </resources>
