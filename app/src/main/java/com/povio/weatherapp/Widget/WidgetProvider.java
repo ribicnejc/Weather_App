@@ -6,24 +6,22 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.RemoteViews;
-import android.widget.Toast;
 
 import com.povio.weatherapp.ForeCastAPI;
 import com.povio.weatherapp.GetWeatherInfoAPI;
 import com.povio.weatherapp.R;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Scanner;
 
 
 public class WidgetProvider extends AppWidgetProvider {
@@ -32,7 +30,8 @@ public class WidgetProvider extends AppWidgetProvider {
     private static final String DAILY_CLICKED = "dailyWidgetButtonClicked";
     private static final String WITHOUT_CLICKED = "withoutWidgetButtonClicked";
     private static final String CHANGE_CITY = "changeCityName";
-    private static String cityNameWidget = "London";
+    private static final String ADD_CITY_CLICKED = "addCity";
+    public static String cityNameWidget = "";
     private static boolean DAILY_BOOL = false;
     private static boolean HOURLY_BOOL = false;
     private static boolean WITHOUT_BOOL = false;
@@ -45,24 +44,44 @@ public class WidgetProvider extends AppWidgetProvider {
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
 
         ComponentName watchWidget;
-        remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_main_layout);
         watchWidget = new ComponentName(context, WidgetProvider.class);
+        remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_main_layout);
         if (cityNameWidget.equals("")) {
-            remoteViews.setViewVisibility(R.id.widget_add_city, View.VISIBLE);
-            remoteViews.setViewVisibility(R.id.widget, View.GONE);
+            remoteViews.setViewVisibility(R.id.widget_first_layout, View.VISIBLE);
+            remoteViews.setViewVisibility(R.id.widget_second_layout, View.GONE);
+            remoteViews.setOnClickPendingIntent(R.id.widget_add_city_button_add, getPendingSelfIntent(context, ADD_CITY_CLICKED));
+            try {
+                Scanner scanner = new Scanner(new File("widgetCityNames.txt"));
+                cityNameWidget = scanner.nextLine();
+            }catch (Exception e){
+                cityNameWidget = "";
+            }
+            appWidgetManager.updateAppWidget(watchWidget, remoteViews);
         } else {
+            remoteViews.setViewVisibility(R.id.widget_first_layout, View.GONE);
+            remoteViews.setViewVisibility(R.id.widget_second_layout, View.VISIBLE);
             api = new GetWeatherInfoAPI(cityNameWidget);
             forecastApi = new ForeCastAPI(cityNameWidget);
             waitForApi(api, forecastApi, remoteViews, watchWidget, appWidgetManager, context);
         }
+
+//        if (cityNameWidget.equals("")) {
+//            remoteViews.setViewVisibility(R.id.widget_add_city, View.VISIBLE);
+//            remoteViews.setViewVisibility(R.id.widget, View.GONE);
+//        } else {
+//            api = new GetWeatherInfoAPI(cityNameWidget);
+//            forecastApi = new ForeCastAPI(cityNameWidget);
+//            waitForApi(api, forecastApi, remoteViews, watchWidget, appWidgetManager, context);
+//        }
     }
 
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
 
-        if (CHANGE_CITY.equals(intent.getAction())){
-            //alertEditText(context);
+
+        if (CHANGE_CITY.equals(intent.getAction()) || ADD_CITY_CLICKED.equals(intent.getAction())) {
+
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
             Intent intent2 = new Intent(context, WidgetChangeCity.class);
             ComponentName watchWidget;
@@ -71,6 +90,7 @@ public class WidgetProvider extends AppWidgetProvider {
 
             RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_main_layout);
             remoteViews.setOnClickPendingIntent(R.id.widget_change_city, pendingIntent);
+            remoteViews.setOnClickPendingIntent(R.id.widget_add_city_button_add, pendingIntent);
 
             appWidgetManager.updateAppWidget(watchWidget, remoteViews);
         }
@@ -235,7 +255,8 @@ public class WidgetProvider extends AppWidgetProvider {
         appWidgetManager.updateAppWidget(watchWidget, remoteViews);
 
     }
-    public void alertEditText(final Context context){
+/*
+    public void alertEditText(final Context context) {
         final AlertDialog.Builder alert = new AlertDialog.Builder(context);
         final EditText input = new EditText(context);
         alert.setView(input);
@@ -254,6 +275,6 @@ public class WidgetProvider extends AppWidgetProvider {
                     }
                 });
         alert.show();
-    }
+    }*/
 }
 

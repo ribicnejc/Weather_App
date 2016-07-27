@@ -2,6 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <include layout="@layout/widget_choose_city_layout"/>
-    <include layout="@layout/widget_layout"/>
+    <include layout="@layout/widget_choose_city_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/widget_first_layout"/>
+    <include layout="@layout/widget_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/widget_second_layout"/>
 </LinearLayout>

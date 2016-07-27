@@ -31,4 +31,6 @@
     <string name="title_activity_widget_change_city">WidgetChangeCity</string>
     <string name="search_city">Search city</string>
     <string name="check_if_city_exists">Check if city exists</string>
+    <string name="version_widget">version 1.0.5</string>
+    <string name="widget_settings">Widget Settings</string>
 </resources>

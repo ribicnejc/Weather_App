@@ -7,6 +7,7 @@
 
     <include layout="@layout/back_ground" />
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -14,7 +15,8 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:id="@+id/widget_add_city_icon"
+            android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginTop="50dp"
             android:contentDescription="@string/app_name"
@@ -26,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:padding="10dp"
-            android:text="@string/app_name"
+            android:text="@string/widget_settings"
             android:textColor="@color/colorLightGray"
             android:textSize="30sp" />
 
@@ -34,7 +36,7 @@
             android:id="@+id/widget_add_city_verion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/version_splash"
+            android:text="@string/version_widget"
             android:textColor="@color/colorLightGray"
             android:textSize="15sp" />
 
@@ -59,6 +61,7 @@
                     android:hint="@string/search_city"
                     android:padding="10dp"
                     android:singleLine="true"
+                    android:textColor="@color/colorLightGray"
                     android:textColorHint="@color/colorLightGray" />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
@@ -69,5 +72,24 @@
             android:layout_height="wrap_content"
             android:text="@string/check_if_city_exists" />
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/widget_add_city_blurry_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="#5595a5a6"
+        android:contentDescription="@string/app_name" />
+
+    <ProgressBar
+        android:id="@+id/widget_add_city_progress_bar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:gravity="center_horizontal"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
 
 </RelativeLayout>
