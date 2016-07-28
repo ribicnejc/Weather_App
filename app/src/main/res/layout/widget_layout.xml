@@ -1,88 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/colorWidgetToolbarBG"
-            android:visibility="visible"
-            android:id="@+id/widget">
+    <RelativeLayout
+        android:id="@+id/widget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWidgetToolbarBG"
+        android:visibility="visible">
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/widget_padding">
+
             <TextView
+                android:id="@+id/widget_max_min"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="H: 15° / L: 7°"
                 android:textColor="@color/colorLightGray"
-                android:id="@+id/widget_max_min"
-                android:textSize="12sp"
-                />
+                android:textSize="12sp" />
+
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/widget_city_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/widget_max_min"
-                android:textColor="@color/colorLightGray"
                 android:text="Medvode"
-                android:textSize="25sp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="FRI, 11. Jun | Sl"
                 android:textColor="@color/colorLightGray"
-                android:layout_below="@+id/widget_city_name"
+                android:textSize="25sp" />
+
+            <TextView
                 android:id="@+id/widget_time_date"
-                android:layout_alignParentStart="true" />
-            </RelativeLayout>
-            <ImageView
-                android:contentDescription="@string/widget_daily"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/widget_image"
-                android:src="@drawable/partly_cloudy_day"
-                android:layout_centerVertical="true"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true" />
-
-            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_input_add"
-                android:id="@+id/widget_change_city"
-                android:layout_alignRight="@+id/widget_temp_main"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/widget_padding"
-                android:text="23°"
-                android:id="@+id/widget_temp_main"
-                android:textColor="@color/colorLightGray"
-                android:layout_alignParentEnd="true"
-                android:textSize="50sp"/>
-
-            <include layout="@layout/widget_hourly_forecast"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:layout_centerHorizontal="true"
-                android:id="@+id/widget_hourly_forecast2"
-                android:layout_below="@+id/widget_image"/>
-
-            <include layout="@layout/widget_daily_forecast"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_width="match_parent"
-                android:id="@+id/widget_daily_forecast2"
-                android:layout_below="@+id/widget_hourly_forecast2"/>
-
-            <include layout="@layout/widget_toolbar"
-                android:layout_below="@+id/widget_daily_forecast2"
-                android:layout_width="match_parent"
-                android:layout_height="25dp" />
-
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/widget_city_name"
+                android:text="FRI, 11. Jun | Sl"
+                android:textColor="@color/colorLightGray" />
         </RelativeLayout>
+
+        <ImageView
+
+            android:id="@+id/widget_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/widget_daily"
+            android:src="@drawable/partly_cloudy_day" />
+
+        <ImageView
+            android:id="@+id/widget_change_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/widget_temp_main"
+            android:src="@android:drawable/ic_input_add" />
+
+        <TextView
+            android:id="@+id/widget_temp_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:padding="@dimen/widget_padding"
+            android:text="23°"
+            android:textColor="@color/colorLightGray"
+            android:textSize="50sp" />
+        <TextView
+            android:layout_above="@+id/widget_hourly_forecast2"
+            android:layout_width="match_parent"
+            android:layout_height="0.2dp"
+            android:background="@color/colorGray"/>
+        <include
+            android:id="@+id/widget_hourly_forecast2"
+            layout="@layout/widget_hourly_forecast"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/widget_image"
+            android:layout_centerHorizontal="true" />
+        <TextView
+            android:layout_above="@+id/widget_daily_forecast2"
+            android:layout_width="match_parent"
+            android:layout_height="0.2dp"
+            android:background="@color/colorGray"/>
+        <include
+            android:id="@+id/widget_daily_forecast2"
+            layout="@layout/widget_daily_forecast"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/widget_hourly_forecast2"
+            android:layout_centerHorizontal="true" />
+
+        <include
+            layout="@layout/widget_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_below="@+id/widget_daily_forecast2" />
+
+    </RelativeLayout>
 </RelativeLayout>

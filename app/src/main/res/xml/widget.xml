@@ -7,5 +7,5 @@
     android:resizeMode="horizontal|vertical"
     android:updatePeriodMillis="10000"
     android:widgetCategory="home_screen|keyguard">
-
+    
 </appwidget-provider>
