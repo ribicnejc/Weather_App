@@ -7,6 +7,11 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -53,7 +58,7 @@ public class WidgetProvider extends AppWidgetProvider {
             try {
                 Scanner scanner = new Scanner(new File("widgetCityNames.txt"));
                 cityNameWidget = scanner.nextLine();
-            }catch (Exception e){
+            } catch (Exception e) {
                 cityNameWidget = "";
             }
             appWidgetManager.updateAppWidget(watchWidget, remoteViews);
@@ -65,14 +70,6 @@ public class WidgetProvider extends AppWidgetProvider {
             waitForApi(api, forecastApi, remoteViews, watchWidget, appWidgetManager, context);
         }
 
-//        if (cityNameWidget.equals("")) {
-//            remoteViews.setViewVisibility(R.id.widget_add_city, View.VISIBLE);
-//            remoteViews.setViewVisibility(R.id.widget, View.GONE);
-//        } else {
-//            api = new GetWeatherInfoAPI(cityNameWidget);
-//            forecastApi = new ForeCastAPI(cityNameWidget);
-//            waitForApi(api, forecastApi, remoteViews, watchWidget, appWidgetManager, context);
-//        }
     }
 
     @Override
@@ -208,7 +205,9 @@ public class WidgetProvider extends AppWidgetProvider {
 
                 remoteViews.setTextViewText(widgetHourlyTimeId, forecastApi.getTimeL().get(i));
                 remoteViews.setImageViewResource(widgetHourlyIconId, forecastApi.getIconL().get(i));
-                remoteViews.setTextViewText(widgetHourlyTempId, forecastApi.getMainTempL().get(i));
+                String tempString = String.format("%s°", forecastApi.getMainTempL().get(i));
+                remoteViews.setTextViewText(widgetHourlyTempId, tempString);
+                //remoteViews.setTextViewText(widgetHourlyTempId, forecastApi.getMainTempL().get(i));
 
             }
         } catch (Exception e) {
@@ -229,7 +228,7 @@ public class WidgetProvider extends AppWidgetProvider {
                     Date MyDate = newDateFormat.parse(forecastApi.getDateAndTimeL().get(j));
                     newDateFormat.applyPattern("EEEE");
                     String nameOfDay = newDateFormat.format(MyDate);
-                    remoteViews.setTextViewText(widgetForecastDayId, nameOfDay);
+                    remoteViews.setTextViewText(widgetForecastDayId, nameOfDay.substring(0, 3).toUpperCase());
 
                     String tempString = String.format("%s°", forecastApi.getMainTempL().get(i));
                     remoteViews.setTextViewText(widgetForecastTempId, tempString);
@@ -255,26 +254,43 @@ public class WidgetProvider extends AppWidgetProvider {
         appWidgetManager.updateAppWidget(watchWidget, remoteViews);
 
     }
-/*
-    public void alertEditText(final Context context) {
-        final AlertDialog.Builder alert = new AlertDialog.Builder(context);
-        final EditText input = new EditText(context);
-        alert.setView(input);
-        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                String value = input.getText().toString().trim();
-                Toast.makeText(context.getApplicationContext(), value,
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
 
-        alert.setNegativeButton("Cancel",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        dialog.cancel();
-                    }
-                });
-        alert.show();
-    }*/
+    /*
+        public void alertEditText(final Context context) {
+            final AlertDialog.Builder alert = new AlertDialog.Builder(context);
+            final EditText input = new EditText(context);
+            alert.setView(input);
+            alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    String value = input.getText().toString().trim();
+                    Toast.makeText(context.getApplicationContext(), value,
+                            Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            alert.setNegativeButton("Cancel",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            dialog.cancel();
+                        }
+                    });
+            alert.show();
+        }*/
+    public Bitmap buildUpdate(String time, Context context) {
+        Bitmap myBitmap = Bitmap.createBitmap(160, 84, Bitmap.Config.ARGB_4444);
+        Canvas myCanvas = new Canvas(myBitmap);
+        Paint paint = new Paint();
+        Typeface clock = Typeface.createFromAsset(context.getAssets(), "openSansLight.ttf");
+        paint.setAntiAlias(true);
+        paint.setSubpixelText(true);
+        paint.setTypeface(clock);
+        paint.setStyle(Paint.Style.FILL);
+        //paint.setColor(Color.WHITE);
+        //paint.setTextSize(65);
+        paint.setTextAlign(Paint.Align.CENTER);
+        myCanvas.drawText(time, 80, 60, paint);
+        return myBitmap;
+    }
+
 }
 

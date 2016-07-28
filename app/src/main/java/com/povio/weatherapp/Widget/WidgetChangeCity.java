@@ -1,6 +1,8 @@
 package com.povio.weatherapp.Widget;
 
 import android.app.AlertDialog;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -31,6 +33,7 @@ import java.io.PrintWriter;
 
 public class WidgetChangeCity extends AppCompatActivity {
     GetWeatherInfoAPI api;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -133,7 +136,16 @@ public class WidgetChangeCity extends AppCompatActivity {
                             try {
                                 PrintWriter printWriter = new PrintWriter("/storage/emulated/0/widget.txt");
                                 printWriter.print(api.getCityName());
-                            }catch (Exception e){
+                                Intent intent = new Intent(getBaseContext(), WidgetProvider.class);
+                                intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+                                int ids[] = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds
+                                        (new ComponentName(getApplication(), WidgetProvider.class));
+// Use an array and EXTRA_APPWIDGET_IDS instead of AppWidgetManager.EXTRA_APPWIDGET_ID,
+// since it seems the onUpdate() is only fired on that:
+//                                int[] ids = {widgetId};
+                                intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+                                sendBroadcast(intent);
+                            } catch (Exception e) {
                                 Log.d("WRITE TO WIDGETS.TXT", "Something went wrong better look what");
                             }
                             Intent setIntent = new Intent(Intent.ACTION_MAIN);
