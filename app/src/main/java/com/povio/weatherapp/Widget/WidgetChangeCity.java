@@ -136,6 +136,7 @@ public class WidgetChangeCity extends AppCompatActivity {
                             try {
                                 PrintWriter printWriter = new PrintWriter("/storage/emulated/0/widget.txt");
                                 printWriter.print(api.getCityName());
+                                printWriter.close();
                                 Intent intent = new Intent(getBaseContext(), WidgetProvider.class);
                                 intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
                                 int ids[] = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds
