@@ -1,9 +1,7 @@
 package com.povio.weatherapp;
 
-import com.povio.weatherapp.APIs.*;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -12,7 +10,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -46,11 +43,9 @@ import jp.co.recruit_lifestyle.android.widget.*;
 
 public class MainActivity extends AppCompatActivity {
     public static List<Data> datas = new ArrayList<>();
-    //public static List<Data> a;
     private RecyclerView rv;
     public static TextView mTxtView;
     public ImageView background;
-    public static Context mContext;
 
     @Override
     protected void onStart() {
@@ -119,53 +114,55 @@ public class MainActivity extends AppCompatActivity {
         Typeface type = Typeface.createFromAsset(getAssets(), "openSansLight.ttf");
         mTxtView.setTypeface(type);
         final WaveSwipeRefreshLayout swipeView = (WaveSwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
-        swipeView.setColorSchemeColors(Color.WHITE, Color.WHITE);
-        swipeView.setWaveColor(Color.argb(100, 7, 133, 171));
-        swipeView.setOnRefreshListener(new WaveSwipeRefreshLayout.OnRefreshListener() {
+        if (swipeView != null) {
+            swipeView.setColorSchemeColors(Color.WHITE, Color.WHITE);
+            swipeView.setWaveColor(Color.argb(100, 7, 133, 171));
+            swipeView.setOnRefreshListener(new WaveSwipeRefreshLayout.OnRefreshListener() {
 
-            @Override
-            public void onRefresh() {
-                swipeView.setRefreshing(true);
-                refreshItems(swipeView, 0);
-            }
-        });
+                @Override
+                public void onRefresh() {
+                    swipeView.setRefreshing(true);
+                    refreshItems(swipeView, 0);
+                }
+            });
+        }
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         NavigationDrawerFragment drawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), CityQuery.class);
-                intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
-            }
-        });
+        if (fab != null)
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getBaseContext(), CityQuery.class);
+                    intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+                }
+            });
 
-        // setup data
         datas = readState();
 
-        //check if datas is empty
         emptyRecyclerView(datas);
 
-        // setup recyclerview
         rv = (RecyclerView) findViewById(R.id.recyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         rv.setLayoutManager(linearLayoutManager);
         rv.setHasFixedSize(true);
 
-        // setup adapter
         final RVAdapter adapter = new RVAdapter(datas, this);
         rv.setAdapter(adapter);
-
-        //setup ItemTouchHelper
+        /**
+         * Setup Item touch helper for swipe dismiss action event
+         */
         ItemTouchHelper.Callback callback = new CardTouchHelper(adapter);
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(rv);
@@ -227,10 +224,8 @@ public class MainActivity extends AppCompatActivity {
     public final void emptyRecyclerView(List someList) {
         if (someList.isEmpty()) {
             mTxtView.setVisibility(View.VISIBLE);
-            //mTextView.setVisibility(View.GONE);
         } else {
             mTxtView.setVisibility(View.GONE);
-            //mTextView.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -306,12 +301,14 @@ public class MainActivity extends AppCompatActivity {
             rv.getAdapter().notifyDataSetChanged();
 
         }
-        if(id == R.id.refresh_toolbar_icon){
+        if (id == R.id.refresh_toolbar_icon) {
             final WaveSwipeRefreshLayout swipeView = (WaveSwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
-            swipeView.setColorSchemeColors(Color.WHITE, Color.WHITE);
-            swipeView.setWaveColor(Color.argb(100, 7, 133, 171));
-            swipeView.setRefreshing(true);
-            refreshItems(swipeView, 0);
+            if (swipeView != null) {
+                swipeView.setColorSchemeColors(Color.WHITE, Color.WHITE);
+                swipeView.setWaveColor(Color.argb(100, 7, 133, 171));
+                swipeView.setRefreshing(true);
+                refreshItems(swipeView, 0);
+            }
 
         }
         saveState(datas);
@@ -346,7 +343,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             FileInputStream fileInputStream = new FileInputStream(new File("/storage/emulated/0/savedData.ser"));
             ObjectInputStream in = new ObjectInputStream(fileInputStream);
-            list = (ArrayList) in.readObject();
+            list = (ArrayList<Data>)in.readObject();
 
 
         } catch (Exception e) {

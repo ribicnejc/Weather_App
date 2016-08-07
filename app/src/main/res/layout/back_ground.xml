@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <ImageView
-        android:src="@drawable/bg_clear"
-        android:scaleType="centerCrop"
-        android:layout_width="match_parent"
         android:id="@+id/background"
-        android:layout_height="match_parent" />
-
-    <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorDarkTransparentBackground"
-         />
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_clear" />
+
+    <View
+        android:id="@+id/background_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorDarkTransparentBackground" />
 
 </RelativeLayout>

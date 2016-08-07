@@ -102,21 +102,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.InfoViewHolder> {
         gdDefault.setColor(getRightColor(datas.get(i).getTemp()));
         gdDefault.setCornerRadius(10);
         weatherViewHolder.backGroundTemp.setBackground(gdDefault);
-        //weatherViewHolder.backGroundTemp.setBackgroundColor(getRightColor(datas.get(i).getTemp()));
-
-        //weatherViewHolder.cv.setBackgroundColor(Color.TRANSPARENT);
         weatherViewHolder.cv.setCardElevation(0);
-        weatherViewHolder.buttonTest.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                //Toast.makeText(mContext, "More info", Toast.LENGTH_SHORT).show();
-                //Intent intent = new Intent(mContext, MoreInfoActivity.class);
-                //intent.putExtra("city", datas.get(i).getCityName());
-                //mContext.startActivity(intent);
-                //((Activity) mContext).overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
-            }
-        });
         weatherViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
