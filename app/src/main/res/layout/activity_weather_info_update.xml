@@ -28,137 +28,106 @@
     </android.support.design.widget.AppBarLayout>
 
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/appbar">
 
-        <ScrollView
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/appbar">
+            android:layout_height="match_parent">
 
+            <TextView
+                android:id="@+id/cityMoreInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:text="Ljubljana, SI"
+                android:textColor="@color/colorGrayLight"
+                android:textSize="35sp" />
+
+            <include
+                android:id="@+id/more_info_main_info_included"
+                layout="@layout/more_info_main_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/line0"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin" />
 
             <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <TextView
-                    android:id="@+id/cityMoreInfo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
-                    android:text="Ljubljana, SI"
-                    android:textColor="@color/colorGrayLight"
-                    android:textSize="35sp" />
-
-                <RelativeLayout
-                    android:id="@+id/relativeLayout4"
-                    android:layout_width="200dp"
-                    android:layout_height="90dp"
-                    android:layout_above="@+id/relativeLayout3"
-                    android:layout_alignLeft="@+id/cityMoreInfo"
-                    android:layout_alignStart="@+id/cityMoreInfo">
-
-                    <TextView
-                        android:id="@+id/textView13"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
-                        android:text="Weather info:"
-                        android:textColor="@color/colorGrayLight"
-                        android:textSize="25sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/infoMoreInfo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_below="@+id/textView13"
-                        android:text="Clouds"
-                        android:textColor="@color/colorGrayLight"
-                        android:textSize="22sp"
-                        android:textStyle="italic" />
-
-                    <TextView
-                        android:id="@+id/descMoreInfo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_below="@+id/infoMoreInfo"
-                        android:text="broken clouds"
-                        android:textColor="@color/colorGrayLight"
-                        android:textSize="18sp"
-                        android:textStyle="italic" />
-                </RelativeLayout>
-
-                <ImageView
-                    android:id="@+id/iconMoreInfo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_below="@+id/cityMoreInfo"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="20dp"
-                    android:src="@drawable/snow" />
-
-
-                <RelativeLayout
-                    android:id="@+id/relativeLayout3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/iconMoreInfo"
-                    android:layout_marginTop="20dp"
-                    android:padding="@dimen/forcast_card_view_padding">
-                    <!--<include layout="@layout/fore_cast_info"/>-->
-                    <include layout="@layout/horizontal_rec_view_forecast" />
-                </RelativeLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/cityMoreInfo"
-                    android:layout_marginTop="15dp"
-                    android:background="@color/colorGray"
-                    android:text="" />
-
-                <TextView
-                    android:id="@+id/line4"
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/relativeLayout4"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/colorGray"
-                    android:text="" />
-
-                <TextView
-                    android:id="@+id/line5"
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/relativeLayout3"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/colorGray" />
-
-                <include
-                    layout="@layout/fore_cast_five_days"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/line5"
-                    android:layout_marginTop="10dp" />
+                android:id="@+id/relativeLayout3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/more_info_main_info_included"
+                android:layout_marginTop="20dp"
+                android:padding="@dimen/forcast_card_view_padding">
+                <!--<include layout="@layout/fore_cast_info"/>-->
+                <include layout="@layout/horizontal_rec_view_forecast" />
             </RelativeLayout>
-          </ScrollView>
+
+            <TextView
+                android:id="@+id/line0"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/cityMoreInfo"
+                android:layout_marginTop="15dp"
+                android:background="@color/colorGray"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/line4"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/more_info_main_info_included"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorGray"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/line5"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/relativeLayout3"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorGray" />
+
+            <include
+                android:id="@+id/more_info_forecast_five_days"
+                layout="@layout/fore_cast_five_days"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/line5"
+                android:layout_marginTop="10dp" />
+
+            <View
+                android:id="@+id/line6"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@id/more_info_forecast_five_days"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorGray" />
+
+            <include layout="@layout/more_info_expendable_info"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_below="@id/line6"
+                android:layout_marginTop="10dp"/>
+        </RelativeLayout>
+        
+    </ScrollView>
 
 </RelativeLayout>

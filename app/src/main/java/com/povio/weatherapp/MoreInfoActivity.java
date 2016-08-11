@@ -1,14 +1,12 @@
 package com.povio.weatherapp;
 
-import android.content.Context;
+
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.Handler;
-import android.os.SystemClock;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +16,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -34,7 +34,7 @@ import java.util.Locale;
 
 import com.povio.weatherapp.Images.Backgrounds;
 
-import jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout;
+import org.w3c.dom.Text;
 
 public class MoreInfoActivity extends AppCompatActivity {
     private RecyclerView horizontalRecyclerView;
@@ -46,13 +46,14 @@ public class MoreInfoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.loading_before_moreinfo);
-
         ProgressBar pr;
-
-
         pr = (ProgressBar) findViewById(R.id.progressBarMoreInfo);
-        pr.setVisibility(View.VISIBLE);
+        if (pr != null)
+            pr.setVisibility(View.VISIBLE);
         GetWeatherInfoAPI api;
         ForeCastAPI foreCastAPI;
 
@@ -103,10 +104,11 @@ public class MoreInfoActivity extends AppCompatActivity {
         TextView weatherDesc;
         TextView weatherInfo;
         ImageView weatherPhoto;
-        ImageView firstIcon;
-        TextView firstTime;
-        TextView firstTemp;
         ImageView background;
+        TextView mainTemp;
+        TextView windSpeed;
+        TextView pressure;
+        TextView humidity;
 
         TextView[] days = new TextView[5];
         TextView[] daysTempMin = new TextView[5];
@@ -126,20 +128,27 @@ public class MoreInfoActivity extends AppCompatActivity {
             weatherDesc.setText(api.getIconDesc());
             weatherDesc.setTypeface(type);
 
+            mainTemp = (TextView) findViewById(R.id.more_info_main_temp);
+            if (mainTemp != null) {
+                mainTemp.setText(String.format("%s°", api.getMainTemp()));
+                mainTemp.setTypeface(type);
+            }
             weatherPhoto = (ImageView) findViewById(R.id.iconMoreInfo);
             weatherPhoto.setImageResource(api.getIcon());
             background = (ImageView) findViewById(R.id.background);
             HashMap<String, Integer> backgrounds = new HashMap<>();
             backgrounds = Backgrounds.getIcons(backgrounds);
-            background.setImageBitmap(
-                    decodeSampledBitmapFromResource(getResources(), R.id.background, 100, 100)
-            );
-            background.setImageResource(backgrounds.get(api.getIconDesc()));
+            if (background != null) {
+                background.setImageBitmap(
+                        decodeSampledBitmapFromResource(getResources(), R.id.background, 100, 100)
+                );
+                background.setImageResource(backgrounds.get(api.getIconDesc()));
+            }
             int i = 0;
             int j = 0;
             for (String elt : foreCastAPI.getTimeL()) {
                 if (elt.equals("15:00")) {
-                   // RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.day1_main);
+                    // RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.day1_main);
                     int resId = getResources().getIdentifier("day" + (i + 1) + "_icon", "id", getPackageName());
                     daysIcons[i] = (ImageView) findViewById(resId);
                     daysIcons[i].setImageResource(foreCastAPI.getIconL().get(j));
@@ -150,7 +159,8 @@ public class MoreInfoActivity extends AppCompatActivity {
 
                     int dayMainId = getResources().getIdentifier("day" + (i + 1) + "_main", "id", getPackageName());
                     RelativeLayout relativeLayout1 = (RelativeLayout) findViewById(dayMainId);
-                    relativeLayout1.setVisibility(View.VISIBLE);
+                    if (relativeLayout1 != null)
+                        relativeLayout1.setVisibility(View.VISIBLE);
 
                     String nameOfDay = newDateFormat.format(MyDate);
                     int dayResId = getResources().getIdentifier("day" + (i + 1), "id", getPackageName());
@@ -172,6 +182,24 @@ public class MoreInfoActivity extends AppCompatActivity {
 
                 }
                 j++;
+            }
+
+            windSpeed = (TextView) findViewById(R.id.more_info_wind_speed);
+            if (windSpeed != null){
+                windSpeed.setText(String.format("%skph",api.getWindSpeed()));
+                windSpeed.setTypeface(type);
+            }
+
+            pressure = (TextView) findViewById(R.id.more_info_pressure);
+            if (pressure != null){
+                pressure.setText(String.format("%s hBar", api.getPressure()));
+                pressure.setTypeface(type);
+            }
+
+            humidity = (TextView) findViewById(R.id.more_info_humidity);
+            if (humidity != null){
+                humidity.setText(api.getHumidity() + " %");
+                humidity.setTypeface(type);
             }
         } catch (Exception e) {
             setContentView(R.layout.error);
@@ -204,12 +232,12 @@ public class MoreInfoActivity extends AppCompatActivity {
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
         }
-        if (id == android.R.id.home){
+        if (id == android.R.id.home) {
             startActivity(new Intent(getBaseContext(), MainActivity.class));
-           // NavUtils.navigateUpFromSameTask(this);
+            // NavUtils.navigateUpFromSameTask(this);
             overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
         }
-        if (id == R.id.refresh_toolbar_icon){
+        if (id == R.id.refresh_toolbar_icon) {
             Intent intent = new Intent(getBaseContext(), MoreInfoActivity.class);
             intent.putExtra("city", cityName);
             startActivity(intent);

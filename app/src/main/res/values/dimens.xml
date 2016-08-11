@@ -17,4 +17,6 @@
     <dimen name="widget_daily_icon">30dp</dimen>
     <dimen name="nav_drawer">280dp</dimen>
     <dimen name="drawable_icon_size">25dp</dimen>
+    <dimen name="below_image">10dp</dimen>
+    <dimen name="expendable_info_icon_size">35dp</dimen>
 </resources>
