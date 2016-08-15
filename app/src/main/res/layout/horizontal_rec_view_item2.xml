@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:gravity="center"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/horTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="09:00"
+        android:textColor="@color/colorForeCast"
+        android:textSize="@dimen/forecast_temp_font"
+        android:layout_gravity="center_horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:id="@+id/horIcon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/horTime"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/sun"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:id="@+id/horTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/horIcon"
+        android:layout_centerHorizontal="true"
+        android:text="20°"
+        android:textColor="@color/colorForeCast"
+        android:textSize="@dimen/forecast_temp_font" />
+
+</RelativeLayout>

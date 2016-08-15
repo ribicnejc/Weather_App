@@ -94,7 +94,7 @@ public class MoreInfoActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Weather in " + api.getCityName());
         horizontalRecyclerView = (RecyclerView) findViewById(R.id.horizontal_recycler_view);
-        horizontalAdapter = new HorizontalRVAdapter(foreCastAPI.getTimeL(), foreCastAPI.getIconL(), foreCastAPI.getMainTempL());
+        horizontalAdapter = new HorizontalRVAdapter(foreCastAPI.getTimeL(), foreCastAPI.getIconL(), foreCastAPI.getMainTempL(), foreCastAPI.getDateAndTimeL());
         LinearLayoutManager horizontalLayoutManager
                 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         horizontalRecyclerView.setLayoutManager(horizontalLayoutManager);
@@ -186,7 +186,7 @@ public class MoreInfoActivity extends AppCompatActivity {
 
             windSpeed = (TextView) findViewById(R.id.more_info_wind_speed);
             if (windSpeed != null){
-                windSpeed.setText(String.format("%skph",api.getWindSpeed()));
+                windSpeed.setText(String.format("%sm/s",api.getWindSpeed()));
                 windSpeed.setTypeface(type);
             }
 
