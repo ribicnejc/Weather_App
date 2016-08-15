@@ -192,7 +192,7 @@ public class MoreInfoActivity extends AppCompatActivity {
 
             pressure = (TextView) findViewById(R.id.more_info_pressure);
             if (pressure != null){
-                pressure.setText(String.format("%s hBar", api.getPressure()));
+                pressure.setText(String.format("%s mBar", api.getPressure()));
                 pressure.setTypeface(type);
             }
 

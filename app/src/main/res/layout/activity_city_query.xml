@@ -7,7 +7,7 @@
     android:fitsSystemWindows="true"
     tools:context="com.povio.weatherapp.CityQuery">
 
-    <include layout="@layout/content_city_query" />
+    <include layout="@layout/content_search_city" />
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

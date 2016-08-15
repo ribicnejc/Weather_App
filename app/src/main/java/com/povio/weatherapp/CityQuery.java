@@ -3,71 +3,79 @@ package com.povio.weatherapp;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
+import android.graphics.Typeface;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.romainpiel.shimmer.Shimmer;
-import com.romainpiel.shimmer.ShimmerButton;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.HashMap;
-
 public class CityQuery extends AppCompatActivity {
-
-    final Shimmer shimmer = new Shimmer();
-    EditText editTextCityName;
-    TextView add;
-    ShimmerButton btnByCityName;
-    TextView textViewResult, textViewInfo;
+    Button btnByCityName;
     ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_city_query);
+        Typeface typeface = Typeface.createFromAsset(getAssets(), "openSansLight.ttf");
+
+        TextView title = (TextView) findViewById(R.id.app_add_city_title);
+        TextView version = (TextView) findViewById(R.id.app_add_city_verion);
+        if (title != null & version != null) {
+            title.setTypeface(typeface);
+            version.setTypeface(typeface);
+        }
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Search city");
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        progressBar.setVisibility(View.GONE);
-        editTextCityName = (EditText) findViewById(R.id.cityname);
-        btnByCityName = (ShimmerButton) findViewById(R.id.bycityname);
-        shimmer.setDuration(2000);
-        shimmer.start(btnByCityName);
-        add = (TextView) findViewById(R.id.add);
-        //textViewResult = (TextView)findViewById(R.id.result);
-        //textViewResult.setText("");
-        textViewInfo = (TextView) findViewById(R.id.info);
+        progressBar = (ProgressBar) findViewById(R.id.app_add_city_progress_bar);
+        if (progressBar != null)
+            progressBar.setVisibility(View.GONE);
+
+        LinearLayout searchLayout = (LinearLayout) findViewById(R.id.app_search_layout);
+        GradientDrawable gdDefault = new GradientDrawable();
+        gdDefault.setColor(ContextCompat.getColor(this, R.color.colorDarkTransparentBackground));
+        gdDefault.setCornerRadius(10);
+        if (searchLayout != null)
+            searchLayout.setBackground(gdDefault);
+
+        btnByCityName = (Button) findViewById(R.id.app_add_city_button_check_if_exists);
+        final EditText editText = (EditText) findViewById(R.id.app_add_city_edit_text);
+        if (editText != null)
+            editText.setOnKeyListener(new View.OnKeyListener() {
+                @Override
+                public boolean onKey(View v, int keyCode, KeyEvent event) {
+                    if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                            (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                        checkIfExists(editText.getText().toString());
+                        return true;
+                    }
+                    return false;
+                }
+            });
         btnByCityName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                add.setText("Searching...");
-                progressBar.setVisibility(View.VISIBLE);
-                GetWeatherInfoAPI api = new GetWeatherInfoAPI(editTextCityName.getText().toString());
-                waitForApi(api);
+                if (editText != null)
+                    checkIfExists(editText.getText().toString());
             }
         });
     }
@@ -87,7 +95,6 @@ public class CityQuery extends AppCompatActivity {
     }
 
     public void onFinish(final GetWeatherInfoAPI api) {
-        add.setText("Search city");
         progressBar.setVisibility(View.GONE);
         if (api.getMainDesc().equals(":(")) {
             Toast.makeText(CityQuery.this, "That place does not exist", Toast.LENGTH_SHORT).show();
@@ -122,10 +129,8 @@ public class CityQuery extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         MenuItem sortIcon = menu.findItem(R.id.sort_icon);
         MenuItem resfreshIcon = menu.findItem(R.id.refresh_toolbar_icon);
-        //MenuItem searchIcon = menu.findItem(R.id.search);
         sortIcon.setVisible(false);
         resfreshIcon.setVisible(false);
-        //searchIcon.setVisible(false);
         return true;
     }
 
@@ -148,6 +153,12 @@ public class CityQuery extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void checkIfExists(String city) {
+        GetWeatherInfoAPI api = new GetWeatherInfoAPI(city);
+        progressBar.setVisibility(View.VISIBLE);
+        waitForApi(api);
     }
 
     @Override
