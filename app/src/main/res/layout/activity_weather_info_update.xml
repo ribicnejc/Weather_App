@@ -68,8 +68,8 @@
                 android:layout_below="@+id/more_info_main_info_included"
                 android:layout_marginTop="20dp"
                 android:padding="@dimen/forcast_card_view_padding">
-                <!--<include layout="@layout/fore_cast_info"/>-->
-                <include layout="@layout/horizontal_rec_view_forecast" />
+
+                    <include layout="@layout/horizontal_rec_view_forecast" />
             </RelativeLayout>
 
             <TextView
@@ -125,7 +125,19 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_below="@id/line6"
+                android:id="@+id/more_info_expandable_info_layout"
                 android:layout_marginTop="10dp"/>
+
+            <!--<FrameLayout-->
+                <!--android:id="@+id/container"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:background="@android:color/transparent" />-->
+            <fragment
+                android:id="@+id/mapTest"
+                class="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"/>
         </RelativeLayout>
         
     </ScrollView>

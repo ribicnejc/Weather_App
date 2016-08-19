@@ -1,6 +1,8 @@
 package com.povio.weatherapp;
 
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -13,17 +15,21 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.povio.weatherapp.Adapters.HorizontalRVAdapter;
 
 import java.text.SimpleDateFormat;
@@ -34,9 +40,8 @@ import java.util.Locale;
 
 import com.povio.weatherapp.Images.Backgrounds;
 
-import org.w3c.dom.Text;
 
-public class MoreInfoActivity extends AppCompatActivity {
+public class MoreInfoActivity extends AppCompatActivity implements OnMapReadyCallback {
     private RecyclerView horizontalRecyclerView;
     private HorizontalRVAdapter horizontalAdapter;
     private Toolbar toolbar;
@@ -49,6 +54,9 @@ public class MoreInfoActivity extends AppCompatActivity {
 //        requestWindowFeature(Window.FEATURE_NO_TITLE);
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 //                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
+
         setContentView(R.layout.loading_before_moreinfo);
         ProgressBar pr;
         pr = (ProgressBar) findViewById(R.id.progressBarMoreInfo);
@@ -56,6 +64,18 @@ public class MoreInfoActivity extends AppCompatActivity {
             pr.setVisibility(View.VISIBLE);
         GetWeatherInfoAPI api;
         ForeCastAPI foreCastAPI;
+//
+        //SupportMapFragment mapFragment = (SupportMapFragment) this.getSupportFragmentManager()
+        //        .findFragmentById(R.id.mapTest);
+        MapFragment mapFragment = (MapFragment) getFragmentManager() .findFragmentById(R.id.mapTest);
+        mapFragment.getMapAsync(this);
+
+//        Fragment fragment = Fragment.instantiate(this, MapViewFragment.class.getName());
+//        FragmentTransaction ft = getFragmentManager().beginTransaction();
+//        ft.replace(R.id.container, fragment);
+//        ft.commit();
+
+
 
 
         Bundle extras = getIntent().getExtras();
@@ -185,19 +205,19 @@ public class MoreInfoActivity extends AppCompatActivity {
             }
 
             windSpeed = (TextView) findViewById(R.id.more_info_wind_speed);
-            if (windSpeed != null){
-                windSpeed.setText(String.format("%sm/s",api.getWindSpeed()));
+            if (windSpeed != null) {
+                windSpeed.setText(String.format("%sm/s", api.getWindSpeed()));
                 windSpeed.setTypeface(type);
             }
 
             pressure = (TextView) findViewById(R.id.more_info_pressure);
-            if (pressure != null){
+            if (pressure != null) {
                 pressure.setText(String.format("%s mBar", api.getPressure()));
                 pressure.setTypeface(type);
             }
 
             humidity = (TextView) findViewById(R.id.more_info_humidity);
-            if (humidity != null){
+            if (humidity != null) {
                 humidity.setText(api.getHumidity() + " %");
                 humidity.setTypeface(type);
             }
@@ -290,5 +310,10 @@ public class MoreInfoActivity extends AppCompatActivity {
         }
 
         return inSampleSize;
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        Toast.makeText(this, "GoogleMapsActivityToastOnMapReady", Toast.LENGTH_SHORT).show();
     }
 }
