@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -41,7 +42,7 @@ import java.util.Locale;
 import com.povio.weatherapp.Images.Backgrounds;
 
 
-public class MoreInfoActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MoreInfoActivity extends AppCompatActivity {
     private RecyclerView horizontalRecyclerView;
     private HorizontalRVAdapter horizontalAdapter;
     private Toolbar toolbar;
@@ -56,7 +57,6 @@ public class MoreInfoActivity extends AppCompatActivity implements OnMapReadyCal
 //                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 
-
         setContentView(R.layout.loading_before_moreinfo);
         ProgressBar pr;
         pr = (ProgressBar) findViewById(R.id.progressBarMoreInfo);
@@ -64,18 +64,6 @@ public class MoreInfoActivity extends AppCompatActivity implements OnMapReadyCal
             pr.setVisibility(View.VISIBLE);
         GetWeatherInfoAPI api;
         ForeCastAPI foreCastAPI;
-//
-        //SupportMapFragment mapFragment = (SupportMapFragment) this.getSupportFragmentManager()
-        //        .findFragmentById(R.id.mapTest);
-        MapFragment mapFragment = (MapFragment) getFragmentManager() .findFragmentById(R.id.mapTest);
-        mapFragment.getMapAsync(this);
-
-//        Fragment fragment = Fragment.instantiate(this, MapViewFragment.class.getName());
-//        FragmentTransaction ft = getFragmentManager().beginTransaction();
-//        ft.replace(R.id.container, fragment);
-//        ft.commit();
-
-
 
 
         Bundle extras = getIntent().getExtras();
@@ -104,7 +92,7 @@ public class MoreInfoActivity extends AppCompatActivity implements OnMapReadyCal
         }, 100);
     }
 
-    public void onFinish(GetWeatherInfoAPI api, ForeCastAPI foreCastAPI) {
+    public void onFinish(final GetWeatherInfoAPI api, ForeCastAPI foreCastAPI) {
         setContentView(R.layout.activity_weather_info_update);
         Typeface type = Typeface.createFromAsset(getAssets(), "openSansLight.ttf");
         toolbar = (Toolbar) findViewById(R.id.app_bar);
@@ -135,6 +123,7 @@ public class MoreInfoActivity extends AppCompatActivity implements OnMapReadyCal
         TextView[] daysTempMax = new TextView[5];
         ImageView[] daysIcons = new ImageView[5];
 
+        Button openGoogleMapsButton;
         try {
             cityName = (TextView) findViewById(R.id.cityMoreInfo);
             cityName.setText(api.getCityName() + ", " + api.getCountry());
@@ -221,6 +210,19 @@ public class MoreInfoActivity extends AppCompatActivity implements OnMapReadyCal
                 humidity.setText(api.getHumidity() + " %");
                 humidity.setTypeface(type);
             }
+
+            openGoogleMapsButton = (Button) findViewById(R.id.open_google_maps);
+            if (openGoogleMapsButton != null)
+                openGoogleMapsButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getBaseContext(), GoogleMapsActivity.class);
+                        intent.putExtra("lonAndLat", api.getCoords());
+                        intent.putExtra("cityName", api.getCityName());
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
+                    }
+                });
         } catch (Exception e) {
             setContentView(R.layout.error);
             Toast.makeText(MoreInfoActivity.this, "No internet connection", Toast.LENGTH_SHORT).show();
@@ -312,8 +314,4 @@ public class MoreInfoActivity extends AppCompatActivity implements OnMapReadyCal
         return inSampleSize;
     }
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        Toast.makeText(this, "GoogleMapsActivityToastOnMapReady", Toast.LENGTH_SHORT).show();
-    }
 }

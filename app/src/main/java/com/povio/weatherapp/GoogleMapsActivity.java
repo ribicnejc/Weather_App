@@ -1,8 +1,10 @@
 package com.povio.weatherapp;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,19 +17,25 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class GoogleMapsActivity extends Fragment implements OnMapReadyCallback {
+public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private String cityName;
+    private double[] coords;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Toast.makeText(getContext(), "GoogleMapsActivityToast", Toast.LENGTH_SHORT).show();
-        //setContentView(R.layout.activity_google_maps);
+        setContentView(R.layout.activity_google_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getFragmentManager()
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            coords = extras.getDoubleArray("lonAndLat");
+            cityName = extras.getString("cityName");
+        }
     }
 
 
@@ -41,19 +49,23 @@ public class GoogleMapsActivity extends Fragment implements OnMapReadyCallback {
      * installed Google Play services and returned to the app.
      */
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.activity_google_maps, container, false);
-
-        return view;
-    }
-    @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        Toast.makeText(getContext(), "GoogleMapsActivityToastOnMapReady", Toast.LENGTH_SHORT).show();
+
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng city = new LatLng(coords[0], coords[1]);
+
+        mMap.addMarker(new MarkerOptions().position(city).title(cityName));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(city));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(8.0f));
+
+    }
+    @Override
+    public void onBackPressed() {
+        Log.d("CDA", "onBackPressed Called");
+        Intent intent = new Intent(getBaseContext(), MoreInfoActivity.class);
+        intent.putExtra("city", cityName);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
     }
 }

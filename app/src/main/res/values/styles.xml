@@ -20,11 +20,17 @@
         <item name="android:editTextStyle">@color/colorLightGray</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
+    <style name="SplashTheme" parent="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <!--<item name="android:windowTranslucentStatus">true</item>-->
+        <item name="android:windowBackground">@mipmap/splash_background</item>
+
+        <!--<item name="android:background">@mipmap/splash_background</item>-->
     </style>
+    <!--<style name="AppTheme.NoActionBar">-->
+        <!---->
+        <!--<item name="android:windowTranslucentStatus">true</item>-->
+    <!--</style>-->
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 

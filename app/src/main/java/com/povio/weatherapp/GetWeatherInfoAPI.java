@@ -32,60 +32,82 @@ public class GetWeatherInfoAPI {
     public String country = ":(";
     public String sunrise = ":(";
     public String sunset = ":(";
+    public double lon = 0;
+    public double lat = 0;
     public boolean success = false;
     public int icon;
-    public GetWeatherInfoAPI(String cityName){
+
+    public GetWeatherInfoAPI(String cityName) {
         this.cityName = cityName;
         start();
     }
 
-    public void start(){
+    public void start() {
         new OpenWeatherMapTask(this.cityName).execute();
     }
 
 
-    public String getCityName(){
+    public String getCityName() {
         return this.cityName;
     }
-    public String getMainDesc(){
+
+    public String getMainDesc() {
         return this.mainDesc;
     }
-    public int getIcon(){
+
+    public int getIcon() {
         HashMap<String, Integer> icons = new HashMap<>();
         icons = WeatherTypes.getIcons(icons);
         icon = icons.get(iconDesc);
         return icon;
     }
-    public String getIconDesc(){
+
+    public String getIconDesc() {
         return iconDesc;
     }
-    public String getMainTemp(){
+
+    public String getMainTemp() {
         return mainTemp;
     }
-    public String getPressure(){
+
+    public String getPressure() {
         return pressure;
     }
-    public String getHumidity(){
+
+    public String getHumidity() {
         return humidity;
     }
-    public String getMinTemp(){
+
+    public String getMinTemp() {
         return minTemp;
     }
-    public String getMaxTemp(){
+
+    public String getMaxTemp() {
         return maxTemp;
     }
+
     public String getRealFeel() {
         double rf = Double.parseDouble(getMinTemp().replace(',', '.')) + Double.parseDouble(getMaxTemp().replace(',', '.')) + 3;
         String a = String.format("%.1f", rf / 2);
         return a;
     }
-    public String getWindSpeed(){
+
+    public String getWindSpeed() {
         return windSpeed;
     }
-    public String getCountry(){
+
+    public String getCountry() {
         return country;
     }
-    public String getSunrise(){
+
+    public double[] getCoords() {
+        double coords[] = new double[2];
+        coords[0] = lat;
+        coords[1] = lon;
+        return coords;
+    }
+
+    public String getSunrise() {
         long millis = Long.parseLong(sunrise) * 1000;
         Date date = new Date(millis);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
@@ -93,7 +115,8 @@ public class GetWeatherInfoAPI {
         String sunRise = simpleDateFormat.format(date);
         return sunRise;
     }
-    public String getSunset(){
+
+    public String getSunset() {
         long millis = Long.parseLong(sunset) * 1000;
         Date date = new Date(millis);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
@@ -101,7 +124,8 @@ public class GetWeatherInfoAPI {
         String sunSet = simpleDateFormat.format(date);
         return sunSet;
     }
-    public void setCityName(String cityName){
+
+    public void setCityName(String cityName) {
         this.cityName = cityName;
     }
 
@@ -114,7 +138,7 @@ public class GetWeatherInfoAPI {
         String queryWeather = "http://api.openweathermap.org/data/2.5/weather?q=";
         String queryDummyKey = "&appid=" + dummyAppid;
 
-        OpenWeatherMapTask(String city){
+        OpenWeatherMapTask(String city) {
             this.city = city;
         }
 
@@ -144,54 +168,63 @@ public class GetWeatherInfoAPI {
         private String sendQuery(String query) throws IOException {
             String result = "";
             URL searchURL = new URL(query);
-            HttpURLConnection httpURLConnection = (HttpURLConnection)searchURL.openConnection();
-            if(httpURLConnection.getResponseCode() == HttpURLConnection.HTTP_OK){
+            HttpURLConnection httpURLConnection = (HttpURLConnection) searchURL.openConnection();
+            if (httpURLConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 InputStreamReader inputStreamReader = new InputStreamReader(httpURLConnection.getInputStream());
                 BufferedReader bufferedReader = new BufferedReader(
                         inputStreamReader,
                         8192);
                 String line;
-                while((line = bufferedReader.readLine()) != null){
+                while ((line = bufferedReader.readLine()) != null) {
                     result += line;
                 }
                 bufferedReader.close();
             }
             return result;
         }
-        private String ParseJSON(String json){
+
+        private String ParseJSON(String json) {
             String jsonResult = "";
             try {
                 JSONObject JsonObject = new JSONObject(json);
                 String cod = jsonHelperGetString(JsonObject, "cod");
 
-                if(cod != null){
-                    if(cod.equals("200")){
+                if (cod != null) {
+                    if (cod.equals("200")) {
                         cityName = jsonHelperGetString(JsonObject, "name");
+                        JSONObject coord = jsonHelperGetJSONObject(JsonObject, "coord");
+                        if (coord != null) {
+                            String lat1 = jsonHelperGetString(coord, "lat");
+                            String lon1 = jsonHelperGetString(coord, "lon");
+                            lat = Double.parseDouble(lat1);
+                            lon = Double.parseDouble(lon1);
+                        }
+
                         JSONObject sys = jsonHelperGetJSONObject(JsonObject, "sys");
-                        if(sys != null){
+                        if (sys != null) {
                             country = jsonHelperGetString(sys, "country");
                             sunrise = jsonHelperGetString(sys, "sunrise");
                             sunset = jsonHelperGetString(sys, "sunset");
                         }
                         JSONObject wind = jsonHelperGetJSONObject(JsonObject, "wind");
-                        if(wind != null){
+                        if (wind != null) {
                             windSpeed = jsonHelperGetString(wind, "speed");
                         }
-                        if(sys != null){
+                        if (sys != null) {
                             country = jsonHelperGetString(sys, "country");
                             sunrise = jsonHelperGetString(sys, "sunrise");
                             sunset = jsonHelperGetString(sys, "sunset");
                         }
                         jsonResult += "\n";
                         JSONArray weather = jsonHelperGetJSONArray(JsonObject, "weather");
-                        if(weather != null){
-                                JSONObject thisWeather = weather.getJSONObject(0);
-                                iconDesc = jsonHelperGetString(thisWeather, "description");
-                                mainDesc = jsonHelperGetString(thisWeather, "main");
+                        if (weather != null) {
+                            JSONObject thisWeather = weather.getJSONObject(0);
+                            iconDesc = jsonHelperGetString(thisWeather, "description");
+                            mainDesc = jsonHelperGetString(thisWeather, "main");
                         }
 
                         JSONObject main = jsonHelperGetJSONObject(JsonObject, "main");
-                        if(main != null){
+                        if (main != null) {
                             mainTemp = toCelsius(main, "temp");
                             pressure = jsonHelperGetString(main, "pressure");
                             humidity = jsonHelperGetString(main, "humidity");
@@ -200,7 +233,7 @@ public class GetWeatherInfoAPI {
                         }
 
                     }
-                }else{
+                } else {
                     jsonResult = null;
                 }
 
@@ -212,7 +245,7 @@ public class GetWeatherInfoAPI {
             return jsonResult;
         }
 
-        private String jsonHelperGetString(JSONObject obj, String k){
+        private String jsonHelperGetString(JSONObject obj, String k) {
             String v = null;
             try {
                 v = obj.getString(k);
@@ -223,7 +256,7 @@ public class GetWeatherInfoAPI {
             return v;
         }
 
-        private JSONObject jsonHelperGetJSONObject(JSONObject obj, String k){
+        private JSONObject jsonHelperGetJSONObject(JSONObject obj, String k) {
             JSONObject o = null;
 
             try {
@@ -235,7 +268,7 @@ public class GetWeatherInfoAPI {
             return o;
         }
 
-        private JSONArray jsonHelperGetJSONArray(JSONObject obj, String k){
+        private JSONArray jsonHelperGetJSONArray(JSONObject obj, String k) {
             JSONArray a = null;
 
             try {
@@ -247,7 +280,7 @@ public class GetWeatherInfoAPI {
             return a;
         }
 
-        private String toCelsius(JSONObject main, String thing){
+        private String toCelsius(JSONObject main, String thing) {
             String a;
             String tmp2 = jsonHelperGetString(main, thing);
             float celsius = Float.parseFloat(tmp2);
