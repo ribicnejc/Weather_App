@@ -65,11 +65,11 @@
                 android:id="@+id/relativeLayout3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/more_info_main_info_included"
+                android:layout_below="@+id/more_info_expandable_info_layout"
                 android:layout_marginTop="20dp"
                 android:padding="@dimen/forcast_card_view_padding">
 
-                    <include layout="@layout/horizontal_rec_view_forecast" />
+                <include layout="@layout/horizontal_rec_view_forecast" />
             </RelativeLayout>
 
             <TextView
@@ -120,34 +120,33 @@
                 android:layout_marginTop="10dp"
                 android:background="@color/colorGray" />
 
-            <include layout="@layout/more_info_expendable_info"
+            <include
+                android:id="@+id/more_info_expandable_info_layout"
+                layout="@layout/more_info_expendable_info"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/line4"
                 android:layout_gravity="center"
-                android:layout_below="@id/line6"
-                android:id="@+id/more_info_expandable_info_layout"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="10dp" />
 
-            <!--<FrameLayout-->
-                <!--android:id="@+id/container"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:background="@android:color/transparent" />-->
-            <!--<fragment-->
-                <!--android:id="@+id/mapTest"-->
-                <!--class="com.google.android.gms.maps.SupportMapFragment"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="200dp"/>-->
+            <View
+                android:id="@+id/line8"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@id/more_info_expandable_info_layout"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorGray" />
+
             <Button
+                android:id="@+id/open_google_maps"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/open_google_maps"
-                android:layout_marginTop="10dp"
+                android:layout_below="@id/line6"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@id/more_info_expandable_info_layout"
-                android:text="See on Google maps"/>
+                android:layout_marginTop="10dp"
+                android:text="See on Google maps" />
         </RelativeLayout>
-        
+
     </ScrollView>
 
 </RelativeLayout>

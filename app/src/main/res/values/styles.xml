@@ -4,25 +4,38 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="android:windowTranslucentStatus">true</item>
+        <!--<item name="android:windowTranslucentStatus">true</item>-->
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppThemeTransparent" parent="Theme.AppCompat.Light.NoActionBar">
+
+
+
+    <style name="MoreInfoTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="EditTextStyle" parent="AppTheme">
-        <item name="android:editTextBackground">@color/colorLightGray</item>
-        <item name="android:editTextStyle">@color/colorLightGray</item>
+
+    <style name="CityQueryActivityTheme" parent="AppTheme.NoActionBar">
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
+    <style name="MainActivityTheme" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <!--<item name="android:windowTranslucentStatus">true</item>-->
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:windowBackground">@mipmap/splash_bg</item>
     </style>
 
     <style name="SplashTheme" parent="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowBackground">@mipmap/splash_background</item>
 
         <!--<item name="android:background">@mipmap/splash_background</item>-->

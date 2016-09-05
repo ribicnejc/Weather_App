@@ -14,6 +14,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,6 +24,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView rv;
     public static TextView mTxtView;
     public ImageView background;
+    static boolean scroll_down;
 
     @Override
     protected void onStart() {
@@ -128,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null)
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -160,6 +164,40 @@ public class MainActivity extends AppCompatActivity {
 
         final RVAdapter adapter = new RVAdapter(datas, this);
         rv.setAdapter(adapter);
+
+
+        rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (scroll_down) {
+                    toolbar.animate().translationY(-toolbar.getBottom()).setInterpolator(new AccelerateInterpolator()).start();
+//                    toolbar.setFadingEdgeLength(500);
+                    getSupportActionBar().hide();
+
+//                    toolbar.setVisibility(View.GONE);
+                } else {
+                    toolbar.animate().translationY(0).setInterpolator(new DecelerateInterpolator()).start();
+//                    toolbar.setVisibility(View.VISIBLE);
+                    getSupportActionBar().show();
+//                    toolbar.setFadingEdgeLength(50);
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 70) {
+                    //scroll down
+                    scroll_down = true;
+
+                } else if (dy < -5) {
+                    //scroll up
+                    scroll_down = false;
+                }
+            }
+        });
+
         /**
          * Setup Item touch helper for swipe dismiss action event
          */
