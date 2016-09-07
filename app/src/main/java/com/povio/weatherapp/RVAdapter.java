@@ -157,6 +157,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.InfoViewHolder> {
     }
 
 
+
     public void remove(final int position, View view) {
         final Data deleted = datas.get(position);
         final Snackbar snackbar = Snackbar.make(view, datas.get(position).getCityName() + " has been removed", Snackbar.LENGTH_LONG);
