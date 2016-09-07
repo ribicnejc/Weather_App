@@ -78,7 +78,9 @@ public class HorizontalRVAdapter extends RecyclerView.Adapter<HorizontalRVAdapte
             try{
                 Date MyDate = newDateFormat.parse(this.dateTime.get(position));
                 newDateFormat.applyPattern("EEEE");
-                holder.rail.setText(newDateFormat.format(MyDate).substring(0, 3));
+                String day = newDateFormat.format(MyDate).substring(0, 3);
+                day = getPlusDay(day);
+                holder.rail.setText(day);
             }catch (Exception e){
                 Log.d("Setting day","went wrong");
             }
@@ -90,6 +92,22 @@ public class HorizontalRVAdapter extends RecyclerView.Adapter<HorizontalRVAdapte
     @Override
     public int getItemCount() {
         return time.size();
+    }
+
+    private String getPlusDay(String day){
+        if (day.equals("Sun"))
+            return "Mon";
+        if (day.equals("Mon"))
+            return "Tue";
+        if (day.equals("Tue"))
+            return "Wed";
+        if (day.equals("Wed"))
+            return "Thu";
+        if (day.equals("Thu"))
+            return "Fri";
+        if (day.equals("Fri"))
+            return "Sat";
+        else return "Sun";
     }
 }
 

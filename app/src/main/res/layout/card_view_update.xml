@@ -1,190 +1,191 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:clickable="true"
     android:padding="5dp">
+
     <android.support.v7.widget.CardView
+        android:id="@+id/cv2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/colorWhiteTransparent"
-        android:id="@+id/cv2"
 
         >
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            >
+
             <ImageView
+                android:id="@+id/weatherIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/weatherIcon"
-                android:src="@drawable/partly_cloudy_day"
-                android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
                 android:layout_marginLeft="20dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New York"
                 android:layout_marginTop="10dp"
-                android:textColor="@color/colorGrayLight"
-                android:textSize="25sp"
-                android:id="@+id/cityName"
-                android:layout_alignTop="@+id/weatherIcon"
-                android:layout_toRightOf="@+id/weatherIcon"
-                android:layout_toEndOf="@+id/weatherIcon"
-                android:layout_marginLeft="66dp"
-                android:layout_marginStart="66dp" />
+                android:src="@drawable/partly_cloudy_day" />
 
             <TextView
+                android:id="@+id/cityName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="full moon"
-                android:textStyle="italic"
-                android:textSize="20sp"
+                android:layout_alignTop="@+id/weatherIcon"
+                android:layout_marginLeft="66dp"
+                android:layout_marginStart="66dp"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@+id/weatherIcon"
+                android:layout_toRightOf="@+id/weatherIcon"
+                android:text="New York"
                 android:textColor="@color/colorGrayLight"
-                android:id="@+id/weatherDesc"
-                android:layout_below="@+id/cityName"
-                android:layout_alignLeft="@+id/cityName"
-                android:layout_alignStart="@+id/cityName" />
+                android:textSize="25sp" />
+
             <TextView
+                android:id="@+id/weatherDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/cityName"
+                android:layout_alignStart="@+id/cityName"
+                android:layout_below="@+id/cityName"
+                android:text="full moon"
+                android:textColor="@color/colorGrayLight"
+                android:textSize="20sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/card_view_background_temp"
                 android:layout_width="140dp"
                 android:layout_height="45dp"
-                android:layout_marginBottom="-5dp"
-                android:background="@color/colorBlack"
-                android:id="@+id/card_view_background_temp"
-                android:layout_marginEnd="-10dp"
                 android:layout_alignBottom="@+id/mainDegrees"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_marginBottom="-5dp"
+                android:layout_marginEnd="-10dp"
+                android:background="@color/colorBlack" />
+
             <TextView
+                android:id="@+id/mainDegrees"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="20,5"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/weatherDesc"
+                android:layout_marginEnd="30dp"
                 android:layout_marginTop="10dp"
+                android:text="20,5"
+                android:textAlignment="textEnd"
                 android:textColor="#ffffff"
                 android:textSize="30sp"
-                android:textStyle="italic"
-                android:id="@+id/mainDegrees"
-                android:layout_below="@+id/weatherDesc"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="30dp"
-                android:textAlignment="textEnd" />
+                android:textStyle="italic" />
+
             <RelativeLayout
+                android:id="@+id/relativeLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:id="@+id/relativeLayout"
-                android:layout_marginLeft="11dp"
-                android:layout_marginStart="11dp"
                 android:layout_alignBottom="@+id/card_view_background_temp"
                 android:layout_alignLeft="@+id/weatherIcon"
-                android:layout_alignStart="@+id/weatherIcon">
+                android:layout_alignStart="@+id/weatherIcon"
+                android:layout_marginLeft="11dp"
+                android:layout_marginStart="11dp">
+
                 <TextView
+                    android:id="@+id/maxDegrees"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Max: 21"
-                    android:textSize="14sp"
-                    android:textColor="@color/colorGrayLight"
                     android:layout_marginLeft="10dp"
                     android:layout_marginStart="10dp"
-                    android:id="@+id/maxDegrees"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text=""
-                    android:textColor="@color/colorGray"
-                    android:textStyle="bold|italic"
-                    android:textSize="12dp"
-                    android:id="@+id/degrees"
-                    android:layout_marginTop="2dp"
-                    android:layout_alignTop="@+id/maxDegrees"
-                    android:layout_toRightOf="@+id/maxDegrees"
-                    android:layout_toEndOf="@+id/maxDegrees" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Min: 7"
-                    android:layout_marginBottom="-3dp"
-                    android:textSize="14sp"
-                    android:id="@+id/minDegrees"
+                    android:text="Max: 21"
                     android:textColor="@color/colorGrayLight"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignLeft="@+id/maxDegrees"
-                    android:layout_alignStart="@+id/maxDegrees" />
+                    android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/degrees"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
-                    android:textStyle="bold|italic"
-                    android:id="@+id/degrees2"
-                    android:textSize="12sp"
-                    android:textColor="@color/colorGray"
+                    android:layout_alignTop="@+id/maxDegrees"
                     android:layout_marginTop="2dp"
+                    android:layout_toEndOf="@+id/maxDegrees"
+                    android:layout_toRightOf="@+id/maxDegrees"
+                    android:text=""
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/colorGray"
+                    android:textSize="12dp"
+                    android:textStyle="bold|italic" />
+
+                <TextView
+                    android:id="@+id/minDegrees"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/maxDegrees"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignStart="@+id/maxDegrees"
+                    android:layout_marginBottom="-3dp"
+                    android:text="Min: 7"
+                    android:textColor="@color/colorGrayLight"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/degrees2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignTop="@+id/minDegrees"
+                    android:layout_marginTop="2dp"
+                    android:layout_toEndOf="@+id/minDegrees"
                     android:layout_toRightOf="@+id/minDegrees"
-                    android:layout_toEndOf="@+id/minDegrees" />
+                    android:text=""
+                    android:textColor="@color/colorGray"
+                    android:textSize="12sp"
+                    android:textStyle="bold|italic" />
             </RelativeLayout>
 
             <TextView
+                android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="0.0dp"
+                android:layout_below="@+id/mainDegrees"
                 android:layout_marginTop="15dp"
-                android:background="@color/colorBlack"
-                android:id="@+id/textView"
-                android:layout_below="@+id/mainDegrees" />
-
+                android:background="@color/colorBlack" />
 
 
             <TextView
+                android:id="@+id/buttonMore"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:textColor="@color/colorPrimary"
-                android:text="MORE    "
-                android:textSize="20dp"
-                android:id="@+id/buttonMore"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:layout_below="@+id/textView"
-                android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:gravity="right|fill_vertical" />
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/textView"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:gravity="right|fill_vertical"
+                android:text="MORE    "
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp" />
 
             <TextView
+                android:id="@+id/degreeshow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="°C"
-                android:textStyle="italic"
-                android:textSize="20sp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="10dp"
-                android:textColor="#ffffff"
-                android:id="@+id/degreeshow"
                 android:layout_above="@+id/textView"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
-
-
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="8dp"
+                android:text="°C"
+                android:textColor="#ffffff"
+                android:textSize="20sp"
+                android:textStyle="italic" />
 
 
         </RelativeLayout>
 
 
-
-
     </android.support.v7.widget.CardView>
-
-
 
 
 </RelativeLayout>
