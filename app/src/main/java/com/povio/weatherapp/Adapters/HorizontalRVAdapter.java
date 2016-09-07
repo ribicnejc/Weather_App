@@ -7,6 +7,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +28,7 @@ public class HorizontalRVAdapter extends RecyclerView.Adapter<HorizontalRVAdapte
     private List<Integer> picture;
     private List<String> temperature;
     private List<String> dateTime;
+    private int lastPosition = -1;
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView timeTxtView;
         public ImageView imgView;
@@ -32,7 +36,7 @@ public class HorizontalRVAdapter extends RecyclerView.Adapter<HorizontalRVAdapte
         public Typeface type;
         public TextView rail;
         public TextView day1, day2;
-
+        FrameLayout container;
         public MyViewHolder(View view) {
             super(view);
             timeTxtView = (TextView) view.findViewById(R.id.horTime);
@@ -40,14 +44,14 @@ public class HorizontalRVAdapter extends RecyclerView.Adapter<HorizontalRVAdapte
             tempTxtView = (TextView) view.findViewById(R.id.horTemp);
             type = Typeface.createFromAsset(view.getContext().getAssets(), "openSansLight.ttf");
             rail = (TextView) view.findViewById(R.id.rail);
-//            day1 = (TextView) view.findViewById(R.id.horDay1);
-//            day2 = (TextView) view.findViewById(R.id.horDay2);
+            container = (FrameLayout) view.findViewById(R.id.item_layout_container);
         }
     }
 
 
-    public HorizontalRVAdapter(ArrayList<String> time, ArrayList<Integer> picture, ArrayList<String> temperature, ArrayList<String> dateTime) {
+    public HorizontalRVAdapter(Context mContext, ArrayList<String> time, ArrayList<Integer> picture, ArrayList<String> temperature, ArrayList<String> dateTime) {
         this.time = time;
+        this.mContext = mContext;
         this.picture = picture;
         this.temperature = temperature;
         this.dateTime = dateTime;
@@ -87,6 +91,7 @@ public class HorizontalRVAdapter extends RecyclerView.Adapter<HorizontalRVAdapte
         }else{
             holder.rail.setVisibility(View.GONE);
         }
+        setAnimation(holder.container, position);
     }
 
     @Override
@@ -108,6 +113,23 @@ public class HorizontalRVAdapter extends RecyclerView.Adapter<HorizontalRVAdapte
         if (day.equals("Fri"))
             return "Sat";
         else return "Sun";
+    }
+
+    private void setAnimation(View viewToAnimate, int position)
+    {
+        // If the bound view wasn't previously displayed on screen, it's animated
+        if (position > lastPosition)
+        {
+            Animation animation = AnimationUtils.loadAnimation(mContext, android.R.anim.slide_in_left);
+            viewToAnimate.startAnimation(animation);
+            lastPosition = position;
+        }
+        if (position < lastPosition)
+        {
+            Animation animation = AnimationUtils.loadAnimation(mContext, R.anim.slide_in_right_recycler_horizontal);
+            viewToAnimate.startAnimation(animation);
+            lastPosition = position;
+        }
     }
 }
 

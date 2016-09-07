@@ -1,8 +1,6 @@
 package com.povio.weatherapp;
 
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -15,11 +13,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -27,10 +23,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.povio.weatherapp.Adapters.HorizontalRVAdapter;
 
 import java.text.SimpleDateFormat;
@@ -102,7 +94,7 @@ public class MoreInfoActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Weather in " + api.getCityName());
         horizontalRecyclerView = (RecyclerView) findViewById(R.id.horizontal_recycler_view);
-        horizontalAdapter = new HorizontalRVAdapter(foreCastAPI.getTimeL(), foreCastAPI.getIconL(), foreCastAPI.getMainTempL(), foreCastAPI.getDateAndTimeL());
+        horizontalAdapter = new HorizontalRVAdapter(getApplicationContext(), foreCastAPI.getTimeL(), foreCastAPI.getIconL(), foreCastAPI.getMainTempL(), foreCastAPI.getDateAndTimeL());
         LinearLayoutManager horizontalLayoutManager
                 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         horizontalRecyclerView.setLayoutManager(horizontalLayoutManager);
