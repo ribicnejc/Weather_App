@@ -15,6 +15,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,6 +26,7 @@ import java.util.List;
 
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.InfoViewHolder> {
     private Context mContext;
+    private int lastPosition = -1;
 
     public static class InfoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -37,6 +41,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.InfoViewHolder> {
         TextView backGroundTemp;
         ImageView weatherPhoto;
         public Typeface typeface;
+        FrameLayout container;
 
         InfoViewHolder(View itemView) {
             super(itemView);
@@ -50,6 +55,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.InfoViewHolder> {
             buttonTest = (TextView) itemView.findViewById(R.id.buttonMore);
             weatherPhoto = (ImageView) itemView.findViewById(R.id.weatherIcon);
             backGroundTemp = (TextView) itemView.findViewById(R.id.card_view_background_temp);
+            container = (FrameLayout) itemView.findViewById(R.id.item_layout_container2);
             typeface = Typeface.createFromAsset(itemView.getContext().getAssets(), "openSansLight.ttf");
         }
 
@@ -142,6 +148,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.InfoViewHolder> {
                 return false;
             }
         });
+        setAnimation(weatherViewHolder.container, i);
     }
 
     @Override
@@ -204,6 +211,22 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.InfoViewHolder> {
             return ContextCompat.getColor(mContext, R.color.colorChart12);
         }else{
             return ContextCompat.getColor(mContext, R.color.colorChart13);
+        }
+    }
+    private void setAnimation(View viewToAnimate, int position)
+    {
+        // If the bound view wasn't previously displayed on screen, it's animated
+        if (position > lastPosition)
+        {
+            Animation animation = AnimationUtils.loadAnimation(mContext, android.R.anim.slide_in_left);
+            viewToAnimate.startAnimation(animation);
+            lastPosition = position;
+        }
+        if (position < lastPosition)
+        {
+            Animation animation = AnimationUtils.loadAnimation(mContext, R.anim.slide_in_right_recycler_horizontal);
+            viewToAnimate.startAnimation(animation);
+            lastPosition = position;
         }
     }
 }

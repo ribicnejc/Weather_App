@@ -166,37 +166,37 @@ public class MainActivity extends AppCompatActivity {
         rv.setAdapter(adapter);
 
 
-        rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                if (scroll_down) {
-                    toolbar.animate().translationY(-toolbar.getBottom()).setInterpolator(new AccelerateInterpolator()).start();
-//                    toolbar.setFadingEdgeLength(500);
-                    getSupportActionBar().hide();
-
-//                    toolbar.setVisibility(View.GONE);
-                } else {
-                    toolbar.animate().translationY(0).setInterpolator(new DecelerateInterpolator()).start();
-//                    toolbar.setVisibility(View.VISIBLE);
-                    getSupportActionBar().show();
-//                    toolbar.setFadingEdgeLength(50);
-                }
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                if (dy > 70) {
-                    //scroll down
-                    scroll_down = true;
-
-                } else if (dy < -5) {
-                    //scroll up
-                    scroll_down = false;
-                }
-            }
-        });
+//        rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+//                super.onScrollStateChanged(recyclerView, newState);
+//                if (scroll_down) {
+//                    toolbar.animate().translationY(-toolbar.getBottom()).setInterpolator(new AccelerateInterpolator()).start();
+////                    toolbar.setFadingEdgeLength(500);
+//                    getSupportActionBar().hide();
+//
+////                    toolbar.setVisibility(View.GONE);
+//                } else {
+//                    toolbar.animate().translationY(0).setInterpolator(new DecelerateInterpolator()).start();
+////                    toolbar.setVisibility(View.VISIBLE);
+//                    getSupportActionBar().show();
+////                    toolbar.setFadingEdgeLength(50);
+//                }
+//            }
+//
+//            @Override
+//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+//                super.onScrolled(recyclerView, dx, dy);
+//                if (dy > 70) {
+//                    //scroll down
+//                    scroll_down = true;
+//
+//                } else if (dy < -5) {
+//                    //scroll up
+//                    scroll_down = false;
+//                }
+//            }
+//        });
 
         /**
          * Setup Item touch helper for swipe dismiss action event
