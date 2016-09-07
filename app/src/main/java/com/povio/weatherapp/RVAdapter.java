@@ -83,7 +83,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.InfoViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(InfoViewHolder weatherViewHolder, final int i) {
+    public void onBindViewHolder(final InfoViewHolder weatherViewHolder, final int i) {
         //weatherViewHolder.cityName.setTypeface(type);
         weatherViewHolder.cityName.setText(datas.get(i).getCityName());
         weatherViewHolder.weatherDesc.setText(datas.get(i).getType());
@@ -122,7 +122,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.InfoViewHolder> {
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
                             case DialogInterface.BUTTON_POSITIVE:
-                                MainActivity.remove(i);
+                                remove(i, weatherViewHolder.itemView);
                                 notifyDataSetChanged();
                                 notifyItemRangeChanged(0, getItemCount());
                                 break;
