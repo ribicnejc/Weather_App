@@ -1,302 +1,328 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:orientation="vertical">
 
-<android.support.v7.widget.CardView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/colorDarkTransparentBackgroundCard"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
-    android:padding="@dimen/forcast_card_view_padding">
-
-        <LinearLayout
+    <android.support.v7.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:padding="@dimen/forcast_card_view_padding"
-        android:orientation="vertical">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:layout_gravity="center"
-        android:id="@+id/day1_main"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/forcast_fice_days_margin"
-            android:layout_marginLeft="@dimen/forcast_fice_days_margin"
-            android:text="Friday"
-            android:id="@+id/day1"
-            android:textColor="@color/colorForeCast"
-            android:gravity="start"
-            android:layout_gravity="center_vertical"
-            android:textSize="@dimen/forcast_five_days_font"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-        <ImageView
-            android:gravity="end"
-            android:layout_width="@dimen/forcast_five_days_icon"
-            android:layout_height="@dimen/forcast_five_days_icon"
-            android:src="@drawable/sun"
-            android:id="@+id/day1_icon"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/forcast_five_days_font"
-            android:textColor="@color/colorForeCast"
-            android:text="60°"
-            android:id="@+id/day1_temp_max"
-            android:layout_marginEnd="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_gravity="center"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/day1_temp_min"
-            android:layout_toStartOf="@+id/day1_temp_min" />
-        <TextView
-            android:id="@+id/day1_temp_min"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorForeCastCold"
-            android:textSize="@dimen/forcast_five_days_font"
-            android:layout_marginRight="@dimen/forcast_fice_days_margin"
-            android:text="50°"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+        app:cardBackgroundColor="@color/colorDarkTransparentBackgroundCard">
 
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone"
-        android:id="@+id/day2_main"
-        android:orientation="horizontal">
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/forcast_fice_days_margin"
-            android:layout_marginLeft="@dimen/forcast_fice_days_margin"
-            android:text="Saturday"
-            android:id="@+id/day2"
-            android:textColor="@color/colorForeCast"
-            android:gravity="start"
-            android:layout_gravity="center_vertical"
-            android:textSize="@dimen/forcast_five_days_font"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-        <ImageView
-            android:gravity="end"
-            android:layout_width="@dimen/forcast_five_days_icon"
-            android:layout_height="@dimen/forcast_five_days_icon"
-            android:src="@drawable/partly_cloudy_day"
-            android:id="@+id/day2_icon"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/forcast_five_days_font"
-            android:textColor="@color/colorForeCast"
-            android:text="60°"
-            android:id="@+id/day2_temp_max"
-            android:layout_marginEnd="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_gravity="center"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/day2_temp_min"
-            android:layout_toStartOf="@+id/day2_temp_min" />
-        <TextView
-            android:id="@+id/day2_temp_min"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorForeCastCold"
-            android:textSize="@dimen/forcast_five_days_font"
-            android:layout_marginRight="@dimen/forcast_fice_days_margin"
-            android:text="50°"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:orientation="vertical"
+            android:padding="@dimen/forcast_card_view_padding">
 
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone"
-        android:id="@+id/day3_main"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/forcast_fice_days_margin"
-            android:layout_marginLeft="@dimen/forcast_fice_days_margin"
-            android:text="Sunday"
-            android:id="@+id/day3"
-            android:textColor="@color/colorForeCast"
-            android:gravity="start"
-            android:layout_gravity="center_vertical"
-            android:textSize="@dimen/forcast_five_days_font"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-        <ImageView
-            android:gravity="end"
-            android:layout_width="@dimen/forcast_five_days_icon"
-            android:layout_height="@dimen/forcast_five_days_icon"
-            android:src="@drawable/rain"
-            android:id="@+id/day3_icon"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/forcast_five_days_font"
-            android:textColor="@color/colorForeCast"
-            android:text="60°"
-            android:id="@+id/day3_temp_max"
-            android:layout_marginEnd="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_gravity="center"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/day3_temp_min"
-            android:layout_toStartOf="@+id/day3_temp_min" />
-        <TextView
-            android:id="@+id/day3_temp_min"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorForeCastCold"
-            android:textSize="@dimen/forcast_five_days_font"
-            android:layout_marginRight="@dimen/forcast_fice_days_margin"
-            android:text="50°"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            <RelativeLayout
+                android:id="@+id/day1_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:visibility="gone">
 
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone"
-        android:id="@+id/day4_main"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/forcast_fice_days_margin"
-            android:layout_marginLeft="@dimen/forcast_fice_days_margin"
-            android:text="Monday"
-            android:id="@+id/day4"
-            android:textColor="@color/colorForeCast"
-            android:gravity="start"
-            android:layout_gravity="center_vertical"
-            android:textSize="@dimen/forcast_five_days_font"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-        <ImageView
-            android:gravity="end"
-            android:layout_width="@dimen/forcast_five_days_icon"
-            android:layout_height="@dimen/forcast_five_days_icon"
-            android:src="@drawable/downpour"
-            android:id="@+id/day4_icon"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/forcast_five_days_font"
-            android:textColor="@color/colorForeCast"
-            android:text="60°"
-            android:id="@+id/day4_temp_max"
-            android:layout_marginEnd="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_gravity="center"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/day4_temp_min"
-            android:layout_toStartOf="@+id/day4_temp_min" />
-        <TextView
-            android:id="@+id/day4_temp_min"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorForeCastCold"
-            android:textSize="@dimen/forcast_five_days_font"
-            android:layout_marginRight="@dimen/forcast_fice_days_margin"
-            android:text="50°"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+                <TextView
+                    android:id="@+id/day1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/forcast_fice_days_margin"
+                    android:layout_marginStart="@dimen/forcast_fice_days_margin"
+                    android:gravity="start"
+                    android:text="Friday"
+                    android:textColor="@color/colorForeCast"
+                    android:textSize="@dimen/forcast_five_days_font" />
 
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:id="@+id/day5_main"
-        android:visibility="gone"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/forcast_fice_days_margin"
-            android:layout_marginLeft="@dimen/forcast_fice_days_margin"
-            android:text="Tuesday"
-            android:id="@+id/day5"
-            android:textColor="@color/colorForeCast"
-            android:gravity="start"
-            android:layout_gravity="center_vertical"
-            android:textSize="@dimen/forcast_five_days_font"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-        <ImageView
-            android:gravity="end"
-            android:layout_width="@dimen/forcast_five_days_icon"
-            android:layout_height="@dimen/forcast_five_days_icon"
-            android:src="@drawable/chance_of_storm"
-            android:id="@+id/day5_icon"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/forcast_five_days_font"
-            android:textColor="@color/colorForeCast"
-            android:text="60°"
-            android:id="@+id/day5_temp_max"
-            android:layout_marginEnd="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_gravity="center"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/day5_temp_min"
-            android:layout_toStartOf="@+id/day5_temp_min" />
-        <TextView
-            android:id="@+id/day5_temp_min"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorForeCastCold"
-            android:textSize="@dimen/forcast_five_days_font"
-            android:layout_marginRight="@dimen/forcast_fice_days_margin"
-            android:text="50°"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+                <ImageView
+                    android:id="@+id/day1_icon"
+                    android:layout_width="@dimen/forcast_five_days_icon"
+                    android:layout_height="@dimen/forcast_five_days_icon"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="end"
+                    android:src="@drawable/sun" />
 
-    </RelativeLayout>
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/day1_temp_max"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_toLeftOf="@+id/day1_temp_min"
+                    android:layout_toStartOf="@+id/day1_temp_min"
+                    android:text="60°"
+                    android:textColor="@color/colorForeCast"
+                    android:textSize="@dimen/forcast_five_days_font" />
+
+                <TextView
+                    android:id="@+id/day1_temp_min"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="@dimen/forcast_fice_days_margin"
+                    android:text="50°"
+                    android:textColor="@color/colorForeCastCold"
+                    android:textSize="@dimen/forcast_five_days_font" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/day2_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/day2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/forcast_fice_days_margin"
+                    android:layout_marginStart="@dimen/forcast_fice_days_margin"
+                    android:gravity="start"
+                    android:text="Saturday"
+                    android:textColor="@color/colorForeCast"
+                    android:textSize="@dimen/forcast_five_days_font" />
+
+                <ImageView
+                    android:id="@+id/day2_icon"
+                    android:layout_width="@dimen/forcast_five_days_icon"
+                    android:layout_height="@dimen/forcast_five_days_icon"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="end"
+                    android:src="@drawable/partly_cloudy_day" />
+
+                <TextView
+                    android:id="@+id/day2_temp_max"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_toLeftOf="@+id/day2_temp_min"
+                    android:layout_toStartOf="@+id/day2_temp_min"
+                    android:text="60°"
+                    android:textColor="@color/colorForeCast"
+                    android:textSize="@dimen/forcast_five_days_font" />
+
+                <TextView
+                    android:id="@+id/day2_temp_min"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="@dimen/forcast_fice_days_margin"
+                    android:text="50°"
+                    android:textColor="@color/colorForeCastCold"
+                    android:textSize="@dimen/forcast_five_days_font" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/day3_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/day3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/forcast_fice_days_margin"
+                    android:layout_marginStart="@dimen/forcast_fice_days_margin"
+                    android:gravity="start"
+                    android:text="Sunday"
+                    android:textColor="@color/colorForeCast"
+                    android:textSize="@dimen/forcast_five_days_font" />
+
+                <ImageView
+                    android:id="@+id/day3_icon"
+                    android:layout_width="@dimen/forcast_five_days_icon"
+                    android:layout_height="@dimen/forcast_five_days_icon"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="end"
+                    android:src="@drawable/rain" />
+
+                <TextView
+                    android:id="@+id/day3_temp_max"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_toLeftOf="@+id/day3_temp_min"
+                    android:layout_toStartOf="@+id/day3_temp_min"
+                    android:text="60°"
+                    android:textColor="@color/colorForeCast"
+                    android:textSize="@dimen/forcast_five_days_font" />
+
+                <TextView
+                    android:id="@+id/day3_temp_min"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="@dimen/forcast_fice_days_margin"
+                    android:text="50°"
+                    android:textColor="@color/colorForeCastCold"
+                    android:textSize="@dimen/forcast_five_days_font" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/day4_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/day4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/forcast_fice_days_margin"
+                    android:layout_marginStart="@dimen/forcast_fice_days_margin"
+                    android:gravity="start"
+                    android:text="Monday"
+                    android:textColor="@color/colorForeCast"
+                    android:textSize="@dimen/forcast_five_days_font" />
+
+                <ImageView
+                    android:id="@+id/day4_icon"
+                    android:layout_width="@dimen/forcast_five_days_icon"
+                    android:layout_height="@dimen/forcast_five_days_icon"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="end"
+                    android:src="@drawable/downpour" />
+
+                <TextView
+                    android:id="@+id/day4_temp_max"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_toLeftOf="@+id/day4_temp_min"
+                    android:layout_toStartOf="@+id/day4_temp_min"
+                    android:text="60°"
+                    android:textColor="@color/colorForeCast"
+                    android:textSize="@dimen/forcast_five_days_font" />
+
+                <TextView
+                    android:id="@+id/day4_temp_min"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="@dimen/forcast_fice_days_margin"
+                    android:text="50°"
+                    android:textColor="@color/colorForeCastCold"
+                    android:textSize="@dimen/forcast_five_days_font" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/day5_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/day5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/forcast_fice_days_margin"
+                    android:layout_marginStart="@dimen/forcast_fice_days_margin"
+                    android:gravity="start"
+                    android:text="Tuesday"
+                    android:textColor="@color/colorForeCast"
+                    android:textSize="@dimen/forcast_five_days_font" />
+
+                <ImageView
+                    android:id="@+id/day5_icon"
+                    android:layout_width="@dimen/forcast_five_days_icon"
+                    android:layout_height="@dimen/forcast_five_days_icon"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="end"
+                    android:src="@drawable/chance_of_storm" />
+
+                <TextView
+                    android:id="@+id/day5_temp_max"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_toLeftOf="@+id/day5_temp_min"
+                    android:layout_toStartOf="@+id/day5_temp_min"
+                    android:text="60°"
+                    android:textColor="@color/colorForeCast"
+                    android:textSize="@dimen/forcast_five_days_font" />
+
+                <TextView
+                    android:id="@+id/day5_temp_min"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="@dimen/forcast_fice_days_margin"
+                    android:text="50°"
+                    android:textColor="@color/colorForeCastCold"
+                    android:textSize="@dimen/forcast_five_days_font" />
+
+            </RelativeLayout>
+        </LinearLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>

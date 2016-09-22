@@ -20,6 +20,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import java.util.List;
@@ -150,6 +151,12 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.InfoViewHolder> {
         });
         setAnimation(weatherViewHolder.container, i);
     }
+//    @Override
+//    void onViewDetachedFromWindow(final RecyclerView.ViewHolder holder)
+//    {
+//        Toast.makeText(mContext, "", Toast.LENGTH_SHORT).show();
+//        ((CustomViewHolder)holder).clearAnimation();
+//    }
 
     @Override
     public int getItemCount() {

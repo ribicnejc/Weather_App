@@ -22,6 +22,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Calendar;
+import java.util.Locale;
+
 public class CityQuery extends AppCompatActivity {
     Button btnByCityName;
     ProgressBar progressBar;
@@ -36,6 +39,24 @@ public class CityQuery extends AppCompatActivity {
         TextView version = (TextView) findViewById(R.id.app_add_city_verion);
         if (title != null & version != null) {
             title.setTypeface(typeface);
+            Calendar c = Calendar.getInstance();
+            String timeStamp = String.format(Locale.getDefault(), "%d", c.get(Calendar.HOUR_OF_DAY));
+            int time = Integer.parseInt(timeStamp);
+            if (time > 0 && time <= 4) {
+                title.setText("Good Night");
+            }
+            if (time > 4 && time <= 8) {
+                title.setText("Good Morning");
+            }
+            if (time > 8 && time < 12) {
+                title.setText("Good Morning");
+            }
+            if (time >= 12 && time < 18) {
+                title.setText("Good Afternoon");
+            }
+            if (time >= 18 && time < 24) {
+                title.setText("Good Evening");
+            }
             version.setTypeface(typeface);
         }
 
