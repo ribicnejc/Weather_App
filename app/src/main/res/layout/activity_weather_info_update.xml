@@ -105,17 +105,16 @@
                 android:background="@color/colorGray" />
 
             <RelativeLayout
+                android:id="@+id/day_forecast"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/line5"
-                android:id="@+id/day_forecast"
-                android:padding="5dp"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:padding="5dp">
 
                 <include
                     android:id="@+id/more_info_forecast_five_days"
-                    layout="@layout/fore_cast_five_days"
-                    />
+                    layout="@layout/fore_cast_five_days" />
             </RelativeLayout>
 
             <View
@@ -128,18 +127,19 @@
 
 
             <RelativeLayout
+                android:id="@+id/wind_temp_pressure"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/line4"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:id="@+id/wind_temp_pressure"
                 android:padding="5dp">
-            <include
-                android:id="@+id/more_info_expandable_info_layout"
-                layout="@layout/more_info_expendable_info"
-                />
+
+                <include
+                    android:id="@+id/more_info_expandable_info_layout"
+                    layout="@layout/more_info_expendable_info" />
             </RelativeLayout>
+
             <View
                 android:id="@+id/line8"
                 android:layout_width="match_parent"

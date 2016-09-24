@@ -109,7 +109,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.InfoViewHolder> {
         gdDefault.setColor(getRightColor(datas.get(i).getTemp()));
         gdDefault.setCornerRadius(10);
         weatherViewHolder.backGroundTemp.setBackground(gdDefault);
-        weatherViewHolder.cv.setCardElevation(0);
+        //weatherViewHolder.cv.setCardElevation(0);
         weatherViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

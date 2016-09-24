@@ -1,11 +1,15 @@
 package com.povio.weatherapp;
 
 
+import android.animation.Animator;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.location.Address;
+import android.location.Geocoder;
+import android.os.Build;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +20,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -25,10 +30,12 @@ import android.widget.Toast;
 
 import com.povio.weatherapp.Adapters.HorizontalRVAdapter;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 
 import com.povio.weatherapp.Images.Backgrounds;
@@ -47,7 +54,6 @@ public class MoreInfoActivity extends AppCompatActivity {
 //        requestWindowFeature(Window.FEATURE_NO_TITLE);
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 //                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
 
         setContentView(R.layout.loading_before_moreinfo);
         ProgressBar pr;
@@ -89,6 +95,15 @@ public class MoreInfoActivity extends AppCompatActivity {
         Typeface type = Typeface.createFromAsset(getAssets(), "openSansLight.ttf");
         toolbar = (Toolbar) findViewById(R.id.app_bar);
 
+        Geocoder gcd = new Geocoder(getApplicationContext(), Locale.getDefault());
+        try {
+            List<Address> address = gcd.getFromLocation(50, 50, 1);
+            if (address.size() > 0){
+                Toast.makeText(getApplicationContext(), address.get(0).toString(), Toast.LENGTH_SHORT).show();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -220,6 +235,26 @@ public class MoreInfoActivity extends AppCompatActivity {
             Toast.makeText(MoreInfoActivity.this, "No internet connection", Toast.LENGTH_SHORT).show();
             Log.e("MoreInfoActivity", "Oops something went wrong");
         }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            View myView = findViewById(R.id.more_info_main_info_included);
+
+            // get the center for the clipping circle
+            int cx = myView.getWidth() / 2;
+            int cy = myView.getHeight() / 2;
+
+            // get the final radius for the clipping circle
+            float finalRadius = (float) Math.hypot(cx, cy);
+
+            // create the animator for this view (the start radius is zero)
+            Animator anim =
+                    ViewAnimationUtils.createCircularReveal(myView, cx, cy, 0, finalRadius);
+
+            // make the view visible and start the animation
+            myView.setVisibility(View.VISIBLE);
+            anim.start();
+        }
+
+
     }
 
     @Override
