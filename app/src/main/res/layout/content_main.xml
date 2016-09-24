@@ -33,14 +33,15 @@
 
 
     </jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout>
-    <android.support.design.widget.FloatingActionButton
+    <Button
         android:id="@+id/fab2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/plus48"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:background="@drawable/current_place"
         android:layout_marginLeft="@dimen/fab_margin"
         android:layout_marginRight="@dimen/fab_margin"
-        android:layout_marginBottom="@dimen/fab_margin"
+        android:layout_marginBottom="20dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true" />
 

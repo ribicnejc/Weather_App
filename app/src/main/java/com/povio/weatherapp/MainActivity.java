@@ -2,6 +2,7 @@ package com.povio.weatherapp;
 
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -32,6 +33,7 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -77,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
 
-            if (hasAccessFinePermission != PackageManager.PERMISSION_GRANTED){
+            if (hasAccessFinePermission != PackageManager.PERMISSION_GRANTED) {
                 permissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
             }
 
@@ -169,26 +171,31 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-        FloatingActionButton fab2 = (FloatingActionButton) findViewById(R.id.fab2);
+        Button fab2 = (Button) findViewById(R.id.fab2);
         if (fab2 != null)
             fab2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Geocoder gcd = new Geocoder(getApplicationContext(), Locale.getDefault());
-                    LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                    if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                            && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                        return;
-                    }
+                    LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                                && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                            return;
+                        }
                     Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                     double longitude = location.getLongitude();
                     double latitude = location.getLatitude();
                     try {
                         List<Address> address = gcd.getFromLocation(latitude, longitude, 1);
-                        if (address.size() > 0){
-                            Toast.makeText(getApplicationContext(), address.get(0).toString(),
+
+                        if (address.size() > 0) {
+                            Toast.makeText(getApplicationContext(), "Current location weather",
                                     Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(getBaseContext(), MoreInfoActivity.class);
+                            intent.putExtra("city", address.get(0).getLocality());
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -207,39 +214,6 @@ public class MainActivity extends AppCompatActivity {
 
         final RVAdapter adapter = new RVAdapter(datas, this);
         rv.setAdapter(adapter);
-
-
-//        rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
-//            @Override
-//            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-//                super.onScrollStateChanged(recyclerView, newState);
-//                if (scroll_down) {
-//                    toolbar.animate().translationY(-toolbar.getBottom()).setInterpolator(new AccelerateInterpolator()).start();
-////                    toolbar.setFadingEdgeLength(500);
-//                    getSupportActionBar().hide();
-//
-////                    toolbar.setVisibility(View.GONE);
-//                } else {
-//                    toolbar.animate().translationY(0).setInterpolator(new DecelerateInterpolator()).start();
-////                    toolbar.setVisibility(View.VISIBLE);
-//                    getSupportActionBar().show();
-////                    toolbar.setFadingEdgeLength(50);
-//                }
-//            }
-//
-//            @Override
-//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-//                super.onScrolled(recyclerView, dx, dy);
-//                if (dy > 70) {
-//                    //scroll down
-//                    scroll_down = true;
-//
-//                } else if (dy < -5) {
-//                    //scroll up
-//                    scroll_down = false;
-//                }
-//            }
-//        });
 
         /**
          * Setup Item touch helper for swipe dismiss action event
@@ -424,7 +398,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             FileInputStream fileInputStream = new FileInputStream(new File("/storage/emulated/0/savedData.ser"));
             ObjectInputStream in = new ObjectInputStream(fileInputStream);
-            list = (ArrayList<Data>)in.readObject();
+            list = (ArrayList<Data>) in.readObject();
 
 
         } catch (Exception e) {

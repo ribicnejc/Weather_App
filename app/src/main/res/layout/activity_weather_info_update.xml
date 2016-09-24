@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/wind_temp_pressure"
                 android:layout_marginTop="20dp"
-                android:padding="@dimen/forcast_card_view_padding">
+                android:padding="1dp">
 
                 <include layout="@layout/horizontal_rec_view_forecast" />
             </RelativeLayout>
@@ -110,7 +110,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/line5"
                 android:layout_marginTop="10dp"
-                android:padding="5dp">
+                android:padding="1dp">
 
                 <include
                     android:id="@+id/more_info_forecast_five_days"
@@ -133,7 +133,7 @@
                 android:layout_below="@id/line4"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:padding="5dp">
+                android:padding="1dp">
 
                 <include
                     android:id="@+id/more_info_expandable_info_layout"

@@ -25,7 +25,7 @@
         android:orderInCategory="150"
         android:title="Refresh"
         android:id="@+id/refresh_toolbar_icon"
-        android:icon="@drawable/refresh_button"
+        android:icon="@android:drawable/stat_notify_sync_noanim"
         app:showAsAction="always"/>
     <item
         android:orderInCategory="200"
