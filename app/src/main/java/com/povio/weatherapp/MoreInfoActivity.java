@@ -95,15 +95,7 @@ public class MoreInfoActivity extends AppCompatActivity {
         Typeface type = Typeface.createFromAsset(getAssets(), "openSansLight.ttf");
         toolbar = (Toolbar) findViewById(R.id.app_bar);
 
-        Geocoder gcd = new Geocoder(getApplicationContext(), Locale.getDefault());
-        try {
-            List<Address> address = gcd.getFromLocation(50, 50, 1);
-            if (address.size() > 0){
-                Toast.makeText(getApplicationContext(), address.get(0).toString(), Toast.LENGTH_SHORT).show();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
