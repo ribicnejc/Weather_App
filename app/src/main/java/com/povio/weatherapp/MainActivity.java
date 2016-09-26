@@ -368,7 +368,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }
-        if (id == R.id.gps_search){
+        if (id == R.id.gps_search) {
             gpsSearch();
         }
         saveState(datas);
@@ -485,30 +485,34 @@ public class MainActivity extends AppCompatActivity {
         return result;
     }
 
-    public void gpsSearch(){
+    public void gpsSearch() {
         Toast.makeText(getApplicationContext(), "Current location weather",
                 Toast.LENGTH_LONG).show();
-        Geocoder gcd = new Geocoder(getApplicationContext(), Locale.getDefault());
-        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                    && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                return;
-            }
-        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        double longitude = location.getLongitude();
-        double latitude = location.getLatitude();
         try {
-            List<Address> address = gcd.getFromLocation(latitude, longitude, 1);
+            Geocoder gcd = new Geocoder(getApplicationContext(), Locale.getDefault());
+            LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                        && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    return;
+                }
+            Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            double longitude = location.getLongitude();
+            double latitude = location.getLatitude();
+            try {
+                List<Address> address = gcd.getFromLocation(latitude, longitude, 1);
 
-            if (address.size() > 0) {
-                Intent intent = new Intent(getBaseContext(), MoreInfoActivity.class);
-                intent.putExtra("city", address.get(0).getLocality());
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
+                if (address.size() > 0) {
+                    Intent intent = new Intent(getBaseContext(), MoreInfoActivity.class);
+                    intent.putExtra("city", address.get(0).getLocality());
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            Toast.makeText(MainActivity.this, "Currently not available", Toast.LENGTH_SHORT).show();
         }
     }
 }

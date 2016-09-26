@@ -24,8 +24,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.povio.weatherapp.GetWeatherInfoAPI;
+import com.povio.weatherapp.MainActivity;
 import com.povio.weatherapp.R;
-import com.povio.weatherapp.Splash;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -60,7 +60,7 @@ public class WidgetChangeCity extends AppCompatActivity {
             logoIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(getBaseContext(), Splash.class));
+                    startActivity(new Intent(getBaseContext(), MainActivity.class));
                 }
             });
 
