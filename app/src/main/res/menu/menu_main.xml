@@ -34,5 +34,12 @@
         android:icon="@drawable/a_z_sort"
         app:showAsAction="always"
         />
+    <item
+        android:orderInCategory="200"
+        android:title="Gps"
+        android:id="@+id/gps_search"
+        android:icon="@drawable/geo_marker"
+        app:showAsAction="always"
+        />
 
 </menu>

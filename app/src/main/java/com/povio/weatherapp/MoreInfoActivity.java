@@ -255,6 +255,8 @@ public class MoreInfoActivity extends AppCompatActivity {
         MenuItem sortIcon = menu.findItem(R.id.sort_icon);
         //MenuItem searchIcon = menu.findItem(R.id.search);
         sortIcon.setVisible(false);
+        MenuItem gpsIcon = menu.findItem(R.id.gps_search);
+        gpsIcon.setVisible(false);
         //searchIcon.setVisible(false);
         return true;
     }

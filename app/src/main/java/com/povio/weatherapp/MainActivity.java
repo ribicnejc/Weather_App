@@ -171,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-        Button fab2 = (Button) findViewById(R.id.fab2);
+      /*  Button fab2 = (Button) findViewById(R.id.fab2);
         if (fab2 != null)
             fab2.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -201,7 +201,7 @@ public class MainActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-            });
+            });*/
 
         datas = readState();
 
@@ -302,6 +302,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuItem refreshIcon = menu.findItem(R.id.refresh_toolbar_icon);
+        refreshIcon.setVisible(false);
         return true;
     }
 
@@ -365,6 +367,9 @@ public class MainActivity extends AppCompatActivity {
                 refreshItems(swipeView, 0);
             }
 
+        }
+        if (id == R.id.gps_search){
+            gpsSearch();
         }
         saveState(datas);
         return super.onOptionsItemSelected(item);
@@ -478,5 +483,32 @@ public class MainActivity extends AppCompatActivity {
             result = getResources().getDimensionPixelSize(resourceId);
         }
         return result;
+    }
+
+    public void gpsSearch(){
+        Toast.makeText(getApplicationContext(), "Current location weather",
+                Toast.LENGTH_LONG).show();
+        Geocoder gcd = new Geocoder(getApplicationContext(), Locale.getDefault());
+        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                    && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                return;
+            }
+        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        double longitude = location.getLongitude();
+        double latitude = location.getLatitude();
+        try {
+            List<Address> address = gcd.getFromLocation(latitude, longitude, 1);
+
+            if (address.size() > 0) {
+                Intent intent = new Intent(getBaseContext(), MoreInfoActivity.class);
+                intent.putExtra("city", address.get(0).getLocality());
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

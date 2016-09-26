@@ -150,6 +150,8 @@ public class CityQuery extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         MenuItem sortIcon = menu.findItem(R.id.sort_icon);
         MenuItem resfreshIcon = menu.findItem(R.id.refresh_toolbar_icon);
+        MenuItem gpsIcon = menu.findItem(R.id.gps_search);
+        gpsIcon.setVisible(false);
         sortIcon.setVisible(false);
         resfreshIcon.setVisible(false);
         return true;
