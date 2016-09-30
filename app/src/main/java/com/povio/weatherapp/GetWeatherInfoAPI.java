@@ -32,8 +32,10 @@ public class GetWeatherInfoAPI {
     public String country = ":(";
     public String sunrise = ":(";
     public String sunset = ":(";
+    public String lastUpdate = ":(";
     public double lon = 0;
     public double lat = 0;
+    public boolean apiFail = false;
     public boolean success = false;
     public int icon;
 
@@ -107,6 +109,15 @@ public class GetWeatherInfoAPI {
         return coords;
     }
 
+
+    public String getLastUpdate() {
+        long millis = Long.parseLong(lastUpdate) * 1000;
+        Date date = new Date(millis);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH", Locale.getDefault());
+        String lastUpdateHours = simpleDateFormat.format(date);
+        return lastUpdateHours;
+    }
+
     public String getSunrise() {
         long millis = Long.parseLong(sunrise) * 1000;
         Date date = new Date(millis);
@@ -120,7 +131,6 @@ public class GetWeatherInfoAPI {
         long millis = Long.parseLong(sunset) * 1000;
         Date date = new Date(millis);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
-        //simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
         String sunSet = simpleDateFormat.format(date);
         return sunSet;
     }
@@ -200,6 +210,8 @@ public class GetWeatherInfoAPI {
                             lon = Double.parseDouble(lon1);
                         }
 
+                        lastUpdate = jsonHelperGetString(JsonObject, "dt");
+
                         JSONObject sys = jsonHelperGetJSONObject(JsonObject, "sys");
                         if (sys != null) {
                             country = jsonHelperGetString(sys, "country");
@@ -232,8 +244,11 @@ public class GetWeatherInfoAPI {
                             maxTemp = toCelsius(main, "temp_max");
                         }
 
+                    }else {
+                        apiFail = true;
                     }
                 } else {
+                    apiFail = true;
                     jsonResult = null;
                 }
 

@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ForeCastAPI {
+    public boolean apiFail = false;
     private ArrayList<String> mainDescL = new ArrayList<>();
     private String cityName = ":(";
     private ArrayList<String> iconDescL = new ArrayList<>();
@@ -195,8 +196,11 @@ public class ForeCastAPI {
                             }
                         }
 
+                    }else{
+                        apiFail = true;
                     }
                 }else{
+                    apiFail = true;
                     Log.v("API ERROR", "CANT CONNECT");
                 }
 

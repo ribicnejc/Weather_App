@@ -82,7 +82,13 @@ public class MoreInfoActivity extends AppCompatActivity {
             @Override
             public void run() {
                 if (api.success && foreCastAPI.success) {
-                    onFinish(api, foreCastAPI);
+                    if (api.apiFail || foreCastAPI.apiFail){
+                        Toast.makeText(MoreInfoActivity.this, "Weather API is currently not responding try again later", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
+                    }else
+                        onFinish(api, foreCastAPI);
                 } else {
                     waitForApi(api, foreCastAPI);
                 }

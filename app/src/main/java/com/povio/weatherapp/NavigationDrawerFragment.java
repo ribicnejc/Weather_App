@@ -1,9 +1,11 @@
 package com.povio.weatherapp;
 
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -18,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RatingBar;
 import android.widget.Toast;
 
 public class NavigationDrawerFragment extends Fragment {
@@ -29,6 +32,7 @@ public class NavigationDrawerFragment extends Fragment {
 
     public static SharedPreferences sharedPreferences;
     private RadioButton radioButtonTemp, radioButtonType, radioButtonName;
+    private RatingBar ratingBar;
 
     private View containerView;
     private boolean mUserLearnedDrawer;
@@ -55,6 +59,19 @@ public class NavigationDrawerFragment extends Fragment {
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
 
+        ratingBar = (RatingBar) view.findViewById(R.id.rate_app);
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                rateApp();
+            }
+        });
+        ratingBar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rateApp();
+            }
+        });
 
         radioButtonTemp = (RadioButton) view.findViewById(R.id.navigation_drawer_radio_temp);
         radioButtonType = (RadioButton) view.findViewById(R.id.navigation_drawer_radio_type);
@@ -159,5 +176,21 @@ public class NavigationDrawerFragment extends Fragment {
 
     public static SharedPreferences getSharedPreferences(){
         return sharedPreferences;
+    }
+
+    public void rateApp(){
+        Uri uri = Uri.parse("market://details?id=" + getContext().getPackageName());
+        Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+        // To count with Play market backstack, After pressing back button,
+        // to taken back to our application, we need to add following flags to intent.
+        goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
+                Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+        try {
+            startActivity(goToMarket);
+        } catch (ActivityNotFoundException e) {
+            startActivity(new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://play.google.com/store/apps/details?id=" + getContext().getPackageName())));
+        }
     }
 }

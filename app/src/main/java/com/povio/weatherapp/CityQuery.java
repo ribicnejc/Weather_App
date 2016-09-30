@@ -7,6 +7,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.ContactsContract;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -17,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -28,6 +30,7 @@ import java.util.Locale;
 public class CityQuery extends AppCompatActivity {
     Button btnByCityName;
     ProgressBar progressBar;
+    ImageView blurryBg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +71,12 @@ public class CityQuery extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Search city");
         progressBar = (ProgressBar) findViewById(R.id.app_add_city_progress_bar);
+        blurryBg = (ImageView) findViewById(R.id.app_add_city_blurry_background);
         if (progressBar != null)
             progressBar.setVisibility(View.GONE);
+        if (blurryBg != null){
+            blurryBg.setVisibility(View.GONE);
+        }
 
         LinearLayout searchLayout = (LinearLayout) findViewById(R.id.app_search_layout);
         GradientDrawable gdDefault = new GradientDrawable();
@@ -117,6 +124,7 @@ public class CityQuery extends AppCompatActivity {
 
     public void onFinish(final GetWeatherInfoAPI api) {
         progressBar.setVisibility(View.GONE);
+        blurryBg.setVisibility(View.GONE);
         if (api.getMainDesc().equals(":(")) {
             Toast.makeText(CityQuery.this, "That place does not exist", Toast.LENGTH_SHORT).show();
         } else {
@@ -181,6 +189,8 @@ public class CityQuery extends AppCompatActivity {
     public void checkIfExists(String city) {
         GetWeatherInfoAPI api = new GetWeatherInfoAPI(city);
         progressBar.setVisibility(View.VISIBLE);
+        progressBar.requestFocus();
+        blurryBg.setVisibility(View.VISIBLE);
         waitForApi(api);
     }
 

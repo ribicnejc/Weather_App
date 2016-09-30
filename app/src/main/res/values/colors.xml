@@ -19,6 +19,8 @@
     <color name="colorWidgetBg">#AA2196F3</color>
     <color name="colorWidgetToolbarBG">#AA000000</color>
     <color name="colorPrimaryTransparent">#11ffffff</color>
+    <color name="duskYellow">#FFBD10</color>
+
 
     <color name="colorChart0">#884A4A4A</color>
     <color name="colorChart1">#88591249</color>
