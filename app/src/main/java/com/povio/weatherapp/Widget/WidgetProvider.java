@@ -17,6 +17,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
+import android.widget.Toast;
 
 import com.povio.weatherapp.ForeCastAPI;
 import com.povio.weatherapp.GetWeatherInfoAPI;
@@ -98,6 +99,7 @@ public class WidgetProvider extends AppWidgetProvider {
             ComponentName watchWidget;
             remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_main_layout);
             watchWidget = new ComponentName(context, WidgetProvider.class);
+            forecastApi = new ForeCastAPI(cityNameWidget);
             api = new GetWeatherInfoAPI(cityNameWidget);
             waitForApi(api, forecastApi, remoteViews, watchWidget, appWidgetManager, context);
             appWidgetManager.updateAppWidget(watchWidget, remoteViews);
@@ -175,8 +177,14 @@ public class WidgetProvider extends AppWidgetProvider {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                /**
+                 * java.lang.NullPointerException: Attempt to read from field 'boolean com.povio.weatherapp.oreCastAPI.success' on a null object reference
+                 */
                 if (api.success && forecastApi.success) { //nul pointer exception
-                    onFinish(api, forecastApi, remoteViews, watchWidget, appWidgetManager, context);
+                    if (api.apiFail || forecastApi.apiFail) {
+                        Toast.makeText(context, "Api not responding", Toast.LENGTH_SHORT).show();
+                    } else
+                        onFinish(api, forecastApi, remoteViews, watchWidget, appWidgetManager, context);
                 } else {
                     waitForApi(api, forecastApi, remoteViews, watchWidget, appWidgetManager, context);
                 }
@@ -252,30 +260,11 @@ public class WidgetProvider extends AppWidgetProvider {
         remoteViews.setOnClickPendingIntent(R.id.widget_without_button, getPendingSelfIntent(context, WITHOUT_CLICKED));
         remoteViews.setOnClickPendingIntent(R.id.widget_change_city, getPendingSelfIntent(context, CHANGE_CITY));
         appWidgetManager.updateAppWidget(watchWidget, remoteViews);
+        Toast.makeText(context, "Widget refreshed successfully", Toast.LENGTH_SHORT).show();
 
     }
 
-    /*
-        public void alertEditText(final Context context) {
-            final AlertDialog.Builder alert = new AlertDialog.Builder(context);
-            final EditText input = new EditText(context);
-            alert.setView(input);
-            alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int whichButton) {
-                    String value = input.getText().toString().trim();
-                    Toast.makeText(context.getApplicationContext(), value,
-                            Toast.LENGTH_SHORT).show();
-                }
-            });
 
-            alert.setNegativeButton("Cancel",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
-                            dialog.cancel();
-                        }
-                    });
-            alert.show();
-        }*/
     public Bitmap buildUpdate(String time, Context context) {
         Bitmap myBitmap = Bitmap.createBitmap(160, 84, Bitmap.Config.ARGB_4444);
         Canvas myCanvas = new Canvas(myBitmap);

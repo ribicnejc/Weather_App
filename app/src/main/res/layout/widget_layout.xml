@@ -55,26 +55,40 @@
             android:src="@drawable/partly_cloudy_day" />
 
         <ImageView
+            android:id="@+id/widget_add_new_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_menu_add"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="35dp"
+            />
+
+        <ImageView
             android:id="@+id/widget_change_city"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignRight="@+id/widget_temp_main"
-            android:src="@android:drawable/ic_input_add" />
+            android:src="@android:drawable/stat_notify_sync" />
 
         <TextView
             android:id="@+id/widget_temp_main"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
             android:padding="@dimen/widget_padding"
             android:text="23°"
             android:textColor="@color/colorLightGray"
             android:textSize="40sp" />
+
         <TextView
-            android:layout_above="@+id/widget_hourly_forecast2"
             android:layout_width="match_parent"
             android:layout_height="0.1dp"
-            android:background="@color/colorGray"/>
+            android:layout_above="@+id/widget_hourly_forecast2"
+            android:background="@color/colorGray" />
+
         <include
             android:id="@+id/widget_hourly_forecast2"
             layout="@layout/widget_hourly_forecast"
@@ -82,11 +96,13 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/widget_image"
             android:layout_centerHorizontal="true" />
+
         <TextView
-            android:layout_above="@+id/widget_daily_forecast2"
             android:layout_width="match_parent"
             android:layout_height="0.1dp"
-            android:background="@color/colorGray"/>
+            android:layout_above="@+id/widget_daily_forecast2"
+            android:background="@color/colorGray" />
+
         <include
             android:id="@+id/widget_daily_forecast2"
             layout="@layout/widget_daily_forecast"

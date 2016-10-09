@@ -25,18 +25,18 @@
         android:name="android.support.multidex.MultiDexApplication"
         android:theme="@style/AppTheme">
 
-         <!--<receiver-->
-         <!--android:name=".Widget.WidgetProvider"-->
-         <!--android:icon="@drawable/ic"-->
-         <!--android:label="Weather App">-->
-         <!--<intent-filter>-->
-         <!--<action android:name="android.appwidget.action.APPWIDGET_UPDATE" />-->
-         <!--</intent-filter>-->
-<!---->
-         <!--<meta-data-->
-         <!--android:name="android.appwidget.provider"-->
-         <!--android:resource="@xml/widget" />-->
-         <!--</receiver>-->
+         <receiver
+         android:name=".Widget.WidgetProvider"
+         android:icon="@drawable/ic"
+         android:label="Weather App">
+         <intent-filter>
+         <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+         </intent-filter>
+
+         <meta-data
+         android:name="android.appwidget.provider"
+         android:resource="@xml/widget" />
+         </receiver>
 
         <activity
             android:name=".CityQuery"
