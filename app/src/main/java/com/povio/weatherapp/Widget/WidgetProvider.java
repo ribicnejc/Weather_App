@@ -189,22 +189,24 @@ public class WidgetProvider extends AppWidgetProvider {
                     waitForApi(api, forecastApi, remoteViews, watchWidget, appWidgetManager, context);
                 }
             }
-        }, 100);
+        }, 400);
     }
 
     public void onFinish(GetWeatherInfoAPI api, ForeCastAPI forecastApi, RemoteViews remoteViews, ComponentName watchWidget, AppWidgetManager appWidgetManager, Context context) {
-
-        String minMaxWidget = String.format("H: %s° / L: %s°", api.getMaxTemp(), api.getMinTemp());
-        SimpleDateFormat sdfDate = new SimpleDateFormat("EEE, dd. MMM", Locale.ENGLISH);//dd/MM/yyyy
-        Date now = new Date();
-        String strDate = sdfDate.format(now);
-        String date = String.format("%s | %s", strDate, api.getCountry());
-        remoteViews.setTextViewText(R.id.widget_city_name, api.getCityName());
-        remoteViews.setImageViewResource(R.id.widget_image, api.getIcon());
-        remoteViews.setTextViewText(R.id.widget_temp_main, api.getMainTemp());
-        remoteViews.setTextViewText(R.id.widget_max_min, minMaxWidget);
-        remoteViews.setTextViewText(R.id.widget_time_date, date);
-
+        try {
+            String minMaxWidget = String.format("H: %s° / L: %s°", api.getMaxTemp(), api.getMinTemp());
+            SimpleDateFormat sdfDate = new SimpleDateFormat("EEE, dd. MMM", Locale.ENGLISH);//dd/MM/yyyy
+            Date now = new Date();
+            String strDate = sdfDate.format(now);
+            String date = String.format("%s | %s", strDate, api.getCountry());
+            remoteViews.setTextViewText(R.id.widget_city_name, api.getCityName());
+            remoteViews.setImageViewResource(R.id.widget_image, api.getIcon());
+            remoteViews.setTextViewText(R.id.widget_temp_main, api.getMainTemp());
+            remoteViews.setTextViewText(R.id.widget_max_min, minMaxWidget);
+            remoteViews.setTextViewText(R.id.widget_time_date, date);
+        }catch (Exception e){
+            Log.d("fuck", e.toString());
+        }
         try {
             for (int i = 0; i < 6; i++) {
                 int widgetHourlyTimeId = context.getResources().getIdentifier("widget_hourly_forecast_time" + (i + 1), "id", context.getPackageName());

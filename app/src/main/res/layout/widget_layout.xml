@@ -52,7 +52,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:contentDescription="@string/widget_daily"
-            android:src="@drawable/partly_cloudy_day" />
+            android:src="@drawable/sun" />
 
         <ImageView
             android:id="@+id/widget_add_new_city"
@@ -62,7 +62,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="24dp"
             />
 
         <ImageView

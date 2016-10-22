@@ -1,6 +1,7 @@
 package com.povio.weatherapp;
 
 
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -8,22 +9,52 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class NavigationDrawerFragment extends Fragment {
+import com.google.android.gms.ads.formats.NativeAd;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.OptionalPendingResult;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+
+public class NavigationDrawerFragment extends Fragment implements GoogleApiClient.OnConnectionFailedListener {
+
+    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final int RC_SIGN_IN = 007;
+
+    private GoogleApiClient mGoogleApiClient;
+    private ProgressDialog mProgressDialog;
+
+    private SignInButton btnSignIn;
+    private Button btnSignOut, btnRevokeAccess;
+    private LinearLayout llProfileLayout;
+    private View loginLayout;
+    private ImageView imgProfilePic;
+    private TextView txtName, txtEmail;
 
     public static final String PREF_FILE_NAME = "testpref";
     public static final String KEY_LEARNED_DRAWER = "user_learned_drawer";
@@ -38,6 +69,7 @@ public class NavigationDrawerFragment extends Fragment {
     private boolean mUserLearnedDrawer;
     private boolean mFromSavedInstanceState;
     private LinearLayout linearLayoutHomeButton;
+    private GoogleSignInOptions gso;
 
     public NavigationDrawerFragment() {
         // Required empty public constructor
@@ -51,6 +83,16 @@ public class NavigationDrawerFragment extends Fragment {
             mFromSavedInstanceState = true;
         }
 
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        mGoogleApiClient = new GoogleApiClient.Builder(getContext())
+                .enableAutoManage(getActivity(), this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+
+        // Customizing G+ button
+
 
     }
 
@@ -58,6 +100,21 @@ public class NavigationDrawerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
+
+        loginLayout = view.findViewById(R.id.google_plus);
+        llProfileLayout = (LinearLayout) view.findViewById(R.id.no_login_layout);
+        btnSignIn = (SignInButton) view.findViewById(R.id.google_plus_login_button);
+        imgProfilePic = (ImageView) view.findViewById(R.id.google_plus_img);
+        txtName = (TextView) view.findViewById(R.id.google_plus_name);
+        txtEmail = (TextView) view.findViewById(R.id.google_plus_mail);
+        btnSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signIn();
+            }
+        });
+        btnSignIn.setSize(SignInButton.SIZE_STANDARD);
+        btnSignIn.setScopes(gso.getScopeArray());
 
         ratingBar = (RatingBar) view.findViewById(R.id.rate_app);
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
@@ -73,12 +130,14 @@ public class NavigationDrawerFragment extends Fragment {
             }
         });
 
+        //TODO connect layouts and then set them visibility and then run the fucking app...
+
         radioButtonTemp = (RadioButton) view.findViewById(R.id.navigation_drawer_radio_temp);
         radioButtonType = (RadioButton) view.findViewById(R.id.navigation_drawer_radio_type);
         radioButtonName = (RadioButton) view.findViewById(R.id.navigation_drawer_radio_name);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        if(sharedPreferences.contains("radioButtonName")) {
+        if (sharedPreferences.contains("radioButtonName")) {
             radioButtonName.setChecked(sharedPreferences.getBoolean("radioButtonName", false));
             radioButtonTemp.setChecked(sharedPreferences.getBoolean("radioButtonTemp", false));
             radioButtonType.setChecked(sharedPreferences.getBoolean("radioButtonType", false));
@@ -141,8 +200,8 @@ public class NavigationDrawerFragment extends Fragment {
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
                 super.onDrawerSlide(drawerView, slideOffset);
-                if(slideOffset < 0.6)
-                    toolbar.setAlpha(1-slideOffset);
+                if (slideOffset < 0.6)
+                    toolbar.setAlpha(1 - slideOffset);
             }
         };
 
@@ -154,6 +213,7 @@ public class NavigationDrawerFragment extends Fragment {
             }
         });
     }
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_main, menu);
@@ -174,11 +234,11 @@ public class NavigationDrawerFragment extends Fragment {
         return sharedPreferences.getString(preferenceName, defaultValue);
     }
 
-    public static SharedPreferences getSharedPreferences(){
+    public static SharedPreferences getSharedPreferences() {
         return sharedPreferences;
     }
 
-    public void rateApp(){
+    public void rateApp() {
         Uri uri = Uri.parse("market://details?id=" + getContext().getPackageName());
         Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
         // To count with Play market backstack, After pressing back button,
@@ -191,6 +251,141 @@ public class NavigationDrawerFragment extends Fragment {
         } catch (ActivityNotFoundException e) {
             startActivity(new Intent(Intent.ACTION_VIEW,
                     Uri.parse("https://play.google.com/store/apps/details?id=" + getContext().getPackageName())));
+        }
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    private void signIn() {
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+
+    private void signOut() {
+        Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
+                new ResultCallback<Status>() {
+                    @Override
+                    public void onResult(Status status) {
+                        updateUI(false);
+                    }
+                });
+    }
+
+    private void revokeAccess() {
+        Auth.GoogleSignInApi.revokeAccess(mGoogleApiClient).setResultCallback(
+                new ResultCallback<Status>() {
+                    @Override
+                    public void onResult(Status status) {
+                        updateUI(false);
+                    }
+                });
+    }
+
+    private void handleSignInResult(GoogleSignInResult result) {
+        Log.d(TAG, "handleSignInResult:" + result.isSuccess());
+        if (result.isSuccess()) {
+            // Signed in successfully, show authenticated UI.
+            GoogleSignInAccount acct = result.getSignInAccount();
+
+            Log.e(TAG, "display name: " + acct.getDisplayName());
+
+            String personName = acct.getDisplayName();
+            String personPhotoUrl = acct.getPhotoUrl().toString();
+            String email = acct.getEmail();
+
+            Log.e(TAG, "Name: " + personName + ", email: " + email
+                    + ", Image: " + personPhotoUrl);
+
+            txtName.setText(personName);
+            txtEmail.setText(email);
+            //Glide.with(this).load(personPhotoUrl).into(imgProfilePic);
+            //.thumbnail(0.5f)
+            //.crossFade()
+            //.diskCacheStrategy(DiskCacheStrategy.ALL)
+
+
+            updateUI(true);
+        } else {
+            // Signed out, show unauthenticated UI.
+            updateUI(false);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            handleSignInResult(result);
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
+        if (opr.isDone()) {
+            // If the user's cached credentials are valid, the OptionalPendingResult will be "done"
+            // and the GoogleSignInResult will be available instantly.
+            Log.d(TAG, "Got cached sign-in");
+            GoogleSignInResult result = opr.get();
+            handleSignInResult(result);
+        } else {
+            // If the user has not previously signed in on this device or the sign-in has expired,
+            // this asynchronous branch will attempt to sign in the user silently.  Cross-device
+            // single sign-on will occur in this branch.
+            showProgressDialog();
+            opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
+                @Override
+                public void onResult(GoogleSignInResult googleSignInResult) {
+                    hideProgressDialog();
+                    handleSignInResult(googleSignInResult);
+                }
+            });
+        }
+    }
+
+
+    private void showProgressDialog() {
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(getContext());
+            mProgressDialog.setMessage("loading");
+            mProgressDialog.setIndeterminate(true);
+        }
+
+        mProgressDialog.show();
+    }
+
+    private void hideProgressDialog() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.hide();
+        }
+    }
+
+    private void updateUI(boolean isSignedIn) {
+        if (isSignedIn) {
+//            TODO hide normal layout and show googleplus login layout
+            llProfileLayout.setVisibility(View.GONE);
+            loginLayout.setVisibility(View.VISIBLE);
+//            btnSignIn.setVisibility(View.GONE);
+//            btnSignOut.setVisibility(View.VISIBLE);
+//            btnRevokeAccess.setVisibility(View.VISIBLE);
+//            llProfileLayout.setVisibility(View.VISIBLE);
+        } else {
+
+            llProfileLayout.setVisibility(View.VISIBLE);
+            loginLayout.setVisibility(View.GONE);
+//            btnSignIn.setVisibility(View.VISIBLE);
+//            btnSignOut.setVisibility(View.GONE);
+//            btnRevokeAccess.setVisibility(View.GONE);
+//            llProfileLayout.setVisibility(View.GONE);
         }
     }
 }
