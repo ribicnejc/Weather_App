@@ -25,6 +25,10 @@
         android:name="android.support.multidex.MultiDexApplication"
         android:theme="@style/AppTheme">
 
+        <service android:name=".Notification.NotificationService"
+            android:exported="false"
+            />
+
          <receiver
          android:name=".Widget.WidgetProvider"
          android:icon="@drawable/ic"

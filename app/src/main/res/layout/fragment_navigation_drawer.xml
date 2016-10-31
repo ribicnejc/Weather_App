@@ -38,45 +38,60 @@
                     android:orientation="vertical"
                     android:visibility="visible">
                     <!--<include layout="@layout/google_plus_layout"/>-->
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/navigation_drawer_user_photo"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:contentDescription="@string/user_profile_photo"
-                        android:src="@drawable/ic" />
+                    <!--<de.hdodenhof.circleimageview.CircleImageView-->
+                    <!--android:id="@+id/navigation_drawer_user_photo"-->
+                    <!--android:layout_width="100dp"-->
+                    <!--android:layout_height="100dp"-->
+                    <!--android:contentDescription="@string/user_profile_photo"-->
+                    <!--android:src="@drawable/ic" />-->
 
-                    <RatingBar
-                        android:id="@+id/rate_app"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:numStars="5"
-                        android:stepSize="1"
-                        android:theme="@style/RatingBar" />
+                    <!--<RatingBar-->
+                    <!--android:id="@+id/rate_app"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:numStars="5"-->
+                    <!--android:stepSize="1"-->
+                    <!--android:theme="@style/RatingBar" />-->
 
-                    <TextView
-                        android:id="@+id/navigation_drawer_user_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/app_name"
-                        android:textColor="@color/colorLightGray"
-                        android:textSize="25sp" />
-
-                    <TextView
-                        android:id="@+id/navigation_drawer_email"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:autoLink="web"
-                        android:text="@string/github_com_ribicnejc"
-                        android:textColorLink="@color/colorLightGray" />
+                    <!--<TextView-->
+                    <!--android:id="@+id/navigation_drawer_user_name"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="@string/app_name"-->
+                    <!--android:textColor="@color/colorLightGray"-->
+                    <!--android:textSize="25sp" />-->
+                    <!---->
+                    <!--<TextView-->
+                    <!--android:id="@+id/navigation_drawer_email"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:autoLink="web"-->
+                    <!--android:text="@string/github_com_ribicnejc"-->
+                    <!--android:textColorLink="@color/colorLightGray" />-->
 
                     <com.google.android.gms.common.SignInButton
                         android:id="@+id/google_plus_login_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp">
 
                     </com.google.android.gms.common.SignInButton>
 
+
+                    <Switch
+                        android:id="@+id/switch1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Notification    " />
+
+                    <Button
+                        android:id="@+id/sign_out"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sign OUT" />
+
                 </LinearLayout>
+
 
             </RelativeLayout>
 
@@ -110,7 +125,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="   Home"
+                            android:layout_marginStart="10dp"
+                            android:text="Home"
                             android:textColor="@color/colorBlack"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -141,7 +157,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="   Add city"
+                            android:layout_marginStart="10dp"
+                            android:text="Add city"
                             android:textColor="@color/colorBlack"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -191,6 +208,13 @@
                             android:paddingStart="30dp">
 
                             <RadioButton
+                                android:id="@+id/navigation_drawer_radio_type"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/type"
+                                android:textColor="@color/colorBlack" />
+
+                            <RadioButton
                                 android:id="@+id/navigation_drawer_radio_temp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -205,12 +229,6 @@
                                 android:text="@string/sort_name"
                                 android:textColor="@color/colorBlack" />
 
-                            <RadioButton
-                                android:id="@+id/navigation_drawer_radio_type"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/type"
-                                android:textColor="@color/colorBlack" />
                         </RadioGroup>
 
                         <View

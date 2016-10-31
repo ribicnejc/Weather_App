@@ -1,6 +1,8 @@
 package com.povio.weatherapp;
 
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -27,9 +29,6 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.android.gms.ads.formats.NativeAd;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -40,6 +39,9 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+import com.povio.weatherapp.Notification.NotificationService;
+
+import java.util.Calendar;
 
 public class NavigationDrawerFragment extends Fragment implements GoogleApiClient.OnConnectionFailedListener {
 
@@ -66,6 +68,7 @@ public class NavigationDrawerFragment extends Fragment implements GoogleApiClien
     private RatingBar ratingBar;
 
     private View containerView;
+    private Button signOutButton;
     private boolean mUserLearnedDrawer;
     private boolean mFromSavedInstanceState;
     private LinearLayout linearLayoutHomeButton;
@@ -83,8 +86,10 @@ public class NavigationDrawerFragment extends Fragment implements GoogleApiClien
             mFromSavedInstanceState = true;
         }
 
+
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
+                .requestIdToken(getString(R.string.server_client_id))
                 .build();
         mGoogleApiClient = new GoogleApiClient.Builder(getContext())
                 .enableAutoManage(getActivity(), this)
@@ -107,6 +112,7 @@ public class NavigationDrawerFragment extends Fragment implements GoogleApiClien
         imgProfilePic = (ImageView) view.findViewById(R.id.google_plus_img);
         txtName = (TextView) view.findViewById(R.id.google_plus_name);
         txtEmail = (TextView) view.findViewById(R.id.google_plus_mail);
+
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,7 +122,27 @@ public class NavigationDrawerFragment extends Fragment implements GoogleApiClien
         btnSignIn.setSize(SignInButton.SIZE_STANDARD);
         btnSignIn.setScopes(gso.getScopeArray());
 
-        ratingBar = (RatingBar) view.findViewById(R.id.rate_app);
+        signOutButton = (Button) view.findViewById(R.id.sign_out);
+        signOutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //signOut();
+                //TODO set AlarmManager
+                AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+                PendingIntent pendingIntent = PendingIntent.getService(getContext(), 0,
+                        new Intent(getContext(), NotificationService.class),
+                        PendingIntent.FLAG_UPDATE_CURRENT);
+                Calendar calendar = Calendar.getInstance();
+                // set the triggered time to currentHour:08:00 for testing
+                calendar.set(Calendar.SECOND, 0);
+                calendar.set(Calendar.MINUTE, 33);
+
+                alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,
+                        calendar.getTimeInMillis(), 0, pendingIntent);
+            }
+        });
+
+  /*      ratingBar = (RatingBar) view.findViewById(R.id.rate_app);
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
@@ -129,8 +155,7 @@ public class NavigationDrawerFragment extends Fragment implements GoogleApiClien
                 rateApp();
             }
         });
-
-        //TODO connect layouts and then set them visibility and then run the fucking app...
+*/
 
         radioButtonTemp = (RadioButton) view.findViewById(R.id.navigation_drawer_radio_temp);
         radioButtonType = (RadioButton) view.findViewById(R.id.navigation_drawer_radio_type);
@@ -218,7 +243,6 @@ public class NavigationDrawerFragment extends Fragment implements GoogleApiClien
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_main, menu);
         MenuItem sortIcon = menu.findItem(R.id.sort_icon);
-        //MenuItem searchIcon = menu.findItem(R.id.search);
         sortIcon.setVisible(false);
     }
 
@@ -371,21 +395,12 @@ public class NavigationDrawerFragment extends Fragment implements GoogleApiClien
 
     private void updateUI(boolean isSignedIn) {
         if (isSignedIn) {
-//            TODO hide normal layout and show googleplus login layout
             llProfileLayout.setVisibility(View.GONE);
             loginLayout.setVisibility(View.VISIBLE);
-//            btnSignIn.setVisibility(View.GONE);
-//            btnSignOut.setVisibility(View.VISIBLE);
-//            btnRevokeAccess.setVisibility(View.VISIBLE);
-//            llProfileLayout.setVisibility(View.VISIBLE);
         } else {
 
             llProfileLayout.setVisibility(View.VISIBLE);
             loginLayout.setVisibility(View.GONE);
-//            btnSignIn.setVisibility(View.VISIBLE);
-//            btnSignOut.setVisibility(View.GONE);
-//            btnRevokeAccess.setVisibility(View.GONE);
-//            llProfileLayout.setVisibility(View.GONE);
         }
     }
 }

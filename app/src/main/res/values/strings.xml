@@ -34,4 +34,6 @@
     <string name="version_widget">version 1.0.5</string>
     <string name="widget_settings">Widget Settings</string>
     <string name="title_activity_google_maps">Map</string>
+
+    <string name="server_client_id">579678056778-7r6ub53qi48avuivborvbi26m6h1mii9.apps.googleusercontent.com</string>
 </resources>
