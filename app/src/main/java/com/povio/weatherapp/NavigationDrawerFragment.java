@@ -127,18 +127,8 @@ public class NavigationDrawerFragment extends Fragment implements GoogleApiClien
             @Override
             public void onClick(View v) {
                 //signOut();
-                //TODO set AlarmManager
-                AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
-                PendingIntent pendingIntent = PendingIntent.getService(getContext(), 0,
-                        new Intent(getContext(), NotificationService.class),
-                        PendingIntent.FLAG_UPDATE_CURRENT);
-                Calendar calendar = Calendar.getInstance();
-                // set the triggered time to currentHour:08:00 for testing
-                calendar.set(Calendar.SECOND, 0);
-                calendar.set(Calendar.MINUTE, 33);
 
-                alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,
-                        calendar.getTimeInMillis(), 0, pendingIntent);
+                enableNotification();
             }
         });
 
@@ -194,6 +184,19 @@ public class NavigationDrawerFragment extends Fragment implements GoogleApiClien
         return view;
     }
 
+    public void enableNotification(){
+        AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+        PendingIntent pendingIntent = PendingIntent.getService(getContext(), 0,
+                new Intent(getContext(), NotificationService.class),
+                PendingIntent.FLAG_UPDATE_CURRENT);
+        Calendar calendar = Calendar.getInstance();
+        // set the triggered time to currentHour:08:00 for testing
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MINUTE, 47);
+
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,
+                calendar.getTimeInMillis(), 0, pendingIntent);
+    }
     public void setUp(int fragmentId, DrawerLayout drawerLayout, final Toolbar toolbar) {
         containerView = getActivity().findViewById(fragmentId);
         mDrawerLayout = drawerLayout;
