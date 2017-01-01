@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.ContactsContract;
@@ -24,6 +25,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.povio.weatherapp.DataBase.DatabaseConnector;
+
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -31,6 +34,7 @@ public class CityQuery extends AppCompatActivity {
     Button btnByCityName;
     ProgressBar progressBar;
     ImageView blurryBg;
+    public static GetWeatherInfoAPI api2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,13 +118,49 @@ public class CityQuery extends AppCompatActivity {
             @Override
             public void run() {
                 if (api.success) {
-                    onFinish(api);
+                    api2 = api;
+                    addToDb(api);
+//                    onFinish(api);
                 } else {
                     waitForApi(api);
                 }
             }
         }, 100);
     }
+
+    public void addToDb(final GetWeatherInfoAPI api){
+        AsyncTask<Object, Object, Object> saveContactTask = new AsyncTask<Object, Object, Object>() {
+            @Override
+            protected Object doInBackground(Object... params) {
+                saveContact(); // save contact to the database
+                return null;
+            } // end method doInBackground
+
+            @Override
+            protected void onPostExecute(Object result) {
+
+                onFinish(api2); // return to the previous Activity
+            } // end method onPostExecute
+        }; // end AsyncTask
+
+        // save the contact to the database using a separate thread
+        saveContactTask.execute((Object[]) null);
+    }
+
+    private void saveContact() {
+        // get DatabaseConnector to interact with the SQLite database
+        DatabaseConnector databaseConnector = new DatabaseConnector(this);
+
+        if (getIntent().getExtras() == null) {
+            // insert the contact information into the database
+            databaseConnector.insertContact(api2.getCityName());
+        } // end if
+        else {
+//            databaseConnector.updateContact(rowID, nameEditText.getText().toString(), emailEditText
+//                    .getText().toString(), phoneEditText.getText().toString(), streetEditText
+//                    .getText().toString(), cityEditText.getText().toString());
+        } // end else
+    } // end class saveContact
 
     public void onFinish(final GetWeatherInfoAPI api) {
         progressBar.setVisibility(View.GONE);
