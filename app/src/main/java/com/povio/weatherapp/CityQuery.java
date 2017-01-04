@@ -236,9 +236,13 @@ public class CityQuery extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        Intent returnIntent = new Intent();
+        Bundle bundle = new Bundle();
+        bundle.putString("returnString", "Ta string vracamo");
+        returnIntent.putExtras(bundle);
+        setResult(RESULT_OK, returnIntent);
+        finish();
         Log.d("CDA", "onBackPressed Called");
-        Intent intent = new Intent(getBaseContext(), MainActivity.class);
-        startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
     }
 }

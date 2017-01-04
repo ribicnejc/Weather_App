@@ -166,42 +166,13 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     Intent intent = new Intent(getBaseContext(), CityQuery.class);
                     intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
-                    startActivity(intent);
+                    startActivityForResult(intent, 47);
+                    //startActivity(intent);
                     overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
                 }
             });
 
-      /*  Button fab2 = (Button) findViewById(R.id.fab2);
-        if (fab2 != null)
-            fab2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Geocoder gcd = new Geocoder(getApplicationContext(), Locale.getDefault());
-                    LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                                && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                            return;
-                        }
-                    Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                    double longitude = location.getLongitude();
-                    double latitude = location.getLatitude();
-                    try {
-                        List<Address> address = gcd.getFromLocation(latitude, longitude, 1);
 
-                        if (address.size() > 0) {
-                            Toast.makeText(getApplicationContext(), "Current location weather",
-                                    Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(getBaseContext(), MoreInfoActivity.class);
-                            intent.putExtra("city", address.get(0).getLocality());
-                            startActivity(intent);
-                            overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });*/
 
         datas = readState();
 
@@ -298,6 +269,20 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Check which request we're responding to
+        if (requestCode == 47) {
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
+                Toast.makeText(this, "Uspesna dvosmerna", Toast.LENGTH_SHORT).show();
+                // The user picked a contact.
+                // The Intent's data Uri identifies which contact was selected.
+
+                // Do something with the contact here (bigger example below)
+            }
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
