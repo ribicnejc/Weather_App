@@ -18,6 +18,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    dexOptions {
+        incremental true
+        javaMaxHeapSize "2048M"
+    }
 }
 repositories {
     maven {
@@ -25,9 +29,8 @@ repositories {
     }
 }
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-
     compile 'com.android.support:multidex:1.0.0'
     compile 'com.android.support:recyclerview-v7:24.0.0'
     compile 'com.android.support:appcompat-v7:24.0.0'
@@ -40,7 +43,7 @@ dependencies {
     compile 'com.sothree.slidinguppanel:library:3.3.0'
     compile 'com.melnykov:floatingactionbutton:1.3.0'
     compile 'com.android.support:support-v4:24.0.0'
-    compile 'com.google.android.gms:play-services:9.2.0'
-    compile 'com.google.android.gms:play-services-plus:9.2.0'
-    compile 'com.google.android.gms:play-services-auth:9.2.0'
+    compile 'com.google.android.gms:play-services:10.0.1'
+    compile 'com.google.android.gms:play-services-plus:10.0.1'
+    compile 'com.google.android.gms:play-services-auth:10.0.1'
 }
