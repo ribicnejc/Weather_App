@@ -28,7 +28,7 @@
     </android.support.design.widget.AppBarLayout>
 
 
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/appbar">
@@ -148,6 +148,7 @@
                 android:layout_marginTop="10dp"
                 android:background="@color/colorGray" />
 
+
             <Button
                 android:id="@+id/open_google_maps"
                 android:layout_width="wrap_content"
@@ -155,9 +156,31 @@
                 android:layout_below="@id/line6"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
-                android:text="See on Google maps" />
+                android:text="See on Google maps"
+                android:visibility="gone" />
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_below="@id/line6"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="10dp"
+                android:padding="5dp"
+                app:cardBackgroundColor="@color/colorDarkTransparentBackgroundCard">
+
+                <FrameLayout
+                    android:id="@+id/google_map_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </FrameLayout>
+
+            </android.support.v7.widget.CardView>
+
         </RelativeLayout>
 
-    </ScrollView>
+    </android.support.v4.widget.NestedScrollView>
 
 </RelativeLayout>

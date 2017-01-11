@@ -11,6 +11,8 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.Build;
 import android.os.Handler;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,6 +30,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.povio.weatherapp.Adapters.HorizontalRVAdapter;
 
 import java.io.IOException;
@@ -41,13 +49,14 @@ import java.util.Locale;
 import com.povio.weatherapp.Images.Backgrounds;
 
 
-public class MoreInfoActivity extends AppCompatActivity {
+public class MoreInfoActivity extends AppCompatActivity implements OnMapReadyCallback {
     private RecyclerView horizontalRecyclerView;
     private HorizontalRVAdapter horizontalAdapter;
     private Toolbar toolbar;
     private String cityName;
-    private ArrayList<String> horizontalList = new ArrayList<>();
-
+    private String weatherDesc;
+    private GoogleMap mMap;
+    private double[] coords;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +71,7 @@ public class MoreInfoActivity extends AppCompatActivity {
             pr.setVisibility(View.VISIBLE);
         GetWeatherInfoAPI api;
         ForeCastAPI foreCastAPI;
+
 
 
         Bundle extras = getIntent().getExtras();
@@ -100,6 +110,15 @@ public class MoreInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_weather_info_update);
         Typeface type = Typeface.createFromAsset(getAssets(), "openSansLight.ttf");
         toolbar = (Toolbar) findViewById(R.id.app_bar);
+        coords = api.getCoords();
+        weatherDesc = api.getMainDesc();
+
+
+        FragmentManager fm = getSupportFragmentManager();
+        SupportMapFragment supportMapFragment =  SupportMapFragment.newInstance();
+        supportMapFragment.getMapAsync(this);
+        fm.beginTransaction().replace(R.id.google_map_container, supportMapFragment).commit();
+
 
 
         setSupportActionBar(toolbar);
@@ -162,7 +181,6 @@ public class MoreInfoActivity extends AppCompatActivity {
             int j = 0;
             for (String elt : foreCastAPI.getTimeL()) {
                 if (elt.equals("15:00")) {
-                    // RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.day1_main);
                     int resId = getResources().getIdentifier("day" + (i + 1) + "_icon", "id", getPackageName());
                     daysIcons[i] = (ImageView) findViewById(resId);
                     daysIcons[i].setImageResource(foreCastAPI.getIconL().get(j));
@@ -341,4 +359,16 @@ public class MoreInfoActivity extends AppCompatActivity {
         return inSampleSize;
     }
 
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
+        LatLng city = new LatLng(coords[0], coords[1]);
+        googleMap.addMarker(new MarkerOptions().position(city).title(cityName).snippet(weatherDesc));
+
+        mMap.addMarker(new MarkerOptions().position(city).title(cityName));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(city));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(8.0f));
+
+    }
 }
